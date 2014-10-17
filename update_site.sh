@@ -21,6 +21,7 @@ php app/console doctrine:database:drop --force
 php app/console doctrine:database:create
 php app/console doctrine:generate:entities --no-backup VladChange
 php app/console doctrine:schema:create
+php app/console assets:install web --symlink
 
 echo -n "Set the environment name for the cache clearing (\"prod\" or \"dev\", default: \"dev\"): "
 read env
