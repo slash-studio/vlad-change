@@ -24,5 +24,8 @@ function init(){
             )
         );
         
+        $.ajax({
+            url : "api.addPlacemark/" + coords.join('&'),
+        });
     });
 }
