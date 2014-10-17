@@ -9,8 +9,9 @@ class RegistrationFormType extends BaseType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
-        $builder->add('name');
-        $builder->add('surname');
+        $builder->remove('username')
+                ->add('name')
+                ->add('surname');
     }
 
     public function getName()
