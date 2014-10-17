@@ -107,4 +107,18 @@ class User extends BaseUser
     {
         return $this->surname;
     }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        $this->setUsername($email);
+
+        return $this;
+    }
 }
