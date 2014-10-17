@@ -1,5 +1,14 @@
 {% extends 'VladChangeMainBundle:Default:page.html.twig' %}
 
+{% block links %}
+
+<script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+<script src="{{ asset('bundles/vladchangemain/js/map.js') }}"></script>
+
+{% endblock %}
+
 {% block div_main %}
-This is document body!
+<body>
+    <div id="map" style="width: 600px; height: 400px"></div> <!-- TODO : Check style -->
+</body>
 {% endblock %}
