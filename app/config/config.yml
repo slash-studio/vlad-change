@@ -31,6 +31,7 @@ twig:
 
 # Assetic Configuration
 assetic:
+    bundles: [ VladChangeMainBundle ]
     debug:          "%kernel.debug%"
     use_controller: false
     bundles:        [ ]

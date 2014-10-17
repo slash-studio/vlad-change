@@ -1,4 +1,6 @@
-<link href="{{ asset('bundles/vladchangemain/css/style.css') }}" rel="stylesheet" />
+{% stylesheets 'bundles/vladchangemain/css/style.css' filter='cssrewrite' %}
+   <link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
 <script src="{{ asset('bundles/vladchangemain/js/jquery.js') }}"></script>
 <!-- <link rel="icon" href="/images/favicon.png" type="image/png" /> -->
 <!--[if lt IE 9]>
