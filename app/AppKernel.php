@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new VladChange\MainBundle\VladChangeMainBundle(),
             new VladChange\StoreBundle\VladChangeStoreBundle(),
+            new VladChange\UserBundle\VladChangeUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

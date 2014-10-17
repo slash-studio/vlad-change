@@ -10,7 +10,11 @@
         </ul>
     </nav>
     <ul class="right">
-      <li><a href="#">Регистрация</a></li>
-      <li><a href="#">Войти</a></li>
+     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <li>{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |</li>
+     {% else %}
+        <li><a href="{{ path('fos_user_registration_register') }}">{{ 'layout.registration'|trans({}, 'FOSUserBundle') }}</a></li>
+        <li><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
+     {% endif %}
     </ul>
 </header>
