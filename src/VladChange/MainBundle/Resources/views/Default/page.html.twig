@@ -2,7 +2,8 @@
 
 {% block links %}
    {{ parent() }}
-   <link href="/css/main.css" rel="stylesheet" />
+   <link href="{{ asset('bundles/vladchangemain/css/main.css') }}" rel="stylesheet" />
+   <link href="{{ asset('bundles/vladchangemain/css/header.css') }}" rel="stylesheet" />
 {% endblock %}
 
 {% block page %}
