@@ -1,0 +1,11 @@
+vlad_change_store:
+    resource: "@VladChangeStoreBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+vlad_change_main:
+    resource: "@VladChangeMainBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

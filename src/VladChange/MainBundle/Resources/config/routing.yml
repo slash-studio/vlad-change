@@ -1,0 +1,7 @@
+vlad_change_main_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: VladChangeMainBundle:Default:index }
+
+vlad_change_view_profile:
+    path:     /profile/{id}
+    defaults: { _controller: VladChangeMainBundle:Default:viewProfile }
