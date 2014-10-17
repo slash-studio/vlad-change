@@ -1,0 +1,14 @@
+{% extends 'VladChangeMainBundle:Default:html.html.twig' %}
+
+{% block links %}
+   {{ parent() }}
+   <link href="/css/main.css" rel="stylesheet" />
+{% endblock %}
+
+{% block page %}
+   {% include 'VladChangeMainBundle:Default:header.html.twig' %}
+   <div id='wrap'>
+      {% block div_main %}{% endblock %}
+   </div>
+   {% include 'VladChangeMainBundle:Default:footer.html.twig' %}
+{% endblock %}
