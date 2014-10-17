@@ -2,11 +2,9 @@
 
 {% block links %}
    {{ parent() }}
-   {% stylesheets
-      'bundles/vladchangemain/css/main.css'
-      'bundles/vladchangemain/css/header.css' filter='cssrewrite' %}
-      <link rel="stylesheet" href="{{ asset_url }}" />
-   {% endstylesheets %}
+      <link rel="stylesheet" href="{{ 'bundles/vladchangemain/css/main.css' }}" />
+      <link rel="stylesheet" href="{{ 'bundles/vladchangemain/css/header.css' }}" />
+      <link rel="stylesheet" href="{{ 'bundles/vladchangemain/css/map.css' }}" />
 {% endblock %}
 
 {% block page %}
