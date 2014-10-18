@@ -2,28 +2,39 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block links %}
+   {{ parent() }}
+   <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/login.css') }}" />
+   <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/forms.css') }}" />
+   <script src="{{ asset('bundles/vladchangemain/js/forms.js') }}"></script>
+{% endblock %}
+
 {% block div_main %}
-{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-{% endif %}
-<h1>Авторизация</h1>
 {% if error %}
    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 
-<form action="{{ path("fos_user_security_check") }}" method="post">
-   <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-
-   <label for="username">{{ 'E-mail'|trans }}</label>
-   <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
-
-   <label for="password">{{ 'Пароль'|trans }}</label>
-   <input type="password" id="password" name="_password" required="required" />
-
-   <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-   <label for="remember_me">{{ 'Оставаться в системе'|trans }}</label>
-
-   <input type="submit" id="_submit" name="_submit" value="{{ 'Войти'|trans }}" />
-</form>
-<a href="{{ path('fos_user_registration_register') }}">Регистрация</a>
-<a href="{{ path('fos_user_resetting_request') }}">Забыли пароль?</a>
+<div id="main_wrap">
+   <h1 class="from_top">Авторизация</h1><div class="block_form">
+   <form action="{{ path("fos_user_security_check") }}" method="post">
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+      <div>
+         <label for="username">{{ 'E-mail'|trans }}</label>
+         <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+      </div>
+      <div>
+         <label for="password">{{ 'Пароль'|trans }}</label>
+         <input type="password" id="password" name="_password" required="required" />
+      </div>
+      <div class="checkbox_in">
+         <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+         <label for="remember_me">{{ 'Оставаться в системе'|trans }}</label>
+      </div>
+      <div class="buttons">
+         <input type="submit" id="_submit" name="_submit" value="{{ 'Войти'|trans }}" />
+      </div>
+   </form>
+   <a href="{{ path('fos_user_registration_register') }}" class="bottom_link">Регистрация</a>
+   <a href="{{ path('fos_user_resetting_request') }}" class="bottom_link">Забыли пароль?</a>
+</div>
 {% endblock %}

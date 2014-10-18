@@ -32,25 +32,30 @@ class DefaultController extends Controller
         if (empty($user)) {
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
-        $form = $this->createForm(new PlacemarkType());
-        $lat = $request->query->get('lat');
-        $lon = $request->query->get('lon');
-        if (!empty($lat) && !empty($lon)) {
-            $form->get('lat')->setData($lat);
-            $form->get('lon')->setData($lon);
+        $view = null;
+        $isAvailableProj = $user->hasAvailableProjAmount();
+        if ($isAvailableProj) {
+            $form = $this->createForm(new PlacemarkType());
+            $lat = $request->query->get('lat');
+            $lon = $request->query->get('lon');
+            if (!empty($lat) && !empty($lon)) {
+                $form->get('lat')->setData($lat);
+                $form->get('lon')->setData($lon);
             }
-        $form->handleRequest($request);
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $tmp = $form->getData();
-            $tmp->setUser($user);
-            $em->persist($tmp);
-            $em->flush();
-            return $this->redirect($this->generateUrl('fos_user_profile_show'));
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $tmp = $form->getData();
+                $tmp->setUser($user);
+                $em->persist($tmp);
+                $em->flush();
+                return $this->redirect($this->generateUrl('fos_user_profile_show'));
+            }
+            $view = $form->createView();
         }
-
         return $this->render('VladChangeMainBundle:Pages:add_project.html.twig', [
-            'form' => $form->createView()
+            'form' => $view,
+            'isAvailableProj' => $isAvailableProj
         ]);
     }
 }
