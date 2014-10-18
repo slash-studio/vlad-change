@@ -76,9 +76,10 @@ function init() {
                         var gotoPoint = map.options.get('projection').fromGlobalPixels(
                             map.converter.pageToGlobal([160, 300]), map.getZoom()
                         );
-                        map.deltaLat = coords[0] - gotoPoint[0];
-                        map.deltaLon = coords[1] - gotoPoint[1];
-                        map.panTo([center[0] + map.deltaLat, center[1] + map.deltaLon]);
+                        map.lastSelectMark = coords;
+                        var deltaLat = coords[0] - gotoPoint[0];
+                        var deltaLon = coords[1] - gotoPoint[1];
+                        map.panTo([center[0] + deltaLat, center[1] + deltaLon]);
                     })
                 );
             }

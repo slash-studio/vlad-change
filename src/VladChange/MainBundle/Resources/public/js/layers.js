@@ -27,7 +27,7 @@ function hideInfo() {
       });
    });
    var center = map.getCenter();
-   map.panTo([center[0] - map.deltaLat, center[1] - map.deltaLon]);
+   map.panTo(map.lastSelectMark);
 }
 
 $(function(){
