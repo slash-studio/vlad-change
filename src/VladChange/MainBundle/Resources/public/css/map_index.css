@@ -42,7 +42,7 @@
 #full_info {
    position: absolute;
    top: 85px;
-   transform: translateX(0);
+   transform: translateX(100%);
    left: 320px;
    right: 0;
    bottom: 0;
@@ -90,5 +90,73 @@
 
 #slider {
    background: #1f1f1f;
-   height: 400px;
+   padding: 0 0 20px 0;
+}
+
+#slider ul.bxslider li {
+   padding: 50px 0 8px;
+}
+
+#slider ul.bxslider li img {
+   margin: 0 auto;
+   max-height: 350px;
+}
+
+#full_info .content div.info div.bottom_info {
+
+}
+
+#full_info .content div.info div.bottom_info div.left {
+   display: inline-block;
+   width: 50%;
+}
+
+#full_info .content div.info div.bottom_info div.left a.avatar {
+   display: block;
+   float: left;
+   margin-right: 8px;
+}
+
+#full_info .content div.info div.bottom_info div.left a.author {
+   color: #1e9db5;
+   display: block;
+   font-style: italic;
+   padding: 5px 0 5px;
+   font-size: 110%;
+}
+
+#full_info .content div.info div.bottom_info div.left time {
+   color: #434343;
+   font-style: italic;
+   font-size: 80%;
+}
+
+#full_info .content div.info div.bottom_info div.right {
+   float: right;
+}
+
+#full_info .content div.info div.bottom_info div.right div.likes {
+   font-size: 110%;
+   padding-right: 35px;
+   height: 18px;
+   padding-top: 7px;
+   cursor: pointer;
+   background: url('../images/like.png') right 0 no-repeat;
+}
+
+
+#full_info .content div.info div.bottom_info div.right div.likes:hover {
+   background-position: 100% 100%;
+}
+
+#close_info {
+   position: fixed;
+   top: 0px;
+   width: 200px;
+   background: #6a1212;
+   color: white;
+   padding: 12px 8px 10px;
+   left: 320px;
+   z-index: 999;
+   text-align: center;
 }
