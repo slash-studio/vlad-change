@@ -2,7 +2,8 @@ header {
    background: #2d2d2d;
    height: 85px;
    z-index: 3000;
-   position: relative;
+   position: absolute;
+   width: 100%;
 }
 
 header div.logo_wrap {

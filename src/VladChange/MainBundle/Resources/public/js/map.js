@@ -18,7 +18,7 @@ function createPlacemark(x, y, balloonText, event){
     return placemark;
 }
 
-function init(){    
+function init(){
 
     map = new ymaps.Map("map", {
         center: [43.15, 131.85],
@@ -31,11 +31,13 @@ function init(){
         success: function(placemarks){
             for (i = 0; i < placemarks.length; i++) {
                 map.geoObjects.add(
-                    createPlacemark(placemarks[i].x, placemarks[i].y, 'Охуенный проект', function() {alert("Клик блять")})
-                );    
+                    createPlacemark(placemarks[i].x, placemarks[i].y, 'Охуенный проект', function() {
+                        showShortInfo();
+                    })
+                );
             }
         }
-    })    
+    })
 
     map.events.add('dblclick', function (e) {
         e.preventDefault();
