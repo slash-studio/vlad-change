@@ -9,7 +9,7 @@ vlad_change_view_profile:
         id: \d+
 
 vlad_change_edit_project:
-    path: /edit_project/{$id}
+    path: /edit_project/{id}
     defaults: { _controller: VladChangeMainBundle:Default:editProject }
     requirements:
         id: \d+
