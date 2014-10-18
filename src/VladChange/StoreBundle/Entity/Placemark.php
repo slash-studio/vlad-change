@@ -86,6 +86,13 @@ class Placemark
      */
     protected $user;
 
+    /**
+     * @var Boolean
+     *
+     * @ORM\Column(name="archived", type="boolean")
+     */
+    protected $archived = 0;
+
 
     /**
      * @ORM\PrePersist()
@@ -97,6 +104,11 @@ class Placemark
         $this->dieDate->add(new \DateInterval("P30D"));
     }
 
+    public function isLiked()
+    {
+        //Проверка на лайки
+        return true;
+    }
     /**
      * Get id
      *
@@ -345,5 +357,28 @@ class Placemark
     public function isExpired()
     {
         return $this->dieDate < $this->createDate;
+    }
+
+    /**
+     * Set archived
+     *
+     * @param boolean $archived
+     * @return Placemark
+     */
+    public function setArchived($archived)
+    {
+        $this->archived = $archived;
+
+        return $this;
+    }
+
+    /**
+     * Get archived
+     *
+     * @return boolean 
+     */
+    public function getArchived()
+    {
+        return $this->archived;
     }
 }

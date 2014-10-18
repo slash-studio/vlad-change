@@ -1,5 +1,10 @@
 {% extends 'VladChangeMainBundle:Default:page.html.twig' %}
 
+{% block links %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/vladchangemain/js/profile.js') }}"></script>
+{% endblock %}
+
 {% block div_main %}
     <div class="fos_user_user_show">
         <p>Имя: {{ user.getName() }}</p>
@@ -9,19 +14,18 @@
             <a href="{{ path('vlad_change_add_project') }}">Добавить проект</a>
             <a href="{{ path('fos_user_security_logout') }}">Выход</a>
         {% endif %}
-        <ul>
 
-        </ul>
-
-
-
+    <ul>
     {% for p in user.getProjects() %}
         <li>Название - {{ p.getName() }}</li>
         <li>Дата создания - {{ p.getCreateDate().format('d-m-Y') }}</li>
         <li>Дата окончания - {{ p.getDieDate().format('d-m-Y') }}</li>
         <li>Краткое описание - {{ p.getShortDesc() }}</li>
         <li>Описание - {{ p.getDesc() }}</li>
+        <button class="to_archive" data-id="{{ p.getId() }}">В архив</button>
+        <button class="delete" data-id="{{ p.getId() }}">Удалить</button>
     {% endfor %}
+    </ul>
 
 
     </div>
