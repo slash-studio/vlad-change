@@ -1,12 +1,12 @@
 ymaps.ready(init);
 
-function createPlacemark(x, y, balloonText, event){
+function createPlacemark(x, y, balloonText, event) {
 
     placemark = new ymaps.Placemark(
-        [x, y], 
+        [x, y],
         {
             balloonContent: balloonText
-        }, 
+        },
         {
             preset: 'islands#icon',
             iconColor: '#0095b6'
@@ -18,7 +18,7 @@ function createPlacemark(x, y, balloonText, event){
     return placemark;
 }
 
-function init(){
+function init() {
 
     map = new ymaps.Map("map", {
         center: [43.15, 131.85],
@@ -28,13 +28,13 @@ function init(){
 
     $.ajax({
         url : "api.getAllPlacemark",
-        success: function(placemarks){
+        success: function(placemarks) {
             for (i = 0; i < placemarks.length; i++) {
                 map.geoObjects.add(
                     createPlacemark(placemarks[i].x, placemarks[i].y, 'Охуенный проект', function(e) {
                         showShortInfo();
                         var coords = e.get('coords');
-                        var center = map.getCenter();           
+                        var center = map.getCenter();
                         var gotoPoint = map.options.get('projection').fromGlobalPixels(
                             map.converter.pageToGlobal([160, 300]), map.getZoom()
                         );
@@ -42,7 +42,7 @@ function init(){
                     })
                 );
             }
-            
+
         }
     })
 
@@ -60,7 +60,7 @@ function init(){
     //     //     ).join(', ');
     //     // });
     //     alert(coords);
-        
+
     //     var projection = map.options.get('projection');
     //     alert(projection.fromGlobalPixels(
     //         map.converter.pageToGlobal([160, 300]), map.getZoom()
@@ -80,7 +80,7 @@ function init(){
         var center = map.getCenter();
 
         var projection = map.options.get('projection');
-        
+
         var gotoPoint = projection.fromGlobalPixels(
             map.converter.pageToGlobal([160, 300]), map.getZoom()
         );
