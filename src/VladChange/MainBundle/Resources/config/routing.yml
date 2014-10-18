@@ -18,6 +18,12 @@ vlad_change_add_project:
     path: /add_project/
     defaults: { _controller: VladChangeMainBundle:Default:addProject }
 
+vlad_change_manipulate_project:
+    path: /project/{type}
+    defaults: { _controller: VladChangeMainBundle:Default:manipulateProject }
+    requirements:
+        type:  archive|delete
+
 vlad_change_add_project_from_map:
     path: /add_project/?lat={x}&lon={y}
     defaults: { _controller: VladChangeMainBundle:Default:addProject }

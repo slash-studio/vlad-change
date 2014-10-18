@@ -2,9 +2,10 @@
 
 namespace VladChange\MainBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use VladChange\MainBundle\Form\Type\PlacemarkType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
@@ -37,6 +38,24 @@ class DefaultController extends Controller
             'expired'  => $placemark->isExpired(),
             'notliked' => !$placemark->isLiked()
         ]);
+    }
+
+    public function manipulateProjectAction(Request $request, $type)
+    {
+        $user = $this->getUser();
+        $response = new Response('Not found', 404, ['Content-Type' => 'application/json']);
+        if (empty($user) || !$request->isXMLHttpRequest()) return $response;
+        $em = $this->getDoctrine()->getEntityManager();
+        $placemark = $em->getRepository('VladChangeStoreBundle:Placemark')
+                        ->findOneById($request->request->get('id'));
+        if (empty($placemark)) return $response;
+        if ($type == 'archive') {
+            $em->merge($placemark->setArchived(true));
+        } else {
+            $em->remove($placemark);
+        }
+        $em->flush();
+        return $response->setStatusCode(200);;
     }
 
     public function addProjectAction(Request $request)
