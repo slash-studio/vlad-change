@@ -15,8 +15,8 @@ class PlacemarkType extends AbstractType
                 ->add('short_desc', 'text', ['label' => 'Краткое описание'])
                 ->add('desc', 'text', ['label' => 'Полное описание'])
                 ->add('limit_voice', 'number', ['data' => 100, 'label' => 'Порог голосов'])
-                ->add('lat', 'number', ['label' => 'Широта'])
-                ->add('lon', 'number', ['label' => 'Долгота'])
+                ->add('lat', 'number', ['label' => 'Широта', 'precision' => 20])
+                ->add('lon', 'number', ['label' => 'Долгота', 'precision' => 20])
                 ->add('save', 'submit', ['label' => 'Сохранить'])
         ;
     }
