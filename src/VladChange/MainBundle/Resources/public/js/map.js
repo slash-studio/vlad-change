@@ -1,5 +1,23 @@
 ymaps.ready(init);
 
+function createPlacemark(x, y, balloonText, event){
+
+    placemark = new ymaps.Placemark(
+        [x, y], 
+        {
+            balloonContent: balloonText
+        }, 
+        {
+            preset: 'islands#icon',
+            iconColor: '#0095b6'
+        }
+    );
+    if (event) {
+        placemark.events.add('click', event);
+    }
+    return placemark;
+}
+
 function init(){    
 
     map = new ymaps.Map("map", {
@@ -13,16 +31,7 @@ function init(){
         success: function(placemarks){
             for (i = 0; i < placemarks.length; i++) {
                 map.geoObjects.add(
-                    new ymaps.Placemark(
-                        [placemarks[i].x, placemarks[i].y], 
-                        {
-                            balloonContent: 'цвет <strong>воды пляжа бонди</strong>'
-                        }, 
-                        {
-                            preset: 'islands#icon',
-                            iconColor: '#0095b6'
-                        }
-                    )
+                    createPlacemark(placemarks[i].x, placemarks[i].y, 'Охуенный проект', function() {alert("Клик блять")})
                 );    
             }
         }
@@ -32,16 +41,7 @@ function init(){
         e.preventDefault();
         var coords = e.get('coords');
         map.geoObjects.add(
-            new ymaps.Placemark(
-                e.get('coords'), 
-                {
-                    balloonContent: 'цвет <strong>воды пляжа бонди</strong>'
-                }, 
-                {
-                    preset: 'islands#icon',
-                    iconColor: '#0095b6'
-                }
-            )
+            createPlacemark(coords[0], coords[1], 'Охуенный новый проект', function() {alert("хуик")})
         );
 
         $.ajax({
