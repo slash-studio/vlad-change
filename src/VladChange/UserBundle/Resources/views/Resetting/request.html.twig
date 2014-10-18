@@ -1,5 +1,19 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends 'VladChangeMainBundle:Default:page.html.twig' %}
 
-{% block fos_user_content %}
-{% include "FOSUserBundle:Resetting:request_content.html.twig" %}
-{% endblock fos_user_content %}
+{% block div_main %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+    <div>
+        {% if invalid_username is defined %}
+            <p>Пользователя с таким e-mail не существует</p>
+        {% endif %}
+        <label for="username">Ваш E-mail</label>
+        <input type="text" id="username" name="username" required="required" />
+    </div>
+    <div>
+        <input type="submit" value="Отправить пароль" />
+    </div>
+</form>
+
+{% endblock %}

@@ -1,0 +1,6 @@
+services:
+    vlad_change_main.registration.form.type:
+        class: VladChange\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: vladchange_user_registration }

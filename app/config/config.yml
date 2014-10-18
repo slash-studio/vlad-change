@@ -86,10 +86,10 @@ fos_user:
         mailer: fos_user.mailer.twig_swift
     resetting:
         email:
-            template: VladChangeMainBundle:Mail:resetting.html.twig
+            template: VladChangeUserBundle:Mail:resetting.html.twig
     registration:
         form:
             type: vladchange_user_registration
         confirmation:
             enabled: true
-            template: VladChangeMainBundle:Mail:confirmation.html.twig
+            template: VladChangeUserBundle:Mail:confirmation.html.twig
