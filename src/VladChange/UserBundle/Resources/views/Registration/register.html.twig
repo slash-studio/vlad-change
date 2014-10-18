@@ -3,12 +3,11 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block div_main %}
-<h1>Регистрация</h1>
-<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
-   {{ form_widget(form) }}
-   <div>
-      <input type="submit" value="Подтвердить" />
-   </div>
-</form>
-
+   <h1>Регистрация</h1>
+   <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+      {{ form_widget(form) }}
+      <div>
+         <input type="submit" value="Подтвердить" />
+      </div>
+   </form>
 {% endblock %}

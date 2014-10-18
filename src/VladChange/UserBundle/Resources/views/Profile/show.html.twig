@@ -12,5 +12,17 @@
         <ul>
 
         </ul>
+
+
+
+    {% for p in user.getProjects() %}
+        <li>Название - {{ p.getName() }}</li>
+        <li>Дата создания - {{ p.getCreateDate().format('d-m-Y') }}</li>
+        <li>Дата окончания - {{ p.getDieDate().format('d-m-Y') }}</li>
+        <li>Краткое описание - {{ p.getShortDesc() }}</li>
+        <li>Описание - {{ p.getDesc() }}</li>
+    {% endfor %}
+
+
     </div>
 {% endblock %}

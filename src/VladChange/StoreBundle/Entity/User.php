@@ -5,6 +5,7 @@ namespace VladChange\StoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * User
  *
@@ -18,7 +19,7 @@ class User extends BaseUser
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
 
@@ -51,6 +52,16 @@ class User extends BaseUser
      * )
      */
     protected $surname;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Placemark", mappedBy="user")
+     */
+    protected $projects;
+
+    public function __construct() {
+        parent::__construct();
+        $this->projects = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -120,5 +131,38 @@ class User extends BaseUser
         $this->setUsername($email);
 
         return $this;
+    }
+
+    /**
+     * Add projects
+     *
+     * @param \VladChange\StoreBundle\Entity\Placemark $projects
+     * @return User
+     */
+    public function addProject(\VladChange\StoreBundle\Entity\Placemark $projects)
+    {
+        $this->projects[] = $projects;
+
+        return $this;
+    }
+
+    /**
+     * Remove projects
+     *
+     * @param \VladChange\StoreBundle\Entity\Placemark $projects
+     */
+    public function removeProject(\VladChange\StoreBundle\Entity\Placemark $projects)
+    {
+        $this->projects->removeElement($projects);
+    }
+
+    /**
+     * Get projects
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProjects()
+    {
+        return $this->projects;
     }
 }

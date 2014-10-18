@@ -15,11 +15,22 @@ class DefaultController extends Controller
 
     public function addProjectAction(Request $request)
     {
+        $user = $this->getUser();
+        if (empty($user)) {
+            return $this->redirect($this->generateUrl('fos_user_security_login'));
+        }
         $form = $this->createForm(new PlacemarkType());
         $form->handleRequest($request);
+        $lat = $request->get('lat');
+        $lon = $request->get('lon');
+        if (!empty($lat) && !empty($lon)) {
+            //set lat and lon if exist
+        }
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($form->getData());
+            $tmp = $form->getData();
+            $tmp->setUser($user);
+            $em->persist($tmp);
             $em->flush();
             return $this->redirect($this->generateUrl('fos_user_profile_show'));
         }

@@ -41,11 +41,6 @@ else
    php app/console cache:clear --env=$env --no-debug
 fi
 
-rm -f app/logs/dev.log/*
-rm -f app/logs/prod.log/*
-rm -f app/logs/dev_old.log/*
-rm -f app/logs/prod_old.log/*
-
 sudo chmod -R ug+rw .
 if egrep -i "^www-data" /etc/group > /dev/null; then
   sudo chown $USER:www-data .
