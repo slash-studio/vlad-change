@@ -42,19 +42,21 @@
 #full_info {
    position: absolute;
    top: 85px;
-   transform: translateX(100%);
+   transform: translateX(0);
    left: 320px;
    right: 0;
    bottom: 0;
-   overflow: hidden;
+   overflow-x: hidden;
+   overflow-y: scroll;
+   -webkit-box-shadow: -6px 0px 10px 0px rgba(0, 0, 0, 0.28);
+   -moz-box-shadow:    -6px 0px 10px 0px rgba(0, 0, 0, 0.28);
+   box-shadow:         -6px 0px 10px 0px rgba(0, 0, 0, 0.28);
 }
 
 #full_info .content {
    position: absolute;
    height: 100%;
    width: 100%;
-   background: white;
-   text-align: center;
    color: black;
 }
 
@@ -64,4 +66,29 @@
    margin-top: -85px;
    position: absolute;
    overflow: hidden;
+}
+
+#full_info .content div.info {
+   padding: 50px 80px 50px 80px;
+   background: white;
+}
+
+#full_info .content div.info h1 {
+   font-family: Cambria, serif;
+   font-size: 250%;
+   margin: 0 0 30px 0;
+}
+
+#full_info .content div.info div.text {
+   font-size: 100%;
+   line-height: 1.5;
+}
+
+#full_info .content div.info div.text p {
+   margin: 20px 0;
+}
+
+#slider {
+   background: #1f1f1f;
+   height: 400px;
 }

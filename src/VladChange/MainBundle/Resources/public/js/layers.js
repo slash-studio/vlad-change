@@ -6,11 +6,4 @@ function showShortInfo() {
    $("#full_info").animate({
       transform: 'translateX(0)'
    }, 500);
-
 }
-
-$(function(){
-   $('header').click(function(){
-      showShortInfo();
-   });
-})

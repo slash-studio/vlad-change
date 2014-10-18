@@ -12,23 +12,27 @@
 {% block div_main %}
    <div id="wrap">
       <div id="map"></div> <!-- TODO : Check style -->
-      <div id="short_info">
+      <article id="short_info">
          <h1>Арт-объект для фестиваля "Белые ночи"</h1>
          <div class="place">ул. Светланская 54</div>
          <div class="author">
             <span>автор</span>
             <a href="#">Алексей Вострицкий</a>
          </div>
-      </div>
-      <div id="full_info">
+      </article>
+      <article id="full_info">
          <div class="content">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <div id="slider">
+            тут слайдер
+            </div>
+            <div class="info">
+               <h1>Арт-объект для фестиваля «Белые ночи»</h1>
+               <div class="text">
+                  <p>Символом культурно-исторического наследия Португалии, произведением искусства, полноценным арт-объектом, и в то же время - функциональным предметом современной мебели стал новый дизайн-проект португальской компании Boca do Lobo. Не так давно они дополнили свою линию эксклюзивной, штучной мебели Heritage ("Наследие") новой разработкой, сервантом под названием Heritage Sideboard, который выглядит как музейный экспонат, щеголяет уникальным декором на дверцах, стенках и богатым внутренним оформлением.</p>
+                  <p>Как следует из названия, проект Heritage Sideboard от компании Boca do Lobo целиком и полностью посвящен национальному наследию державы. А его поверхность отражает сложный и многоуровневый процесс становления и формирования облика той Португалии, которую мы видим сегодня. Именно поэтому она настолько неровная, местами с трещинами, утолщениями и шероховатостями.</p>
+               </div>
+            </div>
          </div>
-      </div>
+      </article>
    </div>
 {% endblock %}
