@@ -7,3 +7,30 @@
 .ymaps-2-1-16-copyright {
    display: none !important;
 }
+
+div.my-hint {
+   display: inline-block;
+   padding: 7px;
+   position: relative;
+   left: -10px;
+   -webkit-box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.35);
+   -moz-box-shadow:    0px 0px 19px 0px rgba(0, 0, 0, 0.35);
+   box-shadow:         0px 0px 19px 0px rgba(0, 0, 0, 0.35);
+   text-align: center;
+   min-width: 150px;
+   vertical-align: middle;
+   background: #2d2d2d;
+   color: white;
+}
+
+div.my-hint h1 {
+   font-family: Cambria, serif;
+   font-size: 110%;
+}
+
+div.my-hint div.street {
+   margin-top: 5px;
+   font-size: 80%;
+   font-style: italic;
+   color: #777;
+}

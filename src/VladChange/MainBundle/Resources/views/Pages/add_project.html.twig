@@ -1,11 +1,30 @@
 {% extends 'VladChangeMainBundle:Default:page.html.twig' %}
 
+{% block links %}
+   {{ parent() }}
+   <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/registration.css') }}" />
+   <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/forms.css') }}" />
+   <script src="{{ asset('bundles/vladchangemain/js/forms.js') }}"></script>
+   <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/message.css') }}" />
+   <script src="{{ asset('bundles/vladchangemain/js/message.js') }}"></script>
+{% endblock %}
+
 {% block div_main %}
-   {% if isAvailableProj %}
-      {{ parent() }}
-      {{ form(form) }}
-   {% else %}
-      <p>Вы исчерпали лимит доступных проектов. Очень жаль. </p>
-      <p>Можете купить место для дополнительного проекта.</p>
-   {% endif %}
+   <div id="main_wrap">
+      {% if isAvailableProj %}
+         <h1 class="from_top">Добавление проекта</h1><div class="block_form">
+            <form action="{{ path('vlad_change_add_project') }}" {{ form_enctype(form) }} method="POST" class="vlad_change_add_project">
+               {{ form_widget(form) }}
+               <div class="buttons">
+                  <input type="submit" value="Добавить" />
+               </div>
+            </form>
+         </div>
+      {% else %}
+         <div class="message">
+            <p>Вы исчерпали лимит доступных проектов. Очень жаль:( </p>
+            <p>Можете купить место для дополнительного проекта.</p>
+         </div>
+      {% endif %}
+   </div>
 {% endblock %}

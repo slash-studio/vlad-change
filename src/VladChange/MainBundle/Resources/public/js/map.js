@@ -2,10 +2,10 @@ ymaps.ready(init);
 
 function createPlacemark(x, y, balloonText, event) {
 
-    HintLayout = ymaps.templateLayoutFactory.createClass( "<div class='my-hint'>" +
-            "<b>{{ properties.object }}</b><br />" +
-            "{{ properties.address }}" +
-            "</div>", {
+    HintLayout = ymaps.templateLayoutFactory.createClass( '<div class="my-hint">' +
+            '<h1>{{ properties.object }}</h1>' +
+            '<div class="street">{{ properties.address }}</div>' +
+            '</div>', {
                 getShape: function () {
                     var el = this.getElement(),
                         result = null;

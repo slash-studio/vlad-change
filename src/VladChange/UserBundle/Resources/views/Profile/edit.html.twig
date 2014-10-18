@@ -9,14 +9,14 @@
 
 {% block div_main %}
 {% trans_default_domain 'FOSUserBundle' %}
-<div id="main_wrap">
-   <h1 class="from_top">Изменение профиля</h1><div class="block_form">
-      <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
-      {{ form_widget(form) }}
-         <div class="buttons">
-            <input type="submit" value="Сохранить" />
-         </div>
-      </form>
+   <div id="main_wrap">
+      <h1 class="from_top">Изменение профиля</h1><div class="block_form">
+         <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+         {{ form_widget(form) }}
+            <div class="buttons">
+               <input type="submit" value="Сохранить" />
+            </div>
+         </form>
+      </div>
    </div>
-</div>
 {% endblock %}
