@@ -31,13 +31,44 @@ function init(){
         success: function(placemarks){
             for (i = 0; i < placemarks.length; i++) {
                 map.geoObjects.add(
-                    createPlacemark(placemarks[i].x, placemarks[i].y, 'Охуенный проект', function() {
+                    createPlacemark(placemarks[i].x, placemarks[i].y, 'Охуенный проект', function(e) {
                         showShortInfo();
+                        var coords = e.get('coords');
+                        var center = map.getCenter();           
+                        var gotoPoint = map.options.get('projection').fromGlobalPixels(
+                            map.converter.pageToGlobal([160, 300]), map.getZoom()
+                        );
+                        map.setCenter([center[0] + coords[0] - gotoPoint[0], center[1] + coords[1] - gotoPoint[1]]);
                     })
                 );
             }
+            
         }
     })
+
+
+    // map.events.add('click', function (e) {
+    //     e.preventDefault();
+    //     var coords = e.get('coords');
+    //     // map.geoObjects.add(
+    //     //     createPlacemark(coords[0], coords[1], 'Охуенный новый проект', function() {alert("хуик")})
+    //     // );
+    //     // var projection = map.options.get('projection');
+    //     // $('#map').bind('click', function (e) {
+    //     //     console.log(projection.fromGlobalPixels(
+    //     //         map.converter.pageToGlobal([e.pageX, e.pageY]), map.getZoom()
+    //     //     ).join(', ');
+    //     // });
+    //     alert(coords);
+        
+    //     var projection = map.options.get('projection');
+    //     alert(projection.fromGlobalPixels(
+    //         map.converter.pageToGlobal([160, 300]), map.getZoom()
+    //     ));
+    //     map.setCenter(projection.fromGlobalPixels(
+    //         map.converter.pageToGlobal([160, 300]), map.getZoom()
+    //     ));
+    // });
 
     map.events.add('dblclick', function (e) {
         e.preventDefault();
@@ -46,8 +77,14 @@ function init(){
             createPlacemark(coords[0], coords[1], 'Охуенный новый проект', function() {alert("хуик")})
         );
 
-        $.ajax({
-            url : "api.addPlacemark/" + coords.join('&'),
-        });
+        var center = map.getCenter();
+
+        var projection = map.options.get('projection');
+        
+        var gotoPoint = projection.fromGlobalPixels(
+            map.converter.pageToGlobal([160, 300]), map.getZoom()
+        );
+
+        map.setCenter([center[0] + coords[0] - gotoPoint[0], center[1] + coords[1] - gotoPoint[1]]);
     });
 }
