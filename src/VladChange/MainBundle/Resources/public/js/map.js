@@ -32,7 +32,7 @@ function init() {
             for (i = 0; i < placemarks.length; i++) {
                 map.geoObjects.add(
                     createPlacemark(placemarks[i].x, placemarks[i].y, 'Охуенный проект', function(e) {
-                        showShortInfo();
+                        showInfo();
                         var coords = e.get('coords');
                         var center = map.getCenter();
                         var gotoPoint = map.options.get('projection').fromGlobalPixels(
