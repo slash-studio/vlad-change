@@ -11,6 +11,7 @@
         <p>Фамилия: {{ user.getSurname() }}</p>
         <p>E-mail: {{ user.getEmail() }}</p>
         {% if isMine %}
+            <a href="{{ path('fos_user_profile_edit') }}">Редактировать профиль</a>
             <a href="{{ path('vlad_change_add_project') }}">Добавить проект</a>
             <a href="{{ path('fos_user_security_logout') }}">Выход</a>
         {% endif %}
