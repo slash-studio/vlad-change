@@ -11,7 +11,7 @@ class SecurityController extends BaseController
     protected function renderLogin(array $data)
     {
 
-        if (true === $this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED') === true) {
             return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_show'));
         }
 

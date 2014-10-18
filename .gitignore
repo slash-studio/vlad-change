@@ -12,3 +12,5 @@
 *~
 composer.lock
 update_site.bat
+.idea
+vlad-change.iml
