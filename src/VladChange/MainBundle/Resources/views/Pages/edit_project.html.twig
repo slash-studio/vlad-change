@@ -1,29 +1,34 @@
 {% extends 'VladChangeMainBundle:Default:page.html.twig' %}
 
+{% block links %}
+   {{ parent() }}
+   <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/project_forms.css') }}" />
+   <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/forms.css') }}" />
+   <script src="{{ asset('bundles/vladchangemain/js/forms.js') }}"></script>
+   <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/message.css') }}" />
+   <script src="{{ asset('bundles/vladchangemain/js/message.js') }}"></script>
+{% endblock %}
+
 {% block div_main %}
-    {% if notliked %}
+    <div id="main_wrap">
         {% if archived %}
-           <p>Ваш проект был помещен в архив, спасибо за внимание.</p>
+            <div class="message">
+                <p>Ваш проект был помещен в архив, спасибо за внимание.</p>
+            </div>
         {% elseif expired %}
-           <p>Срок вашего проекта истек, очень жаль.</p>
-           <p>Можете продлить срок за денежку.</p>
+            <div class="message">
+                <p>Срок вашего проекта истек, очень жаль.</p>
+                <p>Можете продлить срок за денежку.</p>
+            </div>
         {% else %}
-           {{ parent() }}
-           {{ form(form) }}
+            <h1 class="from_top">Изменение проекта</h1><div class="block_form">
+                <form action="{{ path('vlad_change_edit_project', {'id': project_id}) }}" {{ form_enctype(form) }} method="POST" class="vlad_change_edit_project">
+                   {{ form_widget(form) }}
+                   <div class="buttons">
+                      <input type="submit" value="Сохранить" />
+                   </div>
+                </form>
+            </div>
         {% endif %}
-    {% else %}
-        <p>За ваш проект уже проголосовали. Вы не можете его изменить.</p>
-        {# {{ parent() }} #}
-        {# {{ form_start(form) }} #}
-        {# {% for field in form %} #}
-            {# {% if (field.vars.name == "limit_voice") or (field.vars.name == "save") %} #}
-                {# {{ form_row(field) }} #}
-            {# {% else %} #}
-                {# {{ form_label(field, {'attr':{'style':'display:none' }}) }} #}
-                {# {{ form_row(field, {'attr':{'style':'display:none'}}) }} #}
-                {# } #}
-            {# {% endif %} #}
-        {# {% endfor %} #}
-        {# {{ form_end(form) }} #}
-    {% endif %}
+    </div>
 {% endblock %}

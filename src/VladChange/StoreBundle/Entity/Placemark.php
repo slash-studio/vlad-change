@@ -107,7 +107,7 @@ class Placemark
     public function isLiked()
     {
         //Проверка на лайки
-        return true;
+        return false;
     }
     /**
      * Get id

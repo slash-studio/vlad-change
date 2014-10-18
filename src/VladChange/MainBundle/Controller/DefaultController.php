@@ -36,7 +36,8 @@ class DefaultController extends Controller
             'form' => $form->createView(),
             'archived' => $placemark->getArchived(),
             'expired'  => $placemark->isExpired(),
-            'notliked' => !$placemark->isLiked()
+            'notliked' => !$placemark->isLiked(),
+            'project_id' => $placemark->getId()
         ]);
     }
 
