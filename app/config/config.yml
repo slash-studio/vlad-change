@@ -1,6 +1,8 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+parameters:
+    fos_user.template.engine: 'twig'
 
 framework:
     #esi:             ~
@@ -66,17 +68,28 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
+    transport:  "smtp"
+    encryption: ssl
+    auth_mode:  login
+    host:       "smtp.gmail.com"
+    username:   "vladchange"
+    password:   "se6teenp@$$"
+    # spool:      { type: memory }
 
 # FOSUserBundle Configuration
 fos_user:
+    # template.engine: 'twig'
     db_driver: orm
     firewall_name: main
     user_class: VladChange\StoreBundle\Entity\User
+    service:
+        mailer: fos_user.mailer.twig_swift
+    resetting:
+        email:
+            template: VladChangeMainBundle:Mail:resetting.html.twig
     registration:
         form:
             type: vladchange_user_registration
+        confirmation:
+            enabled: true
+            template: VladChangeMainBundle:Mail:confirmation.html.twig

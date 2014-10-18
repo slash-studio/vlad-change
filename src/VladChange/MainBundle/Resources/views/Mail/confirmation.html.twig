@@ -1,0 +1,30 @@
+{% block subject %}
+	VladChange - подтверждение регистрации.
+{% endblock %}
+
+{% block body_text %}
+{% autoescape false %}
+{# <p> #}
+	{# <h1> #}
+		Здравствуйте, {{ user.surname }} {{ user.name }}!
+	{# </h1> #}
+{# </p> #}
+{# <p> #}
+	Спасибо за использование нашего ресурса VladChange! Вместе мы сможем многого добиться!
+	Для подтверждения вашей учетной записи, пожалуйста, перейдите по этой ссылке: {{ confirmationUrl }}
+{# </p> #}
+
+
+С уважением,
+команда разработчиков Vlad Change 
+{% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+{#
+    You can of course render the html directly here.
+    Including a template as done here allows keeping things DRY by using
+    the template inheritance in it
+#}
+{# {% include 'VladChangeMainBundle:User:resetting_email.html.twig' %} #}
+{% endblock %}
