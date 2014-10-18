@@ -54,6 +54,13 @@ class User extends BaseUser
     protected $surname;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="max_proj_amount", type="integer")
+     */
+    protected $maxProjAmount = 3;
+
+    /**
      * @ORM\OneToMany(targetEntity="Placemark", mappedBy="user")
      */
     protected $projects;
@@ -164,5 +171,28 @@ class User extends BaseUser
     public function getProjects()
     {
         return $this->projects;
+    }
+
+    /**
+     * Set maxProjAmount
+     *
+     * @param integer $maxProjAmount
+     * @return User
+     */
+    public function setMaxProjAmount($maxProjAmount)
+    {
+        $this->maxProjAmount = $maxProjAmount;
+
+        return $this;
+    }
+
+    /**
+     * Get maxProjAmount
+     *
+     * @return integer 
+     */
+    public function getMaxProjAmount()
+    {
+        return $this->maxProjAmount;
     }
 }
