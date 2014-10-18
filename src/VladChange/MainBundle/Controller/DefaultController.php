@@ -13,6 +13,19 @@ class DefaultController extends Controller
         return $this->render('VladChangeMainBundle:Pages:index.html.twig');
     }
 
+    public function editProjectAction(Request $request, $id)
+    {
+        $user = $this->getUser();
+        if (empty($user)) {
+            return $this->redirect($this->generateUrl('fos_user_security_login'));
+        }
+        $form = $this->createForm(new PlacemarkType());
+        $form->handleRequest($request);
+        return $this->render('VladChangeMainBundle:Pages:add_project.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
     public function addProjectAction(Request $request)
     {
         $user = $this->getUser();
