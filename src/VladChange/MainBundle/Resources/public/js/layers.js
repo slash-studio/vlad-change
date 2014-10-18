@@ -5,5 +5,9 @@ function showShortInfo() {
 
    $("#full_info").animate({
       transform: 'translateX(0)'
-   }, 500);
+   }, 500, function(){
+      $("#close_info").animate({
+         top: 80
+      }, 500);
+   });
 }

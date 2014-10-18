@@ -1,9 +1,7 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends 'VladChangeMainBundle:Default:page.html.twig' %}
 
-{% trans_default_domain 'FOSUserBundle' %}
-
-{% block fos_user_content %}
+{% block div_main %}
 <p>
-{{ 'resetting.check_email'|trans({'%email%': email}) }}
+На ваш e-mail была отправлена инструкция по восстановлению пароля.
 </p>
 {% endblock %}

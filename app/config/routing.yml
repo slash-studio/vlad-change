@@ -9,4 +9,3 @@ fos_user:
 vlad_change_main:
     resource: "@VladChangeMainBundle/Resources/config/routing.yml"
     prefix:   /
-

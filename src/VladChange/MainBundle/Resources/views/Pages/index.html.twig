@@ -6,7 +6,18 @@
    <script src="{{ asset('bundles/vladchangemain/js/jquery.transform2d.js') }}"></script>
    <script src="{{ asset('bundles/vladchangemain/js/layers.js') }}"></script>
    <script src="{{ asset('bundles/vladchangemain/js/map.js') }}"></script>
+   <script src="{{ asset('bundles/vladchangemain/js/jquery.bxslider.min.js') }}"></script>
    <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/map_index.css') }}" />
+   <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/jquery.bxslider.css') }}" />
+   <script>
+      $(function(){
+         $('.bxslider').bxSlider({
+            infiniteLoop: false,
+            hideControlOnEnd: true,
+            captions: true
+         });
+      });
+   </script>
 {% endblock %}
 
 {% block div_main %}
@@ -20,16 +31,34 @@
             <a href="#">Алексей Вострицкий</a>
          </div>
       </article>
+      <div id="close_info">
+         Закрыть
+      </div>
       <article id="full_info">
          <div class="content">
             <div id="slider">
-            тут слайдер
+               <ul class="bxslider">
+                  <li><img src="{{ asset('bundles/vladchangemain/images/1.jpg') }}" title="Funky roots" /></li>
+                  <li><img src="{{ asset('bundles/vladchangemain/images/2.jpg') }}" title="Funky roots Funky roots" /></li>
+                  <li><img src="{{ asset('bundles/vladchangemain/images/3.jpg') }}" title="Funky roots" /></li>
+                  <li><img src="{{ asset('bundles/vladchangemain/images/4.jpg') }}" title="Funky roots" /></li>
+               </ul>
             </div>
             <div class="info">
                <h1>Арт-объект для фестиваля «Белые ночи»</h1>
                <div class="text">
                   <p>Символом культурно-исторического наследия Португалии, произведением искусства, полноценным арт-объектом, и в то же время - функциональным предметом современной мебели стал новый дизайн-проект португальской компании Boca do Lobo. Не так давно они дополнили свою линию эксклюзивной, штучной мебели Heritage ("Наследие") новой разработкой, сервантом под названием Heritage Sideboard, который выглядит как музейный экспонат, щеголяет уникальным декором на дверцах, стенках и богатым внутренним оформлением.</p>
                   <p>Как следует из названия, проект Heritage Sideboard от компании Boca do Lobo целиком и полностью посвящен национальному наследию державы. А его поверхность отражает сложный и многоуровневый процесс становления и формирования облика той Португалии, которую мы видим сегодня. Именно поэтому она настолько неровная, местами с трещинами, утолщениями и шероховатостями.</p>
+               </div>
+               <div class="bottom_info">
+                  <div class="left">
+                     <a href="#" class="avatar"><img src="{{ asset('bundles/vladchangemain/images/avatar.jpg') }}" /></a>
+                     <a href="#" class="author">Алексей Вострицкий</a>
+                     <time>17.10.2014</time>
+                  </div>
+                  <div class="right">
+                     <div class="likes">1 458</div>
+                  </div>
                </div>
             </div>
          </div>
