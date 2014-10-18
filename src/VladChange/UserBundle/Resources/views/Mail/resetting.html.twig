@@ -1,13 +1,12 @@
-{% block subject %}Resetting your password{% endblock %}
+{% block subject %}VladChange - восстановление пароля{% endblock %}
 
 {% block body_text %}
 {% autoescape false %}
-Hello {{ user.username }} !
+Здравствуйте, {{ user.name }}!
+Вы можете восстановить ваш пароль, перейдя по этой ссылке: {{ confirmationUrl }}
 
-You can reset your email by accessing {{ confirmationUrl }}
-
-Greetings,
-the Vlad change team
+С уважением,
+команда разработчиков Vlad Change 
 {% endautoescape %}
 {% endblock %}
 

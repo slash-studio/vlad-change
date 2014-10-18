@@ -4,8 +4,17 @@
    {{ parent() }}
    <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
    <script src="{{ asset('bundles/vladchangemain/js/map.js') }}"></script>
+   <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/map_index.css') }}" />
 {% endblock %}
 
 {% block div_main %}
    <div id="map"></div> <!-- TODO : Check style -->
+   <div id="short_info">
+      <h1>Арт-объект для фестиваля "Белые ночи"</h1>
+      <div class="place">ул. Светланская 54</div>
+      <div class="author">
+         <span>автор</span>
+         <a href="#">Алексей Вострицкий</a>
+      </span>
+   </div>
 {% endblock %}

@@ -1,9 +1,10 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends 'VladChangeMainBundle:Default:page.html.twig' %}
 
-{% block fos_user_content %}
+{% block div_main %}
    <div class="fos_user_user_show">
-       <p>{{ 'profile.show.username'|trans }}: {{ user.name }}</p>
-       <p>{{ 'profile.show.username'|trans }}: {{ user.surname }}</p>
-       <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+       <p>{{ 'Имя'|trans }}: {{ user.name }}</p>
+       <p>{{ 'Фамилия'|trans }}: {{ user.surname }}</p>
+       <p>{{ 'E-mail'|trans }}: {{ user.email }}</p>
+       <a href="{{ path('fos_user_security_logout') }}">Выход</a>
    </div>
-{% endblock fos_user_content %}
+{% endblock %}
