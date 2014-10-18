@@ -6,11 +6,12 @@
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
-vlad_change_main:
-    resource: "@VladChangeMainBundle/Resources/config/api_routing.yml"
-    prefix:   /api
 
 
 vlad_change_main:
     resource: "@VladChangeMainBundle/Resources/config/routing.yml"
     prefix:   /
+
+vlad_change_api:
+    resource: "@VladChangeMainBundle/Resources/config/api_routing.yml"
+    prefix:   /api
