@@ -1,0 +1,28 @@
+{% extends 'VladChangeMainBundle:Default:page.html.twig' %}
+
+{% block div_main %}
+    {% if notliked %}
+        {% if archived %}
+           <p>Ваш проект был помещен в архив, спасибо за внимание.</p>
+        {% elseif expired %}
+           <p>Срок вашего проекта истек, очень жаль.</p>
+           <p>Можете продлить срок за денежку.</p>
+        {% else %}
+           {{ parent() }}
+           {{ form(form) }}
+        {% endif %}
+    {% else %}
+        <p>За ваш проект уже проголосовали. Вы можете изменить только порог.</p>
+        {{ parent() }}
+        {# {{ form(form) }} #}
+        {% for field in form %}
+            {% if form_label(field) == "Порог голосов" %}
+                {{ form_row(field) }}
+            {% else %}
+                {{ form_row(field, {'attr':{'disabled':'disabled'}}) }}
+            {% endif %}
+        {% endfor %}
+        {# {% form_re} #}
+        {# {% do form.limit_voice.setRendered %} #}
+    {% endif %}
+{% endblock %}
