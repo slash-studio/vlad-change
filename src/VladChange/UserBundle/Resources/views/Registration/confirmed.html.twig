@@ -1,9 +1,21 @@
 {% extends 'VladChangeMainBundle:Default:page.html.twig' %}
 
+{% block links %}
+   {{ parent() }}
+   <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/message.css') }}" />
+   <script src="{{ asset('bundles/vladchangemain/js/message.js') }}"></script>
+   <meta http-equiv="refresh" content="3;{{ path('fos_user_profile_show') }}" />
+{% endblock %}
+
+
 {% block div_main %}
-   {% if app.session is not empty %}
-      <h1>Вы успешно зарегистрированы!</h1>
-      <p>Можете перейти на страницу вашего <a href="{{ path('fos_user_profile_show') }}">профиля</a></p>
-      {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
-   {% endif %}
+   <div id="main_wrap">
+      {% if app.session is not empty %}
+         <div class="message">
+            <h1>Вы успешно зарегистрированы!</h1>
+            <p>В течение нескольких секунд вы перейдете на страницу вашего <a href="{{ path('fos_user_profile_show') }}">профиля</a></p>
+            {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
+         </div>
+      {% endif %}
+</div>
 {% endblock %}

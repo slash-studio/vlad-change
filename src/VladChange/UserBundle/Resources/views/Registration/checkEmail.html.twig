@@ -1,5 +1,16 @@
 {% extends 'VladChangeMainBundle:Default:page.html.twig' %}
 
+{% block links %}
+   {{ parent() }}
+   <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/message.css') }}" />
+   <script src="{{ asset('bundles/vladchangemain/js/message.js') }}"></script>
+{% endblock %}
+
 {% block div_main %}
-   <p>На указанный вами email отправлено письмо с подтверждением регистрации.</p>
+   <div id="main_wrap">
+      <div class="message">
+         <p>На указанный вами e-mail отправлено письмо с подтверждением регистрации.</p>
+         <p><a href="{{ path('vlad_change_main_homepage') }}">Главная</a></p>
+      </div>
+   </div>
 {% endblock %}

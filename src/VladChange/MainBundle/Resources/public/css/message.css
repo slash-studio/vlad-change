@@ -1,0 +1,27 @@
+div.message {
+   font-size: 100%;
+   background: #1F1F1F;
+   padding: 10px 80px 30px 20px;
+   color: white;
+   display: none;
+}
+
+div.message h1 {
+   font-size: 150%;
+   font-family: Cambria, serif;
+   padding: 10px 0;
+}
+
+div.message a {
+   color: #1eaac4;
+}
+
+div.message p {
+   margin: 10px 0;
+}
+
+#main_wrap {
+   display: inline-block;
+   position: absolute;
+   left: 320px;
+}

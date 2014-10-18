@@ -1,10 +1,21 @@
 {% extends 'VladChangeMainBundle:Default:page.html.twig' %}
 
+{% block links %}
+   {{ parent() }}
+   <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/pass.css') }}" />
+   <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/forms.css') }}" />
+   <script src="{{ asset('bundles/vladchangemain/js/forms.js') }}"></script>
+{% endblock %}
+
 {% block div_main %}
-	<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
-    {{ form_widget(form) }}
-    	<div>
-        	<input type="submit" value="{{ 'Восстановить пароль'|trans }}" />
-    	</div>
-	</form>
+<div id="main_wrap">
+   <h1 class="from_top">Востановление пароля</h1><div class="block_form">
+      <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+       {{ form_widget(form) }}
+         <div class="buttons">
+            <input type="submit" value="{{ 'Восстановить пароль'|trans }}" />
+         </div>
+      </form>
+   </div>
+</div>
 {% endblock %}

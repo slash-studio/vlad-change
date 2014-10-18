@@ -1,7 +1,16 @@
 {% extends 'VladChangeMainBundle:Default:page.html.twig' %}
 
+{% block links %}
+   {{ parent() }}
+   <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/message.css') }}" />
+   <script src="{{ asset('bundles/vladchangemain/js/message.js') }}"></script>
+{% endblock %}
+
 {% block div_main %}
-<p>
-На ваш e-mail была отправлена инструкция по восстановлению пароля.
-</p>
+   <div id="main_wrap">
+      <div class="message">
+         <p>На ваш e-mail была отправлена инструкция по восстановлению пароля.</p>
+         <p><a href="{{ path('vlad_change_main_homepage') }}">Главная</a></p>
+      </div>
+   </div>
 {% endblock %}

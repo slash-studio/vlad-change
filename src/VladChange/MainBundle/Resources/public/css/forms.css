@@ -112,6 +112,10 @@ div.block_form {
    position: relative;
 }
 
+#fos_user_registration_form > ul {
+   display: none;
+}
+
 div.block_form div label + ul {
    position: absolute;
    left: 280px;

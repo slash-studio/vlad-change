@@ -1,19 +1,30 @@
 {% extends 'VladChangeMainBundle:Default:page.html.twig' %}
 
+{% block links %}
+   {{ parent() }}
+   <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/pass.css') }}" />
+   <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/forms.css') }}" />
+   <script src="{{ asset('bundles/vladchangemain/js/forms.js') }}"></script>
+{% endblock %}
+
 {% block div_main %}
 {% trans_default_domain 'FOSUserBundle' %}
 
-<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
-    <div>
-        {% if invalid_username is defined %}
-            <p>Пользователя с таким e-mail не существует</p>
-        {% endif %}
-        <label for="username">Ваш E-mail</label>
-        <input type="text" id="username" name="username" required="required" />
+<div id="main_wrap">
+   <h1 class="from_top">Востановление пароля</h1><div class="block_form">
+        <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+            <div>
+                <label for="username">Ваш E-mail</label>
+                {% if invalid_username is defined %}
+                    <ul><li>Пользователя с таким e-mail не существует</li></ul>
+                {% endif %}
+                <input type="text" id="username" name="username" required="required" />
+            </div>
+            <div class="buttons">
+                <input type="submit" value="Отправить пароль" />
+            </div>
+        </form>
     </div>
-    <div>
-        <input type="submit" value="Отправить пароль" />
-    </div>
-</form>
+</div>
 
 {% endblock %}
