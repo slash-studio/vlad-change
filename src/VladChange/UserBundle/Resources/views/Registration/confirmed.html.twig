@@ -4,5 +4,6 @@
    {% if app.session is not empty %}
       <h1>Вы успешно зарегистрированы!</h1>
       <p>Можете перейти на страницу вашего <a href="{{ path('fos_user_profile_show') }}">профиля</a></p>
+      {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
    {% endif %}
 {% endblock %}
