@@ -15,7 +15,7 @@ function showInfo() {
 function hideInfo() {
    $("#close_info").animate({
       top: 0
-   }, 500, function(){
+   }, 50, function(){
       $("#short_info").slideUp(500, function(){
          // Animation complete.
       });
@@ -24,10 +24,10 @@ function hideInfo() {
          transform: 'translateX(4000)'
       }, 800, function(){
          $(this).css('transform', 'translateX(100%)');
-            var center = map.getCenter();
-            map.setCenter([center[0] - map.deltaLat, center[1] - map.deltaLon]);
       });
    });
+   var center = map.getCenter();
+   map.panTo([center[0] - map.deltaLat, center[1] - map.deltaLon]);
 }
 
 $(function(){

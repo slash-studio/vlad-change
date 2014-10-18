@@ -26,9 +26,7 @@ function createPlacemark(x, y, balloonText, event) {
     placemark = new ymaps.Placemark(
         [x, y],
         {
-            address: "Москва, ул. Зоологическая, 13, стр. 2",
-            object: balloonText,
-            balloonContent: balloonText
+            object: balloonText
         },
         {
             preset: 'islands#icon',
@@ -36,6 +34,16 @@ function createPlacemark(x, y, balloonText, event) {
             hintLayout: HintLayout
         }
     );
+
+    ymaps.geocode([x, y]).then(function (res) {
+            var firstGeoObject = res.geoObjects.get(0);
+
+            placemark.properties
+                .set({
+                    address: firstGeoObject.properties.get('name'),
+                });
+        });
+
     if (event) {
         placemark.events.add('click', event);
 
@@ -70,7 +78,7 @@ function init() {
                         );
                         map.deltaLat = coords[0] - gotoPoint[0];
                         map.deltaLon = coords[1] - gotoPoint[1];
-                        map.setCenter([center[0] + map.deltaLat, center[1] + map.deltaLon]);
+                        map.panTo([center[0] + map.deltaLat, center[1] + map.deltaLon]);
                     })
                 );
             }
