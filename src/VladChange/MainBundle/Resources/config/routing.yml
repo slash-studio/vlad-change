@@ -5,3 +5,7 @@ vlad_change_main_homepage:
 vlad_change_view_profile:
     path:     /profile/{id}
     defaults: { _controller: VladChangeMainBundle:Default:viewProfile }
+
+vlad_change_addPlacemark:
+    path:     /api.addPlacemark/{x}&{y}
+    defaults: { _controller: VladChangeMainBundle:Api:addPlacemark }
