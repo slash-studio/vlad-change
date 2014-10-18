@@ -1,10 +1,16 @@
 {% extends 'VladChangeMainBundle:Default:page.html.twig' %}
 
 {% block div_main %}
-   <div class="fos_user_user_show">
-       <p>{{ 'Имя'|trans }}: {{ user.name }}</p>
-       <p>{{ 'Фамилия'|trans }}: {{ user.surname }}</p>
-       <p>{{ 'E-mail'|trans }}: {{ user.email }}</p>
-       <a href="{{ path('fos_user_security_logout') }}">Выход</a>
-   </div>
+    <div class="fos_user_user_show">
+        <p>'Имя': {{ user.getName() }}</p>
+        <p>'Фамилия': {{ user.getSurname() }}</p>
+        <p>'E-mail': {{ user.getEmail() }}</p>
+        {% if isMine %}
+            <a href="{{ path('vlad_change_add_project') }}">Добавить проект</a>
+            <a href="{{ path('fos_user_security_logout') }}">Выход</a>
+        {% endif %}
+        <ul>
+
+        </ul>
+    </div>
 {% endblock %}

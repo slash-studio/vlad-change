@@ -4,7 +4,13 @@ vlad_change_main_homepage:
 
 vlad_change_view_profile:
     path:     /profile/{id}
-    defaults: { _controller: VladChangeMainBundle:Default:viewProfile }
+    defaults: { _controller: FOSUserBundle:Profile:show }
+    requirements:
+        id: \d+
+
+vlad_change_add_project:
+    path: /add_project
+    defaults: { _controller: VladChangeMainBundle:Default:addProject }
 
 vlad_change_addPlacemark:
     path:     /api.addPlacemark/{x}&{y}

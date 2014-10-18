@@ -3,6 +3,8 @@
 namespace VladChange\MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use VladChange\MainBundle\Form\Type\PlacemarkType;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
@@ -11,22 +13,19 @@ class DefaultController extends Controller
         return $this->render('VladChangeMainBundle:Pages:index.html.twig');
     }
 
-    public function viewProfileAction($id)
+    public function addProjectAction(Request $request)
     {
-        $authorized_user = $this->getUser();
-        if (!empty($authorized_user) && $authorized_user->getId() == $id) {
+        $form = $this->createForm(new PlacemarkType());
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($form->getData());
+            $em->flush();
             return $this->redirect($this->generateUrl('fos_user_profile_show'));
         }
-        $user = $this->get('doctrine')
-                     ->getManager()
-                     ->getRepository('VladChangeStoreBundle:User')
-                     ->findOneBy(['id' => $id]);
-        if (empty($user)) {
-            return $this->redirect($this->generateUrl('vlad_change_main_homepage'));
-        }
-        return $this->render(
-            'VladChangeMainBundle:Default:profile.html.twig',
-            ['name' => $user->getName(), 'surname' => $user->getSurname()]
-        );
+
+        return $this->render('VladChangeMainBundle:Pages:add_project.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }

@@ -3,7 +3,6 @@
 namespace VladChange\StoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Placemark
@@ -23,6 +22,13 @@ class Placemark
     protected $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=200)
+     */
+    protected $name;
+
+    /**
      * @var double
      *
      * @ORM\Column(name="lat", type="float")
@@ -35,13 +41,6 @@ class Placemark
      * @ORM\Column(name="lon", type="float")
      */
     protected $lon; // y
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="author", type="string", length=150)
-     */
-    protected $author; // e-mail
 
     /**
      * @var DateTime
@@ -79,11 +78,10 @@ class Placemark
     protected $desc;
 
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -106,7 +104,7 @@ class Placemark
     /**
      * Get lat
      *
-     * @return \double 
+     * @return \double
      */
     public function getLat()
     {
@@ -129,7 +127,7 @@ class Placemark
     /**
      * Get lon
      *
-     * @return \double 
+     * @return \double
      */
     public function getLon()
     {
@@ -152,7 +150,7 @@ class Placemark
     /**
      * Get author
      *
-     * @return string 
+     * @return string
      */
     public function getAuthor()
     {
@@ -175,7 +173,7 @@ class Placemark
     /**
      * Get create_date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreateDate()
     {
@@ -198,7 +196,7 @@ class Placemark
     /**
      * Get die_date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDieDate()
     {
@@ -221,7 +219,7 @@ class Placemark
     /**
      * Get limit_voice
      *
-     * @return integer 
+     * @return integer
      */
     public function getLimitVoice()
     {
@@ -244,7 +242,7 @@ class Placemark
     /**
      * Get short_desc
      *
-     * @return string 
+     * @return string
      */
     public function getShortDesc()
     {
@@ -267,10 +265,33 @@ class Placemark
     /**
      * Get desc
      *
-     * @return string 
+     * @return string
      */
     public function getDesc()
     {
         return $this->desc;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Placemark
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }
