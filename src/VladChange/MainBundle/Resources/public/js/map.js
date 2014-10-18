@@ -2,10 +2,13 @@ ymaps.ready(init);
 
 function createPlacemark(info, event) {
 
-    HintLayout = ymaps.templateLayoutFactory.createClass( '<div class="my-hint">' +
-            '<h1>{{ properties.object }}</h1>' +
+    HintLayout = ymaps.templateLayoutFactory.createClass(
+            '<div class="my-hint">' +
+            '<h1>{{ properties.name }}</h1>' +
             '<div class="street">{{ properties.address }}</div>' +
-            '</div>', {
+            '<div class="short_desc">{{ properties.short_desc }}</div>' +
+            '</div>',
+            {
                 getShape: function () {
                     var el = this.getElement(),
                         result = null;
@@ -28,7 +31,8 @@ function createPlacemark(info, event) {
     placemark = new ymaps.Placemark(
         coords,
         {
-            object: info.name
+            name: info.name,
+            short_desc: info.shortDesc
         },
         {
             preset: 'islands#icon',

@@ -25,7 +25,7 @@ class PlacemarkRepository extends EntityRepository
     public function getCurrentPlacemarks()
     {
         $qb = $this->_em->createQueryBuilder();
-        return $qb->select('p.id, p.name, p.lat, p.lon')
+        return $qb->select('p.id, p.name, p.lat, p.lon, p.shortDesc')
                   ->from('VladChangeStoreBundle:Placemark', 'p')
                   ->where('p.archived = 0')
                   ->andWhere('p.dieDate > p.createDate')
