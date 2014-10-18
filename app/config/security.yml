@@ -16,6 +16,9 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/add_project, role: IS_AUTHENTICATED_REMEMBERED }
+        - { path: ^/edit_project, role: IS_AUTHENTICATED_REMEMBERED }
+        - { path: ^/profile/edit, role: IS_AUTHENTICATED_REMEMBERED }
 
     firewalls:
         main:

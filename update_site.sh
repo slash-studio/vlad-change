@@ -22,6 +22,7 @@ php app/console doctrine:database:create
 php app/console doctrine:generate:entities --no-backup VladChange
 php app/console doctrine:schema:create
 php app/console assets:install web --symlink
+php app/console doctrine:fixtures:load
 
 echo -n "Set the environment name for the cache clearing (\"prod\" or \"dev\", default: \"dev\"): "
 read env
@@ -40,11 +41,6 @@ if [ "$has_debug" = "y" ]; then
 else
    php app/console cache:clear --env=$env --no-debug
 fi
-
-rm -f app/logs/dev.log/*
-rm -f app/logs/prod.log/*
-rm -f app/logs/dev_old.log/*
-rm -f app/logs/prod_old.log/*
 
 sudo chmod -R ug+rw .
 if egrep -i "^www-data" /etc/group > /dev/null; then

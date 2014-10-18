@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="placemarks")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Placemark
 {
@@ -17,7 +18,7 @@ class Placemark
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
 
@@ -31,14 +32,14 @@ class Placemark
     /**
      * @var double
      *
-     * @ORM\Column(name="lat", type="float")
+     * @ORM\Column(name="lat", type="float", nullable=true)
      */
     protected $lat; // x
 
     /**
      * @var double
      *
-     * @ORM\Column(name="lon", type="float")
+     * @ORM\Column(name="lon", type="float", nullable=true)
      */
     protected $lon; // y
 
@@ -47,36 +48,54 @@ class Placemark
      *
      * @ORM\Column(name="create_date", type="date")
      */
-    protected $create_date;
+    protected $createDate;
 
     /**
      * @var DateTime
      *
      * @ORM\Column(name="die_date", type="date")
      */
-    protected $die_date;
+    protected $dieDate;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="limit_voice", type="integer")
      */
-    protected $limit_voice;
+    protected $limitVoice;
 
     /**
      * @var string
      *
      * @ORM\Column(name="short_desc", type="string", length=200)
      */
-    protected $short_desc;
+    protected $shortDesc;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="desc", type="text")
+     * @ORM\Column(name="descr", type="text")
      */
     protected $desc;
 
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user;
+
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist()
+    {
+        $this->createDate = new \DateTime();
+        $this->dieDate = clone $this->createDate;
+        $this->dieDate->add(new \DateInterval("P30D"));
+    }
 
     /**
      * Get id
@@ -91,10 +110,10 @@ class Placemark
     /**
      * Set lat
      *
-     * @param \double $lat
+     * @param float $lat
      * @return Placemark
      */
-    public function setLat(\double $lat)
+    public function setLat($lat)
     {
         $this->lat = $lat;
 
@@ -104,7 +123,7 @@ class Placemark
     /**
      * Get lat
      *
-     * @return \double
+     * @return float
      */
     public function getLat()
     {
@@ -114,10 +133,10 @@ class Placemark
     /**
      * Set lon
      *
-     * @param \double $lon
+     * @param float $lon
      * @return Placemark
      */
-    public function setLon(\double $lon)
+    public function setLon($lon)
     {
         $this->lon = $lon;
 
@@ -127,7 +146,7 @@ class Placemark
     /**
      * Get lon
      *
-     * @return \double
+     * @return float
      */
     public function getLon()
     {
@@ -165,7 +184,7 @@ class Placemark
      */
     public function setCreateDate($createDate)
     {
-        $this->create_date = $createDate;
+        $this->createDate = $createDate;
 
         return $this;
     }
@@ -177,7 +196,7 @@ class Placemark
      */
     public function getCreateDate()
     {
-        return $this->create_date;
+        return $this->createDate;
     }
 
     /**
@@ -188,7 +207,7 @@ class Placemark
      */
     public function setDieDate($dieDate)
     {
-        $this->die_date = $dieDate;
+        $this->dieDate = $dieDate;
 
         return $this;
     }
@@ -200,18 +219,18 @@ class Placemark
      */
     public function getDieDate()
     {
-        return $this->die_date;
+        return $this->dieDate;
     }
 
     /**
-     * Set limit_voice
+     * Set limitVoice
      *
      * @param integer $limitVoice
      * @return Placemark
      */
     public function setLimitVoice($limitVoice)
     {
-        $this->limit_voice = $limitVoice;
+        $this->limitVoice = $limitVoice;
 
         return $this;
     }
@@ -223,7 +242,7 @@ class Placemark
      */
     public function getLimitVoice()
     {
-        return $this->limit_voice;
+        return $this->limitVoice;
     }
 
     /**
@@ -234,7 +253,7 @@ class Placemark
      */
     public function setShortDesc($shortDesc)
     {
-        $this->short_desc = $shortDesc;
+        $this->shortDesc = $shortDesc;
 
         return $this;
     }
@@ -246,7 +265,7 @@ class Placemark
      */
     public function getShortDesc()
     {
-        return $this->short_desc;
+        return $this->shortDesc;
     }
 
     /**
@@ -293,5 +312,38 @@ class Placemark
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \VladChange\StoreBundle\Entity\User $user
+     * @return Placemark
+     */
+    public function setUser(\VladChange\StoreBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \VladChange\StoreBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Get isExpired
+     *
+     * @return bool
+     */
+    public function isExpired()
+    {
+        return $this->dieDate < $this->createDate;
     }
 }

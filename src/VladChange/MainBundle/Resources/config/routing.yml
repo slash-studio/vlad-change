@@ -8,8 +8,18 @@ vlad_change_view_profile:
     requirements:
         id: \d+
 
+vlad_change_edit_project:
+    path: /edit_project/{id}
+    defaults: { _controller: VladChangeMainBundle:Default:editProject }
+    requirements:
+        id: \d+
+
 vlad_change_add_project:
-    path: /add_project
+    path: /add_project/
+    defaults: { _controller: VladChangeMainBundle:Default:addProject }
+
+vlad_change_add_project_from_map:
+    path: /add_project/?lat={x}&lon={y}
     defaults: { _controller: VladChangeMainBundle:Default:addProject }
 
 vlad_change_addPlacemark:

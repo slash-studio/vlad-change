@@ -1,7 +1,11 @@
 {% extends 'VladChangeMainBundle:Default:page.html.twig' %}
 
 {% block div_main %}
-   {{ parent() }}
-   {{ form(form) }}
-   add project page
+   {% if isAvailableProj %}
+      {{ parent() }}
+      {{ form(form) }}
+   {% else %}
+      <p>Вы исчерпали лимит доступных проектов. Очень жаль. </p>
+      <p>Можете купить место для дополнительного проекта.</p>
+   {% endif %}
 {% endblock %}

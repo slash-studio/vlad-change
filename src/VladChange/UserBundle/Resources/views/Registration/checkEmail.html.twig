@@ -1,7 +1,5 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends 'VladChangeMainBundle:Default:page.html.twig' %}
 
-{% trans_default_domain 'FOSUserBundle' %}
-
-{% block fos_user_content %}
-    <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
-{% endblock fos_user_content %}
+{% block div_main %}
+   <p>На указанный вами email отправлено письмо с подтверждением регистрации.</p>
+{% endblock %}
