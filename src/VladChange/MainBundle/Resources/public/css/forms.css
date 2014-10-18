@@ -1,0 +1,139 @@
+label {
+   display: block;
+   margin-bottom: 8px;
+}
+
+form span.error {
+   color: red;
+   margin-left: 10px;
+   margin-top: 3px;
+   display: inline-block;
+   vertical-align: top;
+}
+
+form span.error.top_error {
+   margin-bottom: 10px;
+   margin-left: 0;
+}
+
+form input {
+   padding: 3px 5px;
+   border: 1px solid #cacaca;
+   min-width: 200px;
+}
+
+input[type="number"] {
+   min-width: 40px; 
+   width: 40px; 
+   padding-right: 0;
+}
+
+form div {
+   margin-bottom: 12px;
+}
+
+form small {
+   display: block;
+   margin: 0 0 7px;
+   font-style: italic;
+   color: #888;
+}
+
+input[type="checkbox"], input[type="radio"] {
+   min-width: 1px;
+   margin-right: 5px;
+}
+
+form div.checkbox_in {
+   padding-top: 5px;
+   margin-bottom: 8px;
+}
+
+form div.checkbox_in label, form div.radiogroup_in label {
+   display: inline-block;
+}
+
+form b {
+   font-weight: bold;
+}
+
+select {
+   padding: 3px 5px;
+   min-width: 200px;
+}
+
+textarea {
+   padding: 5px;
+}
+
+form div textarea {
+   margin-top: 5px;
+}
+
+form div.buttons {
+   padding-top: 10px;
+}
+
+form div.buttons input {
+   display: inline-block;
+   background: #2d2d2d;
+   border: 0;
+   color: white;
+   cursor: pointer;
+   width: 100%;
+   padding: 5px 0;
+}
+
+#main_wrap {
+   display: inline-block;
+   position: absolute;
+   left: 320px;
+}
+
+h1.from_top {
+   vertical-align: top;
+   font-size: 180%;
+   font-family: Cambria, serif;
+   background: #1F1F1F;
+   padding: 10px 20px;
+   color: white;
+   display: inline-block;
+}
+
+div.block_form {
+   display: inline-block;
+   width: 220px;
+   background: white;
+   padding: 30px;
+   text-align: center;
+   -webkit-box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.35);
+   -moz-box-shadow:    0px 0px 19px 0px rgba(0, 0, 0, 0.35);
+   box-shadow:         0px 0px 19px 0px rgba(0, 0, 0, 0.35);
+   position: relative;
+}
+
+div.block_form div label + ul {
+   position: absolute;
+   left: 280px;
+   background: #6a1212;
+   opacity: 0.9;
+   -webkit-box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.35);
+   -moz-box-shadow:    0px 0px 19px 0px rgba(0, 0, 0, 0.35);
+   box-shadow:         0px 0px 19px 0px rgba(0, 0, 0, 0.35);
+   width: 250px;
+   display: none;
+}
+
+div.block_form div label + ul li {
+   color: white;
+   padding: 9px;
+}
+
+
+div.block_form a.bottom_link {
+   color: #1e9bb3;
+   display: block;
+   margin: 10px 0 0;
+   font-size: 110%;
+   font-family: Cambria, serif;
+}

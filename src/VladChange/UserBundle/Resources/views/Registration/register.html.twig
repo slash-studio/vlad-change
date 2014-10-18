@@ -1,14 +1,22 @@
 {% extends 'VladChangeMainBundle:Default:page.html.twig' %}
 
-{% trans_default_domain 'FOSUserBundle' %}
+{% block links %}
+   {{ parent() }}
+   <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/registration.css') }}" />
+   <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/forms.css') }}" />
+   <script src="{{ asset('bundles/vladchangemain/js/forms.js') }}"></script>
+{% endblock %}
 
 {% block div_main %}
-<h1>Регистрация</h1>
-<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
-   {{ form_widget(form) }}
-   <div>
-      <input type="submit" value="Подтвердить" />
+<div id="main_wrap">
+   <h1 class="from_top">Регистрация</h1><div class="block_form">
+      <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+         {{ form_widget(form) }}
+         <div class="buttons">
+            <input type="submit" value="Подтвердить" />
+         </div>
+      </form>
    </div>
-</form>
+</div>
 
 {% endblock %}
