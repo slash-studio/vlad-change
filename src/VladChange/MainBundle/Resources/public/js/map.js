@@ -18,6 +18,11 @@ function createPlacemark(x, y, balloonText, event) {
     return placemark;
 }
 
+function addPlacemark(coords) {
+    map.hint.close();
+    window.location = '/add_project/?lat=' + map.lat + '&lon=' + map.lon;
+}
+
 function init() {
 
     map = new ymaps.Map("map", {
@@ -48,7 +53,9 @@ function init() {
     })
 
     map.events.add('contextmenu', function (e) {
-        map.hint.open(e.get('coordPosition'), "<a href='javascript:func();'> Добавить проект </a>");
+        map.lat = e.get('coords')[0];
+        map.lon = e.get('coords')[1];
+        map.hint.open(e.get('coordPosition'), "<a href='javascript:addPlacemark();'> Добавить проект </a>");
     });
 
     // map.events.add('rclick', function (e) {
