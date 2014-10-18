@@ -15,6 +15,10 @@ class DefaultController extends Controller
 
     public function addProjectAction(Request $request)
     {
+        $user = $this->getUser();
+        if (empty($user)) {
+            return $this->redirect($this->generateUrl('fos_user_security_login'));
+        }
         $form = $this->createForm(new PlacemarkType());
         $form->handleRequest($request);
         $lat = $request->get('lat');
@@ -23,14 +27,11 @@ class DefaultController extends Controller
             //set lat and lon if exist
         }
         if ($form->isValid()) {
-            $user = $this->container->get('security.context')->getToken()->getUser();
-            if ($user != 'anon.') {
-                $em = $this->getDoctrine()->getManager();                
-                $tmp = $form->getData();
-                $tmp->setUser($user);
-                $em->persist($tmp);
-                $em->flush();
-            }
+            $em = $this->getDoctrine()->getManager();
+            $tmp = $form->getData();
+            $tmp->setUser($user);
+            $em->persist($tmp);
+            $em->flush();
             return $this->redirect($this->generateUrl('fos_user_profile_show'));
         }
 
