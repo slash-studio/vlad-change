@@ -11,15 +11,34 @@ class PlacemarkRepository extends EntityRepository
     public function getFullInfo($id)
     {
         $qb = $this->_em->createQueryBuilder();
-        $a = $qb->select('p')
-                ->from('VladChangeStoreBundle:Placemark', 'p')
-                ->where('p.archived = 0')
-                ->andWhere('p.dieDate > p.createDate')
-                ->andWhere('p.id = :id')
-                ->setParameter('id', $id)
-                ->getQuery()
-                ->getArrayResult();
-        return !empty($a) ? $a[0] : [];
+        $arry = $qb->select('p')
+                   ->from('VladChangeStoreBundle:Placemark', 'p')
+                   ->where('p.archived = 0')
+                   ->andWhere('p.dieDate > p.createDate')
+                   ->andWhere('p.id = :id')
+                   ->setParameter('id', $id)
+                   ->getQuery()
+                   ->getResult();
+        $arry = !empty($arry) ? $arry[0] : [];
+        if (!empty($arry)) {
+            $e = $arry;
+            $author = $e->getUser();
+            $arry = [
+                'id' => $e->getId(),
+                'name' => $e->getName(),
+                'desc' => $e->getDesc(),
+                'author' => [
+                    'id'      => $author->getId(),
+                    'name'    => $author->getName(),
+                    'surname' => $author->getSurname()
+                ],
+                'dieDate' => $e->getDieDate()->format('d.m.Y'),
+                'shortDesc' => $e->getShortDesc(),
+                'createDate' => $e->getCreateDate()->format('d.m.Y'),
+                'limitVoice' => $e->getLimitVoice(),
+            ];
+        }
+        return $arry;
     }
 
     public function getCurrentPlacemarks()

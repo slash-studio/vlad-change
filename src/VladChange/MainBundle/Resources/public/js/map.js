@@ -43,7 +43,6 @@ function createPlacemark(info, event) {
 
     ymaps.geocode(coords).then(function (res) {
             var firstGeoObject = res.geoObjects.get(0);
-
             placemark.properties
                 .set({
                     address: firstGeoObject.properties.get('name'),
@@ -54,8 +53,9 @@ function createPlacemark(info, event) {
         e.preventDefault();
         $.ajax({
             url : "api/getPlacemarkInfo/" + info.id,
-            success: function(date) {
-                showInfo(date);
+            success: function(data) {
+                if ($.isEmptyObject(data)) return;
+                showInfo(data, placemark.properties.address);
                 var coords = e.get('coords');
                 var center = map.getCenter();
                 var gotoPoint = map.options.get('projection').fromGlobalPixels(
