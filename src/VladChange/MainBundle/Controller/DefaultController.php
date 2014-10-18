@@ -23,9 +23,14 @@ class DefaultController extends Controller
             //set lat and lon if exist
         }
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($form->getData());
-            $em->flush();
+            $user = $this->container->get('security.context')->getToken()->getUser();
+            if ($user != 'anon.') {
+                $em = $this->getDoctrine()->getManager();                
+                $tmp = $form->getData();
+                $tmp->setUser($user);
+                $em->persist($tmp);
+                $em->flush();
+            }
             return $this->redirect($this->generateUrl('fos_user_profile_show'));
         }
 
