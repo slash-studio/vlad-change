@@ -21,4 +21,8 @@ $(function() {
       manipulateProject('delete', $(this).attr('data-id'));
       return false;
    });
+
+   $(document).on('click', '.edit', function() {
+      $(location).attr('href', '/edit_project/' + $(this).attr('data-id'));
+   });
 });

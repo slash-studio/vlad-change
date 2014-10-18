@@ -51,11 +51,13 @@ class DefaultController extends Controller
         if (empty($placemark)) return $response;
         if ($type == 'archive') {
             $em->merge($placemark->setArchived(true));
+            $response->setContent('Archived');
         } else {
             $em->remove($placemark);
+            $response->setContent('Deleted');
         }
         $em->flush();
-        return $response->setStatusCode(200);;
+        return $response->setStatusCode(200);
     }
 
     public function addProjectAction(Request $request)

@@ -23,8 +23,11 @@
         <li>Краткое описание - {{ p.getShortDesc() }}</li>
         <li>Описание - {{ p.getDesc() }}</li>
         <li>Порог голосов - {{ p.getLimitVoice() }}</li>
-        <button class="to_archive" data-id="{{ p.getId() }}">В архив</button>
-        <button class="delete" data-id="{{ p.getId() }}">Удалить</button>
+        {% if isMine %}
+            <button class="edit" data-id="{{ p.getId() }}">Редактировать</button>
+            <button class="to_archive" data-id="{{ p.getId() }}">В архив</button>
+            <button class="delete" data-id="{{ p.getId() }}">Удалить</button>
+        {% endif %}
     {% endfor %}
     </ul>
 
