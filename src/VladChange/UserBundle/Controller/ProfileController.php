@@ -30,9 +30,9 @@ class ProfileController extends BaseController
         } elseif (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
-        
+
         return $this->render(
-            'FOSUserBundle:Profile:show.html.twig',
+            'FOSUserBundle:Profile:profile.html.twig',
             [
                 'user'   => $user,
                 'isMine' => $isMine
