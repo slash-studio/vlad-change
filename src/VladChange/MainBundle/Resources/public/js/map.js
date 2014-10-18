@@ -18,6 +18,10 @@ function createPlacemark(x, y, balloonText, event) {
     return placemark;
 }
 
+function addPlacemark(x, y) {
+    window.location = '/add_project/?lat=' + x + '&lon=' + y;
+}
+
 function init() {
 
     map = new ymaps.Map("map", {
@@ -76,6 +80,7 @@ function init() {
         map.geoObjects.add(
             createPlacemark(coords[0], coords[1], 'Охуенный новый проект', function() {alert("хуик")})
         );
+        // addPlacemark
 
         var center = map.getCenter();
 

@@ -17,6 +17,11 @@ class DefaultController extends Controller
     {
         $form = $this->createForm(new PlacemarkType());
         $form->handleRequest($request);
+        $lat = $request->get('lat');
+        $lon = $request->get('lon');
+        if (!empty($lat) && !empty($lon)) {
+            //set lat and lon if exist
+        }
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($form->getData());
