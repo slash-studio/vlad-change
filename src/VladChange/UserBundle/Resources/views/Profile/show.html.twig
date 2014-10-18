@@ -2,9 +2,9 @@
 
 {% block div_main %}
     <div class="fos_user_user_show">
-        <p>'Имя': {{ user.getName() }}</p>
-        <p>'Фамилия': {{ user.getSurname() }}</p>
-        <p>'E-mail': {{ user.getEmail() }}</p>
+        <p>Имя: {{ user.getName() }}</p>
+        <p>Фамилия: {{ user.getSurname() }}</p>
+        <p>E-mail: {{ user.getEmail() }}</p>
         {% if isMine %}
             <a href="{{ path('vlad_change_add_project') }}">Добавить проект</a>
             <a href="{{ path('fos_user_security_logout') }}">Выход</a>

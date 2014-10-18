@@ -6,7 +6,7 @@ parameters:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    # translator:      { fallback: ru }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -87,9 +87,15 @@ fos_user:
     resetting:
         email:
             template: VladChangeUserBundle:Mail:resetting.html.twig
+        form:
+            type: vladchange_user_change_password
     registration:
         form:
             type: vladchange_user_registration
         confirmation:
             enabled: true
             template: VladChangeUserBundle:Mail:confirmation.html.twig
+    profile:
+        form:
+            type: vladchange_user_profile
+            # handler: vladchange_user.form.hadler.profile

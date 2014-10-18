@@ -4,12 +4,12 @@ namespace VladChange\UserBundle\Controller;
 
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Controller\ProfileController as BaseController;
+
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProfileController extends BaseController
 {
-
     public function showAction()
     {
         $id = $this->getRequest()->get('id');

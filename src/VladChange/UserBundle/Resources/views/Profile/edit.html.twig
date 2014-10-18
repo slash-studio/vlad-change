@@ -1,5 +1,13 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends 'VladChangeMainBundle:Default:page.html.twig' %}
 
-{% block fos_user_content %}
-{% include "FOSUserBundle:Profile:edit_content.html.twig" %}
-{% endblock fos_user_content %}
+{% block div_main %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+    {{ form_widget(form) }}
+    <div>
+        <input type="submit" value="ОК" />
+    </div>
+</form>
+
+{% endblock %}

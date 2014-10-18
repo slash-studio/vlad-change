@@ -1,6 +1,18 @@
 services:
-    vlad_change_main.registration.form.type:
+    vlad_change_user.registration.form.type:
         class: VladChange\UserBundle\Form\Type\RegistrationFormType
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: vladchange_user_registration }
+
+    vlad_change_user.changepassword.form.type:
+        class: VladChange\UserBundle\Form\Type\ChangePasswordFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: vladchange_user_change_password }
+
+    vlad_change_user.profile.form.type:
+        class: VladChange\UserBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: vladchange_user_profile }
