@@ -1,0 +1,39 @@
+#short_info {
+   background: #1f1f1f;
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   width: 280px;
+   text-align: center;
+   padding: 20px;
+   color: white;
+}
+
+#short_info h1 {
+   font-family: Cambria, serif;
+   font-size: 170%;
+   margin: 7px 0 16px;
+   /*DFDFDF*/
+}
+
+#short_info div.place {
+   font-style: italic;
+   font-family: Cambria, serif;
+   font-size: 100%;
+   margin-bottom: 20px
+}
+
+#short_info div.author {
+   font-size: 100%;
+   padding-top: 20px;
+   background: url('../images/line.png') center 0 no-repeat;
+}
+
+#short_info div.author span {
+   display: block;
+   margin-bottom: 5px;
+}
+
+#short_info div.author a {
+   color: #1e9bb3;
+}
