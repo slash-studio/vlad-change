@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Placemark
  *
  * @ORM\Table(name="placemarks")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="VladChange\StoreBundle\Entity\PlacemarkRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class Placemark
