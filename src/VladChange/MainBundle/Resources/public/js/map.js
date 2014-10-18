@@ -2,18 +2,43 @@ ymaps.ready(init);
 
 function createPlacemark(x, y, balloonText, event) {
 
+    HintLayout = ymaps.templateLayoutFactory.createClass( "<div class='my-hint'>" +
+            "<b>{{ properties.object }}</b><br />" +
+            "{{ properties.address }}" +
+            "</div>", {
+                getShape: function () {
+                    var el = this.getElement(),
+                        result = null;
+                    if (el) {
+                        var firstChild = el.firstChild;
+                        result = new ymaps.shape.Rectangle(
+                            new ymaps.geometry.pixel.Rectangle([
+                                [0, 0],
+                                [firstChild.offsetWidth, firstChild.offsetHeight]
+                            ])
+                        );
+                    }
+                    return result;
+                }
+            }
+        );
+
     placemark = new ymaps.Placemark(
         [x, y],
         {
+            address: "Москва, ул. Зоологическая, 13, стр. 2",
+            object: balloonText,
             balloonContent: balloonText
         },
         {
             preset: 'islands#icon',
-            iconColor: '#0095b6'
+            iconColor: '#0095b6',
+            hintLayout: HintLayout
         }
     );
     if (event) {
         placemark.events.add('click', event);
+
     }
     return placemark;
 }
@@ -36,7 +61,7 @@ function init() {
         success: function(placemarks) {
             for (i = 0; i < placemarks.length; i++) {
                 map.geoObjects.add(
-                    createPlacemark(placemarks[i].x, placemarks[i].y, 'Охуенный проект', function(e) {
+                    createPlacemark(placemarks[i].x, placemarks[i].y, placemarks[i].short_desc, function(e) {
                         showInfo();
                         var coords = e.get('coords');
                         var center = map.getCenter();
@@ -55,47 +80,7 @@ function init() {
     map.events.add('contextmenu', function (e) {
         map.lat = e.get('coords')[0];
         map.lon = e.get('coords')[1];
-        map.hint.open(e.get('coordPosition'), "<a href='javascript:addPlacemark();'> Добавить проект </a>");
+        map.hint.open([map.lat, map.lon], "<a href='javascript:addPlacemark();'> Добавить проект </a>");
     });
 
-    // map.events.add('rclick', function (e) {
-    //     e.preventDefault();
-    //     var coords = e.get('coords');
-        // map.geoObjects.add(
-        //     createPlacemark(coords[0], coords[1], 'Охуенный новый проект', function() {alert("хуик")})
-        // );
-        // var projection = map.options.get('projection');
-        // $('#map').bind('click', function (e) {
-        //     console.log(projection.fromGlobalPixels(
-        //         map.converter.pageToGlobal([e.pageX, e.pageY]), map.getZoom()
-        //     ).join(', ');
-        // });
-        // alert(coords);
-
-    //     var projection = map.options.get('projection');
-    //     alert(projection.fromGlobalPixels(
-    //         map.converter.pageToGlobal([160, 300]), map.getZoom()
-    //     ));
-    //     map.setCenter(projection.fromGlobalPixels(
-    //         map.converter.pageToGlobal([160, 300]), map.getZoom()
-    //     ));
-    // });
-
-    // map.events.add('dblclick', function (e) {
-    //     e.preventDefault();
-    //     var coords = e.get('coords');
-    //     map.geoObjects.add(
-    //         createPlacemark(coords[0], coords[1], 'Охуенный новый проект', function() {alert("хуик")})
-    //     );
-
-    //     var center = map.getCenter();
-
-    //     var projection = map.options.get('projection');
-
-    //     var gotoPoint = projection.fromGlobalPixels(
-    //         map.converter.pageToGlobal([160, 300]), map.getZoom()
-    //     );
-
-    //     map.setCenter([center[0] + coords[0] - gotoPoint[0], center[1] + coords[1] - gotoPoint[1]]);
-    // });
 }
