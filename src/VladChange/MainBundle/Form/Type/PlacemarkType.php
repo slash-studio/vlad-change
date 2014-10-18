@@ -15,7 +15,10 @@ class PlacemarkType extends AbstractType
                 ->add('short_desc', 'text')
                 ->add('desc', 'text')
                 ->add('limit_voice', 'number', ['data' => 100])
-                ->add('save', 'submit');
+                ->add('lat', 'integer')
+                ->add('lon', 'integer')
+                ->add('save', 'submit')
+        ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

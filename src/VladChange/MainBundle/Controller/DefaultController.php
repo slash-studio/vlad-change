@@ -20,12 +20,13 @@ class DefaultController extends Controller
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
         $form = $this->createForm(new PlacemarkType());
-        $form->handleRequest($request);
-        $lat = $request->get('lat');
-        $lon = $request->get('lon');
+        $lat = $request->query->get('lat');
+        $lon = $request->query->get('lon');
         if (!empty($lat) && !empty($lon)) {
-            //set lat and lon if exist
-        }
+            $form->get('lat')->setData($lat);
+            $form->get('lon')->setData($lon);
+            }
+        $form->handleRequest($request);
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $tmp = $form->getData();
