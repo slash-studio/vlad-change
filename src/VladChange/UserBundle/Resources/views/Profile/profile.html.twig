@@ -22,6 +22,7 @@
         <li>Дата окончания - {{ p.getDieDate().format('d-m-Y') }}</li>
         <li>Краткое описание - {{ p.getShortDesc() }}</li>
         <li>Описание - {{ p.getDesc() }}</li>
+        <li>Порог голосов - {{ p.getLimitVoice() }}</li>
         <button class="to_archive" data-id="{{ p.getId() }}">В архив</button>
         <button class="delete" data-id="{{ p.getId() }}">Удалить</button>
     {% endfor %}

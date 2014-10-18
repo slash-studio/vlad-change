@@ -12,17 +12,18 @@
            {{ form(form) }}
         {% endif %}
     {% else %}
-        <p>За ваш проект уже проголосовали. Вы можете изменить только порог.</p>
-        {{ parent() }}
-        {# {{ form(form) }} #}
-        {% for field in form %}
-            {% if form_label(field) == "Порог голосов" %}
-                {{ form_row(field) }}
-            {% else %}
-                {{ form_row(field, {'attr':{'disabled':'disabled'}}) }}
-            {% endif %}
-        {% endfor %}
-        {# {% form_re} #}
-        {# {% do form.limit_voice.setRendered %} #}
+        <p>За ваш проект уже проголосовали. Вы не можете его изменить.</p>
+        {# {{ parent() }} #}
+        {# {{ form_start(form) }} #}
+        {# {% for field in form %} #}
+            {# {% if (field.vars.name == "limit_voice") or (field.vars.name == "save") %} #}
+                {# {{ form_row(field) }} #}
+            {# {% else %} #}
+                {# {{ form_label(field, {'attr':{'style':'display:none' }}) }} #}
+                {# {{ form_row(field, {'attr':{'style':'display:none'}}) }} #}
+                {# } #}
+            {# {% endif %} #}
+        {# {% endfor %} #}
+        {# {{ form_end(form) }} #}
     {% endif %}
 {% endblock %}
