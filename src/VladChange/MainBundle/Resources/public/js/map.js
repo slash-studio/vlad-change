@@ -1,6 +1,6 @@
 ymaps.ready(init);
 
-function createPlacemark(x, y, balloonText, event) {
+function createPlacemark(info, event) {
 
     HintLayout = ymaps.templateLayoutFactory.createClass( '<div class="my-hint">' +
             '<h1>{{ properties.object }}</h1>' +
@@ -23,10 +23,12 @@ function createPlacemark(x, y, balloonText, event) {
             }
         );
 
+    var coords = [info.lat, info.lon];
+
     placemark = new ymaps.Placemark(
-        [x, y],
+        coords,
         {
-            object: balloonText
+            object: info.name
         },
         {
             preset: 'islands#icon',
@@ -35,7 +37,7 @@ function createPlacemark(x, y, balloonText, event) {
         }
     );
 
-    ymaps.geocode([x, y]).then(function (res) {
+    ymaps.geocode(coords).then(function (res) {
             var firstGeoObject = res.geoObjects.get(0);
 
             placemark.properties
@@ -44,10 +46,26 @@ function createPlacemark(x, y, balloonText, event) {
                 });
         });
 
-    if (event) {
-        placemark.events.add('click', event);
+    placemark.events.add('click', function(e) {
+        e.preventDefault();
+        $.ajax({
+            url : "api/getPlacemarkInfo/" + info.id,
+            success: function(date) {
+                showInfo(date);
+                var coords = e.get('coords');
+                var center = map.getCenter();
+                var gotoPoint = map.options.get('projection').fromGlobalPixels(
+                    map.converter.pageToGlobal([160, 300]), map.getZoom()
+                );
+                map.lastSelectMark = coords;
+                var deltaLat = coords[0] - gotoPoint[0];
+                var deltaLon = coords[1] - gotoPoint[1];
+                map.panTo([center[0] + deltaLat, center[1] + deltaLon]);
+            }
+        });
+    })
+    placemark.events.add('dblclick', function(){});
 
-    }
     return placemark;
 }
 
@@ -69,18 +87,7 @@ function init() {
         success: function(placemarks) {
             for (i = 0; i < placemarks.length; i++) {
                 map.geoObjects.add(
-                    createPlacemark(placemarks[i].x, placemarks[i].y, placemarks[i].short_desc, function(e) {
-                        showInfo();
-                        var coords = e.get('coords');
-                        var center = map.getCenter();
-                        var gotoPoint = map.options.get('projection').fromGlobalPixels(
-                            map.converter.pageToGlobal([160, 300]), map.getZoom()
-                        );
-                        map.lastSelectMark = coords;
-                        var deltaLat = coords[0] - gotoPoint[0];
-                        var deltaLon = coords[1] - gotoPoint[1];
-                        map.panTo([center[0] + deltaLat, center[1] + deltaLon]);
-                    })
+                    createPlacemark(placemarks[i])
                 );
             }
         }
