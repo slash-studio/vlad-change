@@ -336,4 +336,14 @@ class Placemark
     {
         return $this->user;
     }
+
+    /**
+     * Get isExpired
+     *
+     * @return bool
+     */
+    public function isExpired()
+    {
+        return $this->dieDate < $this->createDate;
+    }
 }

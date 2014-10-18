@@ -166,7 +166,7 @@ class User extends BaseUser
     /**
      * Get projects
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getProjects()
     {
@@ -189,10 +189,23 @@ class User extends BaseUser
     /**
      * Get maxProjAmount
      *
-     * @return integer 
+     * @return integer
      */
     public function getMaxProjAmount()
     {
         return $this->maxProjAmount;
+    }
+
+    /**
+     * Get available amount of project that can be added
+     *
+     * @return bool
+     */
+    public function hasAvailableProjAmount()
+    {
+        $notExpiredProjs = $this->projects->filter(function($e) {
+            return !$e->isExpired();
+        });
+        return $this->maxProjAmount - $notExpiredProjs->count() > 0;
     }
 }
