@@ -4,6 +4,7 @@ namespace VladChange\StoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Placemark
  *
@@ -92,6 +93,16 @@ class Placemark
      * @ORM\Column(name="archived", type="boolean")
      */
     protected $archived = 0;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="placemarks")
+     */
+    protected $likes;
+
+    public function __construct()
+    {
+        $this->likes = new ArrayCollection();
+    }
 
 
     /**
@@ -380,5 +391,38 @@ class Placemark
     public function getArchived()
     {
         return $this->archived;
+    }
+
+    /**
+     * Add likes
+     *
+     * @param \VladChange\StoreBundle\Entity\User $likes
+     * @return Placemark
+     */
+    public function addLike(\VladChange\StoreBundle\Entity\User $likes)
+    {
+        $this->likes[] = $likes;
+
+        return $this;
+    }
+
+    /**
+     * Remove likes
+     *
+     * @param \VladChange\StoreBundle\Entity\User $likes
+     */
+    public function removeLike(\VladChange\StoreBundle\Entity\User $likes)
+    {
+        $this->likes->removeElement($likes);
+    }
+
+    /**
+     * Get likes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLikes()
+    {
+        return $this->likes;
     }
 }

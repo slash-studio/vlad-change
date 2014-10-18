@@ -65,8 +65,15 @@ class User extends BaseUser
      */
     protected $projects;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Placemark", inversedBy="users")
+     * @ORM\JoinTable(name="likes")
+     */
+    protected $likes;
+
     public function __construct() {
         parent::__construct();
+        $this->likes = new ArrayCollection();
         $this->projects = new ArrayCollection();
     }
 
@@ -207,5 +214,38 @@ class User extends BaseUser
             return !$e->isExpired();
         });
         return $this->maxProjAmount - $notExpiredProjs->count() > 0;
+    }
+
+    /**
+     * Add likes
+     *
+     * @param \VladChange\StoreBundle\Entity\Placemark $likes
+     * @return User
+     */
+    public function addLike(\VladChange\StoreBundle\Entity\Placemark $likes)
+    {
+        $this->likes[] = $likes;
+
+        return $this;
+    }
+
+    /**
+     * Remove likes
+     *
+     * @param \VladChange\StoreBundle\Entity\Placemark $likes
+     */
+    public function removeLike(\VladChange\StoreBundle\Entity\Placemark $likes)
+    {
+        $this->likes->removeElement($likes);
+    }
+
+    /**
+     * Get likes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLikes()
+    {
+        return $this->likes;
     }
 }
