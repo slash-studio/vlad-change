@@ -29,9 +29,9 @@ vlad_change_add_project_from_map:
     defaults: { _controller: VladChangeMainBundle:Default:addProject }
 
 vlad_change_addPlacemark:
-    path:     /api.addPlacemark/{x}&{y}
+    path:     /api/addPlacemark/{x}&{y}
     defaults: { _controller: VladChangeMainBundle:Api:addPlacemark }
 
 vlad_change_getPlacemark:
-    path:     /api.getAllPlacemark
+    path:     /api/getAllPlacemark
     defaults: { _controller: VladChangeMainBundle:Api:getAllPlacemark }

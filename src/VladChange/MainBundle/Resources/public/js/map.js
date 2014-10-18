@@ -65,7 +65,7 @@ function init() {
     });
 
     $.ajax({
-        url : "api.getAllPlacemark",
+        url : "api/getAllPlacemark",
         success: function(placemarks) {
             for (i = 0; i < placemarks.length; i++) {
                 map.geoObjects.add(
