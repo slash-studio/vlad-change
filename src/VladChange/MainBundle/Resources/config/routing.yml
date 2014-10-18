@@ -9,3 +9,7 @@ vlad_change_view_profile:
 vlad_change_addPlacemark:
     path:     /api.addPlacemark/{x}&{y}
     defaults: { _controller: VladChangeMainBundle:Api:addPlacemark }
+
+vlad_change_getPlacemark:
+    path:     /api.getAllPlacemark
+    defaults: { _controller: VladChangeMainBundle:Api:getAllPlacemark }

@@ -8,6 +8,26 @@ function init(){
         controls: ['zoomControl']
     });
 
+    $.ajax({
+        url : "api.getAllPlacemark",
+        success: function(placemarks){
+            for (i = 0; i < placemarks.length; i++) {
+                map.geoObjects.add(
+                    new ymaps.Placemark(
+                        [placemarks[i].x, placemarks[i].y], 
+                        {
+                            balloonContent: 'цвет <strong>воды пляжа бонди</strong>'
+                        }, 
+                        {
+                            preset: 'islands#icon',
+                            iconColor: '#0095b6'
+                        }
+                    )
+                );    
+            }
+        }
+    })    
+
     map.events.add('dblclick', function (e) {
         e.preventDefault();
         var coords = e.get('coords');
@@ -23,7 +43,7 @@ function init(){
                 }
             )
         );
-        
+
         $.ajax({
             url : "api.addPlacemark/" + coords.join('&'),
         });
