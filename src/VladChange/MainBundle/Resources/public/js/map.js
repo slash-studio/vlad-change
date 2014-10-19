@@ -7,7 +7,6 @@ function getAddress(placemark, coords, info){
             info.address = firstGeoObject.properties.get('name');
         });
 }
-
 function createPlacemark(info, event) {
 
     HintLayout = ymaps.templateLayoutFactory.createClass(
@@ -49,7 +48,7 @@ function createPlacemark(info, event) {
         }
     );
     getAddress(placemark, coords, info);
-    placemark.events.add('click', function(e) {
+    placemark.events.add('dblclick', function(e) {
         e.preventDefault();
         $.ajax({
             url : "api/getPlacemarkInfo/" + info.id,
@@ -68,7 +67,7 @@ function createPlacemark(info, event) {
             }
         });
     })
-    placemark.events.add('dblclick', function(){});
+    placemark.events.add('click', function(e){e.preventDefault();});
 
     return placemark;
 }
