@@ -85,7 +85,7 @@ class Placemark
      * @ORM\ManyToOne(targetEntity="User", inversedBy="projects")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    protected $author;
+    protected $user;
 
     /**
      * @var Boolean
@@ -180,29 +180,6 @@ class Placemark
     public function getLon()
     {
         return $this->lon;
-    }
-
-    /**
-     * Set author
-     *
-     * @param string $author
-     * @return Placemark
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
     }
 
     /**
