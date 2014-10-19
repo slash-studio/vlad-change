@@ -43,7 +43,8 @@ class DefaultController extends Controller
             'archived' => $placemark->getArchived(),
             'expired'  => $placemark->isExpired(),
             'notliked' => !$placemark->isLiked(),
-            'project_id' => $placemark->getId()
+            'project_id' => $placemark->getId(),
+            'photos' => $placemark->getImages()
         ]);
     }
 
@@ -285,9 +286,22 @@ class DefaultController extends Controller
            $em = $this->getDoctrine()->getEntityManager();
            $em->persist($img);
            $em->flush();
-           $user->setImage($img);
-           $em->merge($user);
-           $em->flush();
+           $isAvatar = $request->get('isAvatar');
+           // echo $isAvatar;
+           if ($isAvatar == 'true') {
+                // echo "isavatar";
+                // exit;
+                $user->setImage($img);
+                $em->merge($user);
+                $em->flush();
+           } else {
+                // echo "notisavatar";
+                // exit;
+                $placemark = $em->getRepository('VladChangeStoreBundle:Placemark')->findOneById($request->request->get('PlacemarkId'));
+                $img->setPlacemark($placemark);
+                $em->merge($img);
+                $em->flush();
+           }
            $__file = $img->getId();
 
            $path = $img->getAbsolutePath();
@@ -305,5 +319,22 @@ class DefaultController extends Controller
            $response->setStatusCode(Response::HTTP_OK);
         }
         $response->setContent(json_encode($ajaxResult))->send();
+    }
+
+    public function deleteImageAction(Request $request)
+    {
+        $params = $request->get('params');
+        $id = $params['id'];
+        $pId = $params['pl'];
+        $em = $this->getDoctrine()->getManager();
+        $placemark = $em->getRepository('VladChangeStoreBundle:Placemark')->findOneById($pId);
+        $img = $em->getRepository('VladChangeStoreBundle:Image')->findOneById($id);
+        $placemark->removeImage($img);
+        $em->merge($placemark);
+        $em->remove($img);
+        $em->flush();
+        $ajaxResult['result'] = true;
+        $response = new Response(json_encode($ajaxResult), 200);
+        $response->send();
     }
 }

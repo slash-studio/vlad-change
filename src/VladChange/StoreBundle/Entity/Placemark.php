@@ -112,8 +112,14 @@ class Placemark
      */
     protected $dislikes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="placemark")
+     */
+    protected $images;
+
     public function __construct()
     {
+        $this->images = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->likes    = new ArrayCollection();
         $this->dislikes = new ArrayCollection();
@@ -482,5 +488,38 @@ class Placemark
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Add images
+     *
+     * @param \VladChange\StoreBundle\Entity\Image $images
+     * @return Placemark
+     */
+    public function addImage(\VladChange\StoreBundle\Entity\Image $images)
+    {
+        $this->images[] = $images;
+
+        return $this;
+    }
+
+    /**
+     * Remove images
+     *
+     * @param \VladChange\StoreBundle\Entity\Image $images
+     */
+    public function removeImage(\VladChange\StoreBundle\Entity\Image $images)
+    {
+        $this->images->removeElement($images);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 }
