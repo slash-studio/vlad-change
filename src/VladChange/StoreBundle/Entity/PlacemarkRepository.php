@@ -32,6 +32,8 @@ class PlacemarkRepository extends EntityRepository
                     'name'    => !empty($author) ? $author->getName() : '',
                     'surname' => !empty($author) ? $author->getSurname() : ''
                 ],
+                // 'images' => $e->getImages(),
+                'comments' => $e->getComments()->toArray(),
                 'voices'  => $e->getLikes()->count(),
                 'dieDate' => $e->getDieDate()->format('d.m.Y'),
                 'shortDesc' => $e->getShortDesc(),
