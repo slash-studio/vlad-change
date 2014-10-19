@@ -49,3 +49,35 @@ function init() {
         }
     })
 }
+
+$(function(){
+  $(document).on('click', '#close_left.disable', function(){
+    $('#user_left').animate({
+      left: '-280'
+    }, 500);
+    $('#close_left').animate({
+      left: '-40'
+    }, 500, function(){
+      $('#close_left div').addClass('active');
+      $('#close_left').animate({
+        left: '00'
+      }, 500);
+    });
+    $(this).removeClass('disable').addClass('active');
+  });
+
+  $(document).on('click', '#close_left.active', function(){
+    $('#close_left').animate({
+      left: '-40'
+    }, 500, function(){
+      $('#close_left div').removeClass('active');
+      $('#close_left').animate({
+        left: '280'
+      }, 500);
+      $('#user_left').animate({
+        left: '0'
+      }, 500);
+    });
+    $(this).removeClass('active').addClass('disable');
+  });
+});

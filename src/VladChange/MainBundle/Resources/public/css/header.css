@@ -42,6 +42,10 @@ header ul li a {
    color: white;
 }
 
+header ul li a:hover, header ul li a.active {
+   color: #1EAAC4;
+}
+
 header ul.right {
    margin: 34px 25px 0 0;
    float: right;

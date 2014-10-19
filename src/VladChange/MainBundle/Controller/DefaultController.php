@@ -14,6 +14,11 @@ class DefaultController extends Controller
         return $this->render('VladChangeMainBundle:Pages:index.html.twig');
     }
 
+    public function listAction()
+    {
+        return $this->render('VladChangeMainBundle:Pages:list.html.twig');
+    }
+
     public function editProjectAction(Request $request, $id)
     {
         $user = $this->getUser();

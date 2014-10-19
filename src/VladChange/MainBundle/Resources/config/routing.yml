@@ -31,3 +31,7 @@ vlad_change_manipulate_project:
 vlad_change_add_project_from_map:
     path: /add_project/?lat={x}&lon={y}
     defaults: { _controller: VladChangeMainBundle:Default:addProject }
+
+vlad_change_main_list:
+    path: /list
+    defaults: { _controller: VladChangeMainBundle:Default:list }
