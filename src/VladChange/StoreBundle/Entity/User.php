@@ -66,7 +66,7 @@ class User extends BaseUser
     protected $projects;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Placemark", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="Placemark", inversedBy="likes")
      * @ORM\JoinTable(name="likes")
      */
     protected $likes;
@@ -76,6 +76,13 @@ class User extends BaseUser
      * @ORM\JoinTable(name="dislikes")
      */
     protected $dislikes;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Image")
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     */
+    protected $image;
+
 
     public function __construct() {
         parent::__construct();
@@ -265,7 +272,18 @@ class User extends BaseUser
     public function addDislike(\VladChange\StoreBundle\Entity\Placemark $dislikes)
     {
         $this->dislikes[] = $dislikes;
+        return $this
+    }
 
+    /**
+     * Set image
+     *
+     * @param \VladChange\StoreBundle\Entity\Image $image
+     * @return User
+     */
+    public function setImage(\VladChange\StoreBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
         return $this;
     }
 
@@ -282,10 +300,19 @@ class User extends BaseUser
     /**
      * Get dislikes
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getDislikes()
     {
         return $this->dislikes;
+    }
+    /**
+     * Get image
+     *
+     * @return \VladChange\StoreBundle\Entity\Image 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }
