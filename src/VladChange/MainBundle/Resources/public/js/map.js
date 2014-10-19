@@ -14,9 +14,6 @@ function getAddress(placemark, coords, info){
             info.address = firstGeoObject.properties.get('name');
         });
 }
-
-var timeoutId;
-
 function createPlacemark(info, event) {
 
     HintLayout = ymaps.templateLayoutFactory.createClass(
@@ -57,28 +54,29 @@ function createPlacemark(info, event) {
         }
     );
     getAddress(placemark, coords, info);
-    placemark.events.add('click', function(e) {
-         e.preventDefault();
-         $.ajax({
+    map.relations[info.id] = info.relation;
+    map.projects[info.id] = placemark;
+    placemark.events.add('dblclick', function(e) {
+
+        e.preventDefault();
+        $.ajax({
             url : "api/getPlacemarkInfo/" + info.id,
             success: function(data) {
-               if ($.isEmptyObject(data)) return;
-               showInfo(data, info.address);
-               var coords = e.get('coords');
-               var center = map.getCenter();
-               var gotoPoint = map.options.get('projection').fromGlobalPixels(
-                 map.converter.pageToGlobal([160, 300]), map.getZoom()
-               );
-               map.lastSelectMark = coords;
-               var deltaLat = coords[0] - gotoPoint[0];
-               var deltaLon = coords[1] - gotoPoint[1];
-               map.panTo([center[0] + deltaLat, center[1] + deltaLon]);
+                if ($.isEmptyObject(data)) return;
+                showInfo(data, info.address, info.relation);
+                var coords = e.get('coords');
+                var center = map.getCenter();
+                var gotoPoint = map.options.get('projection').fromGlobalPixels(
+                    map.converter.pageToGlobal([160, 300]), map.getZoom()
+                );
+                map.lastSelectMark = coords;
+                var deltaLat = coords[0] - gotoPoint[0];
+                var deltaLon = coords[1] - gotoPoint[1];
+                map.panTo([center[0] + deltaLat, center[1] + deltaLon]);
             }
-         });
+        });
     })
-    placemark.events.add('dblclick', function(e){
-      e.preventDefault();
-    });
+    placemark.events.add('click', function(e){e.preventDefault();});
 
     return placemark;
 }
@@ -95,6 +93,9 @@ function init() {
         zoom: 11,
         controls: ['zoomControl']
     });
+
+    map.relations = {};
+    map.projects = {};
 
     $.ajax({
         url : "api/getAllPlacemark",

@@ -83,6 +83,7 @@ class Placemark
      * @var Comment
      *
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="placemark")
+     * @ORM\OrderBy({"dt"="ASC"})
      */
     protected $comments;
 

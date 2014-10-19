@@ -135,17 +135,17 @@
    float: right;
 }
 
-#full_info .content div.info div.bottom_info div.right div.likes {
+#full_info .content div.info div.bottom_info div.right button.likes {
    font-size: 110%;
    padding-right: 35px;
-   height: 18px;
+   min-height: 18px;
    padding-top: 7px;
    cursor: pointer;
    background: url('../images/like.png') right 0 no-repeat;
 }
 
 
-#full_info .content div.info div.bottom_info div.right div.likes:hover {
+#full_info .content div.info div.bottom_info div.right button.likes:hover, #full_info .content div.info div.bottom_info div.right button.likes.active {
    background-position: 100% 100%;
 }
 
