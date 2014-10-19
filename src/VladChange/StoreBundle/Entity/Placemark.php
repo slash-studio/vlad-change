@@ -85,7 +85,7 @@ class Placemark
      * @ORM\ManyToOne(targetEntity="User", inversedBy="projects")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    protected $user;
+    protected $author;
 
     /**
      * @var Boolean

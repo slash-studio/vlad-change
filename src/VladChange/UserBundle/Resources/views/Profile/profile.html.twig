@@ -6,48 +6,50 @@
     <script src="{{ asset('bundles/vladchangemain/js/profile.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/profile.css') }}" />
     <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/map.css') }}" />
-    <script src="{{ asset('bundles/vladchangemain/js/map.js') }}"></script>
 {% endblock %}
 
 {% block div_main %}
-   <div id="map"></div>
-   <div id="user_left">
-      <div class="user_info">
-         <div class="avatar"><img src="{{ asset('bundles/vladchangemain/images/avatar.jpg') }}" /></div>
-         <div class="right_info">
-            <div class="str"><span>Имя:</span> {{ user.getName() }}</div>
-            <div class="str"><span>Фамилия:</span> {{ user.getSurname() }}</div>
-            <div class="str"><span>E-mail:</span> {{ user.getEmail() }}</div>
-         </div>
-      </div>
-      <div class="user_buttons">
-         {% if isMine %}
-            <div class="top">
-               <a class="button" href="{{ path('fos_user_profile_edit') }}">Редактировать профиль</a>
-               <a class="button" href="{{ path('vlad_change_add_project') }}">Добавить проект</a>
-            </div>
-            <div class="bot">
-               <a class="button" href="{{ path('fos_user_security_logout') }}">Выход</a>
-            </div>
-         {% endif %}
-      </div>
-   </div>
-   <div id="user_right">
-      {% for p in user.getProjects() %}
-         <div class="project">
-            <div class="project_info">
-               <div class="str"><span>Название:</span> {{ p.getName() }}</div>
-               <div class="str"><span>Дней осталось:</span> 22</div>
-               <div class="str"><span>Порог голосов:</span> {{ p.getLimitVoice() }}</div>
-            </div>
-            <div class="project_buttons">
-               {% if isMine %}
-                  <a class="button edit" href="/web/edit_project/{{ p.getId() }}">Р</a>
-                  <a class="button to_archive" href="javascript:manipulateProject('archive', {{ p.getId() }});">А</a>
-                  <a class="button delete" href="javascript:manipulateProject('delete', {{ p.getId() }});">X</a>
-               {% endif %}
+   <div id="wrap">
+      <div id="map"></div>
+      <div id="user_left">
+         <div class="user_info">
+            <div class="avatar"><img src="{{ asset('bundles/vladchangemain/images/avatar.jpg') }}" /></div>
+            <div class="right_info">
+               <div class="str"><span>Имя:</span> {{ user.getName() }}</div>
+               <div class="str"><span>Фамилия:</span> {{ user.getSurname() }}</div>
+               <div class="str"><span>E-mail:</span> {{ user.getEmail() }}</div>
             </div>
          </div>
-      {% endfor %}
+         <div class="user_buttons">
+            {% if isMine %}
+               <div class="top">
+                  <a class="button" href="{{ path('fos_user_profile_edit') }}">Редактировать профиль</a>
+                  <a class="button" href="{{ path('fos_user_change_password') }}">Изменить пароль</a>
+                  <a class="button" href="{{ path('vlad_change_add_project') }}">Добавить проект</a>
+               </div>
+               <div class="bot">
+                  <a class="button" href="{{ path('fos_user_security_logout') }}">Выход</a>
+               </div>
+            {% endif %}
+         </div>
+      </div>
+      <div id="user_right">
+         {% for p in user.getProjects() %}
+            <div class="project">
+               <div class="project_info">
+                  <div class="str"><span>Название:</span> {{ p.getName() }}</div>
+                  <div class="str"><span>Дней осталось:</span> 22</div>
+                  <div class="str"><span>Порог голосов:</span> {{ p.getLimitVoice() }}</div>
+               </div>
+               <div class="project_buttons">
+                  {% if isMine %}
+                     <a class="button edit" href="{{ path('vlad_change_edit_project', {'id': p.getId()}) }}">Р</a>
+                     <a class="button to_archive" href="javascript:manipulateProject('archive', {{ p.getId() }});">А</a>
+                     <a class="button delete" href="javascript:manipulateProject('delete', {{ p.getId() }});">X</a>
+                  {% endif %}
+               </div>
+            </div>
+         {% endfor %}
+      </div>
    </div>
 {% endblock %}
