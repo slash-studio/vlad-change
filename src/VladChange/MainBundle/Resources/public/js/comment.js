@@ -1,13 +1,13 @@
 $(function() {
    function addComment(message, owner, create_date) {
-      $('div.comment_block ul').append("<li><div class='left'>
-                           <a href='#' class='avatar'><img src='avatar.jpg' /></a>
-                        </div>
-                        <div class='right'>
-                           <a href='#' class='author'>" + owner + "</a>
-                           <time>" + create_date + "</time>
-                           <div class='text'>" + message + "</div>
-                        </div></li>");
+      $('div.comment_block ul').append("<li><div class='left'>" +
+                           "<a href='#' class='avatar'><img src='avatar.jpg' /></a>" +
+                        "</div>" +
+                        "<div class='right'>" +
+                           "<a href='#' class='author'>" + owner + "</a>" +
+                           "<time>" + create_date + "</time>" +
+                           "<div class='text'>" + message + "</div>" +
+                        "</div></li>");
    }
 
    $(document).on('click', '#add_comment', function() {
