@@ -75,13 +75,13 @@ form div.buttons {
 }
 
 form div.buttons input {
-   display: inline-block;
+   display: block;
    background: #2d2d2d;
    border: 0;
    color: white;
    cursor: pointer;
    width: 100%;
-   padding: 5px 0;
+   padding: 8px 0;
 }
 
 #main_wrap {
@@ -132,7 +132,6 @@ div.block_form div label + ul li {
    color: white;
    padding: 9px;
 }
-
 
 div.block_form a.bottom_link {
    color: #1e9bb3;

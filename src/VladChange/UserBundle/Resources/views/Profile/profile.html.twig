@@ -3,35 +3,47 @@
 {% block links %}
     {{ parent() }}
     <script src="{{ asset('bundles/vladchangemain/js/profile.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/profile.css') }}" />
 {% endblock %}
 
 {% block div_main %}
-    <div class="fos_user_user_show">
-        <p>Имя: {{ user.getName() }}</p>
-        <p>Фамилия: {{ user.getSurname() }}</p>
-        <p>E-mail: {{ user.getEmail() }}</p>
-        {% if isMine %}
-            <a href="{{ path('fos_user_profile_edit') }}">Редактировать профиль</a>
-            <a href="{{ path('vlad_change_add_project') }}">Добавить проект</a>
-            <a href="{{ path('fos_user_security_logout') }}">Выход</a>
-        {% endif %}
-
-    <ul>
-    {% for p in user.getProjects() %}
-        <li>Название - {{ p.getName() }}</li>
-        <li>Дата создания - {{ p.getCreateDate().format('d-m-Y') }}</li>
-        <li>Дата окончания - {{ p.getDieDate().format('d-m-Y') }}</li>
-        <li>Краткое описание - {{ p.getShortDesc() }}</li>
-        <li>Описание - {{ p.getDesc() }}</li>
-        <li>Порог голосов - {{ p.getLimitVoice() }}</li>
-        {% if isMine %}
-            <button class="edit" data-id="{{ p.getId() }}">Редактировать</button>
-            <button class="to_archive" data-id="{{ p.getId() }}">В архив</button>
-            <button class="delete" data-id="{{ p.getId() }}">Удалить</button>
-        {% endif %}
-    {% endfor %}
-    </ul>
-
-
-    </div>
+   <div id="user_left">
+      <div class="user_info">
+         <div class="avatar"><img src="{{ asset('bundles/vladchangemain/images/avatar.jpg') }}" /></div>
+         <div class="right_info">
+            <div class="str"><span>Имя:</span> {{ user.getName() }}</div>
+            <div class="str"><span>Фамилия:</span> {{ user.getSurname() }}</div>
+            <div class="str"><span>E-mail:</span> {{ user.getEmail() }}</div>
+         </div>
+      </div>
+      <div class="user_buttons">
+         {% if isMine %}
+            <div class="top">
+               <a class="button" href="{{ path('fos_user_profile_edit') }}">Редактировать профиль</a>
+               <a class="button" href="{{ path('vlad_change_add_project') }}">Добавить проект</a>
+            </div>
+            <div class="bot">
+               <a class="button" href="{{ path('fos_user_security_logout') }}">Выход</a>
+            </div>
+         {% endif %}
+      </div>
+   </div>
+   <div id="user_right">
+      {% for p in user.getProjects() %}
+         <div class="project">
+            <div class="project_info">
+               <div class="str"><span>Название:</span> {{ p.getName() }}</div>
+               <div class="str"><span>Дней осталось:</span> 22</div>
+               <div class="str"><span>Порог голосов:</span> {{ p.getLimitVoice() }}</div>
+            </div>
+            <div class="project_buttons">
+               {% if isMine %}
+                  <a class="button edit" href="/web/edit_project/{{ p.getId() }}">Р</a>
+                  <a class="button to_archive" href="javascript:manipulateProject('archive', {{ p.getId() }});">А</a>
+                  <a class="button delete" href="javascript:manipulateProject('delete', {{ p.getId() }});">X</a>
+               {% endif %}
+            </div>
+         </div>
+      {% endfor %}
+   </div>
 {% endblock %}

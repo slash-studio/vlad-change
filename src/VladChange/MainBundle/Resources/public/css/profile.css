@@ -1,0 +1,93 @@
+#user_left {
+   background: #2D2D2D;
+   width: 280px;
+   padding: 20px;
+   position: absolute;
+   top: 80px;
+   left: 0;
+   color: white;
+}
+
+div.str {
+   margin: 5px 0;
+   font-style: italic;
+}
+
+div.str span {
+   font-style: normal;
+}
+
+#user_left div.user_info {
+   margin: 0 0 20px 0;
+}
+
+#user_left div.user_info div.avatar {
+   float: left;
+}
+
+#user_left div.user_info div.right_info {
+   margin: 0 0 0 50px;
+}
+
+#user_left div.user_buttons a {
+   display: block;
+   background: #1f1f1f;
+   border: 0;
+   margin: 10px 0;
+   color: white;
+   text-align: center;
+   cursor: pointer;
+   width: 100%;
+   padding: 8px 0;
+}
+
+#user_left div.user_buttons div.top {
+   min-height: 200px;
+}
+
+#user_left div.user_buttons a.button {
+   display: block;
+   background: #1f1f1f;
+   border: 0;
+   margin: 10px 0;
+   color: white;
+   text-align: center;
+   cursor: pointer;
+   width: 100%;
+   padding: 8px 0;
+}
+
+#user_right {
+   background: #1f1f1f;
+   width: 220px;
+   padding: 20px;
+   position: absolute;
+   top: 80px;
+   right: 0;
+   color: white;
+   height: 300px;
+   overflow-y: scroll;
+}
+
+#user_right div.project {
+   margin: 7px 0 25px 0;
+}
+
+#user_right div.project div.project_info {
+   margin: 10px 0 10px 0;
+}
+
+#user_right div.project div.project_buttons {
+}
+
+#user_right div.project div.project_buttons a.button {
+   display: inline-block;
+   background: #2d2d2d;
+   border: 0;
+   color: white;
+   text-align: center;
+   cursor: pointer;
+   width: 15px;
+   height: 15px;
+   padding: 5px;
+}
