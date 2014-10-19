@@ -53,7 +53,7 @@ class PlacemarkRepository extends EntityRepository
         $result = [];
         $setRelation = function(&$e) use($uid) {
             $v = 0;
-            if ($e->getAuthor()->getId() == $uid) {
+            if (!empty($e->getAuthor()) && $e->getAuthor()->getId() == $uid) {
                 $v = 1;
             } else {
                 foreach ($e->getLikes()->toArray() as &$like) {
