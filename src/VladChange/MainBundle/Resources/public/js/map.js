@@ -1,5 +1,13 @@
 ymaps.ready(init);
 
+function getAddress(placemark, coords, info){
+    ymaps.geocode(coords).then(function (res) {
+            var firstGeoObject = res.geoObjects.get(0);
+            placemark.properties.set('address', firstGeoObject.properties.get('name'));
+            info.address = firstGeoObject.properties.get('name');
+        });
+}
+
 function createPlacemark(info, event) {
 
     HintLayout = ymaps.templateLayoutFactory.createClass(
@@ -32,7 +40,7 @@ function createPlacemark(info, event) {
         coords,
         {
             name: info.name,
-            short_desc: info.shortDesc
+            short_desc: info.shortDesc,
         },
         {
             preset: 'islands#icon',
@@ -40,22 +48,14 @@ function createPlacemark(info, event) {
             hintLayout: HintLayout
         }
     );
-
-    ymaps.geocode(coords).then(function (res) {
-            var firstGeoObject = res.geoObjects.get(0);
-            placemark.properties
-                .set({
-                    address: firstGeoObject.properties.get('name'),
-                });
-        });
-
+    getAddress(placemark, coords, info);
     placemark.events.add('click', function(e) {
         e.preventDefault();
         $.ajax({
             url : "api/getPlacemarkInfo/" + info.id,
             success: function(data) {
                 if ($.isEmptyObject(data)) return;
-                showInfo(data, placemark.properties.address);
+                showInfo(data, info.address);
                 var coords = e.get('coords');
                 var center = map.getCenter();
                 var gotoPoint = map.options.get('projection').fromGlobalPixels(
