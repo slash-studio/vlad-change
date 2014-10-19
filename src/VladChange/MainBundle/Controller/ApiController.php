@@ -11,9 +11,10 @@ class ApiController extends Controller
     {
         $response = new JsonResponse('Not found', JsonResponse::HTTP_NOT_FOUND);
         $user = $this->getUser();
-        if (empty($user)) return $response;
         $em = $this->getDoctrine()->getEntityManager();
         $project = $em->getRepository('VladChangeStoreBundle:Placemark')->findOneById($id);
+        $userProj = $project->getUser();
+        if (empty($user) || (!empty($userProj) && $userProj->getId() == $user->getId())) return $response;
         $f = sprintf('remove%s', ucfirst($action));
         $user->$f($project);
         if ($type == 'add') {
@@ -49,8 +50,11 @@ class ApiController extends Controller
 
     public function getAllPlacemarkAction()
     {
+        $u = $this->getUser();
         return new JsonResponse(
-            $this->getDoctrine()->getRepository('VladChangeStoreBundle:Placemark')->getCurrentPlacemarks()
+            $this->getDoctrine()
+                 ->getRepository('VladChangeStoreBundle:Placemark')
+                 ->getCurrentPlacemarks(!empty($u) ? $u->getId() : null)
         );
     }
 }

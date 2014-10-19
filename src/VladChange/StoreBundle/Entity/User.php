@@ -315,4 +315,13 @@ class User extends BaseUser
     {
         return $this->image;
     }
+
+    public function getProjectsMapping()
+    {
+        $result = [];
+        foreach ($this->projects->toArray() as $e) {
+            $result[$e->getId()] = true;
+        }
+        return $result;
+    }
 }

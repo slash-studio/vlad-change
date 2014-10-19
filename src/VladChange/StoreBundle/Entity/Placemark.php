@@ -183,29 +183,6 @@ class Placemark
     }
 
     /**
-     * Set author
-     *
-     * @param string $author
-     * @return Placemark
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    /**
      * Set create_date
      *
      * @param \DateTime $createDate
