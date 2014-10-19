@@ -50,7 +50,7 @@ function createPlacemark(info, event) {
         },
         {
             preset: 'islands#icon',
-            iconColor: '#0095b6',
+            iconColor: baloonColors[info.relation],
             hintLayout: HintLayout
         }
     );
