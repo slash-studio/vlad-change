@@ -18,7 +18,6 @@ function showInfo(data, address, relation) {
    if (relation == 0) {
       $('button.likes').removeClass('active');
    } else if(relation == 1) {
-      alert(relation);
       $('button.likes').attr('disabled', 'disabled');
    } else if (relation == 2){
       $('button.likes').addClass('active');
