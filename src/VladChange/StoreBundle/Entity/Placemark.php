@@ -99,9 +99,15 @@ class Placemark
      */
     protected $likes;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="placemarks")
+     */
+    protected $dislikes;
+
     public function __construct()
     {
-        $this->likes = new ArrayCollection();
+        $this->likes    = new ArrayCollection();
+        $this->dislikes = new ArrayCollection();
     }
 
 
@@ -424,5 +430,38 @@ class Placemark
     public function getLikes()
     {
         return $this->likes;
+    }
+
+    /**
+     * Add dislikes
+     *
+     * @param \VladChange\StoreBundle\Entity\User $dislikes
+     * @return Placemark
+     */
+    public function addDislike(\VladChange\StoreBundle\Entity\User $dislikes)
+    {
+        $this->dislikes[] = $dislikes;
+
+        return $this;
+    }
+
+    /**
+     * Remove dislikes
+     *
+     * @param \VladChange\StoreBundle\Entity\User $dislikes
+     */
+    public function removeDislike(\VladChange\StoreBundle\Entity\User $dislikes)
+    {
+        $this->dislikes->removeElement($dislikes);
+    }
+
+    /**
+     * Get dislikes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDislikes()
+    {
+        return $this->dislikes;
     }
 }

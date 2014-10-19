@@ -8,6 +8,14 @@ vlad_change_get_placemarks:
    path:     /getAllPlacemark
    defaults: { _controller: VladChangeMainBundle:Api:getAllPlacemark }
 
+vlad_change_add_like:
+   path:     /updateLike/id={id}&t={type}&a={action}
+   defaults: { _controller: VladChangeMainBundle:Api:addLike }
+   requirements:
+      id: \d+
+      type: add|remove
+      action: like|dislike
+
    # vlad_change_addPlacemark:
 #     path:     /api.addPlacemark/{x}&{y}
 #     defaults: { _controller: VladChangeMainBundle:Api:addPlacemark }
