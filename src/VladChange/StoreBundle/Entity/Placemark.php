@@ -96,6 +96,14 @@ class Placemark
     protected $user;
 
     /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="financeProjects")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user_financer;
+
+    /**
      * @var Boolean
      *
      * @ORM\Column(name="archived", type="boolean")
@@ -521,5 +529,28 @@ class Placemark
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * Set user_financer
+     *
+     * @param \VladChange\StoreBundle\Entity\User $userFinancer
+     * @return Placemark
+     */
+    public function setUserFinancer(\VladChange\StoreBundle\Entity\User $userFinancer = null)
+    {
+        $this->user_financer = $userFinancer;
+
+        return $this;
+    }
+
+    /**
+     * Get user_financer
+     *
+     * @return \VladChange\StoreBundle\Entity\User 
+     */
+    public function getUserFinancer()
+    {
+        return $this->user_financer;
     }
 }
