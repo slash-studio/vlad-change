@@ -4,7 +4,7 @@ vlad_change_get_placemark_info:
    requirements:
       id: \d+
 
-vlad_change_getPlacemark:
+vlad_change_get_placemarks:
    path:     /getAllPlacemark
    defaults: { _controller: VladChangeMainBundle:Api:getAllPlacemark }
 
