@@ -4,7 +4,7 @@ $(function() {
                            "<a href='#' class='avatar'><img src='avatar.jpg' /></a>" +
                         "</div>" +
                         "<div class='right'>" +
-                           "<a href='#' class='author'>" + owner + "</a>" +
+                           "<a href='/profile/" + owner.id + "' class='author'>" + owner.name + "</a>" +
                            "<time>" + create_date + "</time>" +
                            "<div class='text'>" + message + "</div>" +
                         "</div></li>");
