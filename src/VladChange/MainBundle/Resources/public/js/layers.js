@@ -45,7 +45,7 @@ function hideInfo() {
          // Animation complete.
       });
 
-      $("#full_info").animate({  
+      $("#full_info").animate({
          transform: 'translateX(4000)'
       }, 800, function(){
          $(this).css('transform', 'translateX(100%)');
@@ -64,29 +64,32 @@ $(function(){
 $(function(){
    $('button.likes').click(function(){
       var projectID = $(this).attr('projectId');
+      var $this = $(this);
       if (map.relations[projectID] == 0) {
-         $.ajax({
-              url : "api/updateLike/"+ projectID + "&t=add&a=like",
-              success: function() {
-                  $(this).addClass('active');
+         $.post(
+              "api/updateLike/id="+ projectID + "&t=add&a=like",
+              {},
+              function() {
+                  $this.addClass('active');
                   map.relations[projectID] = 2;
-                  $(this).text(parseInt($(this).text()) + 1);
-                  map.projects[projectID].options.set('iconColor', baloonColors[map.relations[projectID]]);   
+                  $this.text(parseInt($this.text()) + 1);
+                  map.projects[projectID].options.set('iconColor', baloonColors[map.relations[projectID]]);
               }
-          })
+         );
       } else if (map.relations[projectID] == 2){
-         $.ajax({
-              url : "api/updateLike/"+ projectID + "&t=remove&a=like",
-              success: function() {
-                  $(this).removeClass('active');
+         $.post(
+              "api/updateLike/id="+ projectID + "&t=remove&a=like",
+              {},
+              function() {
+                  $this.removeClass('active');
                   map.relations[projectID] = 0;
-                  $(this).text(parseInt($(this).text()) - 1);
-                  map.projects[projectID].options.set('iconColor', baloonColors[map.relations[projectID]]);   
+                  $this.text(parseInt($this.text()) - 1);
+                  map.projects[projectID].options.set('iconColor', baloonColors[map.relations[projectID]]);
               }
-          })
-         
-      } 
-      
+         );
+
+      }
+
    });
-   
+
 });
