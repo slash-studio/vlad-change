@@ -62,11 +62,61 @@
                   </div>
                </div>
                <div class="comments">
-                  <div id="add_comment_block">
+                  {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                  <section id="add_comment_block">
+                     <h1>Добавить комментарий</h1>
                      <textarea id="comment_text" name="text"></textarea>
                      <button id="add_comment">Добавить</button>
-                  </div>
+                  </section>
+                  {% endif %}
                   <div class="comment_block">
+                     <ul>
+                        <li>
+                           <div class="left">
+                              <a href="#" class="avatar"><img src="{{ asset('bundles/vladchangemain/images/avatar.jpg') }}" /></a>
+                           </div>
+                           <div class="right">
+                              <a href="#" class="author">Алексей Вострицкий</a>
+                              <time>17.10.2014</time>
+                              <div class="text">dfgdfgfdgfdg fdg d gdfg dfg gdfgdf </div>
+                           </div>
+                        </li>
+                        <li>
+                           <div class="left">
+                              <a href="#" class="avatar"><img src="{{ asset('bundles/vladchangemain/images/avatar.jpg') }}" /></a>
+                           </div>
+                           <div class="right">
+                              <a href="#" class="author">Алексей Вострицкий</a>
+                              <time>17.10.2014</time>
+                              <div class="text">dfgdfgfdgfdg fdg d gdfg dfg gdfgdf </div>
+                           </div>
+                        </li>
+                        <li>
+                           <div class="left">
+                              <a href="#" class="avatar"><img src="{{ asset('bundles/vladchangemain/images/avatar.jpg') }}" /></a>
+                           </div>
+                           <div class="right">
+                              <a href="#" class="author">Алексей Вострицкий</a>
+                              <time>17.10.2014</time>
+                              <div class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.dfgdfgfdgfdg fdg d gdfg dfg gdfgdf </div>
+                           </div>
+                        </li>
+                        <li>
+                           <div class="left">
+                              <a href="#" class="avatar"><img src="{{ asset('bundles/vladchangemain/images/avatar.jpg') }}" /></a>
+                           </div>
+                           <div class="right">
+                              <a href="#" class="author">Алексей Вострицкий</a>
+                              <time>17.10.2014</time>
+                              <div class="text">dfgdfgfdgfdg fdg d gdfg dfg gdfgdf </div>
+                           </div>
+                        </li>
+                     </ul>
                   </div>
                </div>
             </div>

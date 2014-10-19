@@ -82,6 +82,8 @@ form div.buttons input {
    cursor: pointer;
    width: 100%;
    padding: 8px 0;
+   max-width: 220px;
+   margin: 0 auto;
 }
 
 #main_wrap {
@@ -102,7 +104,7 @@ h1.from_top {
 
 div.block_form {
    display: inline-block;
-   width: 220px;
+   min-width: 220px;
    background: white;
    padding: 30px;
    text-align: center;
@@ -110,6 +112,12 @@ div.block_form {
    -moz-box-shadow:    0px 0px 19px 0px rgba(0, 0, 0, 0.35);
    box-shadow:         0px 0px 19px 0px rgba(0, 0, 0, 0.35);
    position: relative;
+}
+
+div.block_form textarea {
+   resize: none;
+   width: 500px;
+   height: 100px;
 }
 
 #fos_user_registration_form > ul {

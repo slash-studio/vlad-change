@@ -23,7 +23,6 @@ function createPlacemark(info, event) {
             '<div class="my-hint">' +
             '<h1>{{ properties.name }}</h1>' +
             '<div class="street">{{ properties.address }}</div>' +
-            '<div class="short_desc">{{ properties.short_desc }}</div>' +
             '</div>',
             {
                 getShape: function () {
