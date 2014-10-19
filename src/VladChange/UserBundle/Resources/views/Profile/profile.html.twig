@@ -2,11 +2,15 @@
 
 {% block links %}
     {{ parent() }}
+    <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <script src="{{ asset('bundles/vladchangemain/js/profile.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/profile.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/map.css') }}" />
+    <script src="{{ asset('bundles/vladchangemain/js/map.js') }}"></script>
 {% endblock %}
 
 {% block div_main %}
+   <div id="map"></div>
    <div id="user_left">
       <div class="user_info">
          <div class="avatar"><img src="{{ asset('bundles/vladchangemain/images/avatar.jpg') }}" /></div>

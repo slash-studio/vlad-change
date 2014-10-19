@@ -2,6 +2,10 @@ vlad_change_main_homepage:
    path: /
    defaults: { _controller: VladChangeMainBundle:Default:index }
 
+vlad_change_profile_get_placemarks:
+    path:     /profile/api/getAllPlacemark
+    defaults: { _controller: VladChangeMainBundle:Api:getAllPlacemark }
+
 vlad_change_view_profile:
     path:     /profile/{id}
     defaults: { _controller: FOSUserBundle:Profile:show }
@@ -27,11 +31,3 @@ vlad_change_manipulate_project:
 vlad_change_add_project_from_map:
     path: /add_project/?lat={x}&lon={y}
     defaults: { _controller: VladChangeMainBundle:Default:addProject }
-
-vlad_change_addPlacemark:
-    path:     /api/addPlacemark/{x}&{y}
-    defaults: { _controller: VladChangeMainBundle:Api:addPlacemark }
-
-vlad_change_getPlacemark:
-    path:     /api/getAllPlacemark
-    defaults: { _controller: VladChangeMainBundle:Api:getAllPlacemark }

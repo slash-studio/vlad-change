@@ -65,8 +65,29 @@ class User extends BaseUser
      */
     protected $projects;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Placemark", inversedBy="likes")
+     * @ORM\JoinTable(name="likes")
+     */
+    protected $likes;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Placemark", inversedBy="users")
+     * @ORM\JoinTable(name="dislikes")
+     */
+    protected $dislikes;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Image")
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     */
+    protected $image;
+
+
     public function __construct() {
         parent::__construct();
+        $this->likes = new ArrayCollection();
+        $this->dislikes = new ArrayCollection();
         $this->projects = new ArrayCollection();
     }
 
@@ -207,5 +228,91 @@ class User extends BaseUser
             return !$e->isExpired();
         });
         return $this->maxProjAmount - $notExpiredProjs->count() > 0;
+    }
+
+    /**
+     * Add like
+     *
+     * @param \VladChange\StoreBundle\Entity\Placemark $likes
+     * @return User
+     */
+    public function addLike(\VladChange\StoreBundle\Entity\Placemark $like)
+    {
+        $this->likes[] = $like;
+
+        return $this;
+    }
+
+    /**
+     * Remove like
+     *
+     * @param int $projId
+     */
+    public function removeLike(\VladChange\StoreBundle\Entity\Placemark $like)
+    {
+        return $this->likes->removeElement($like);
+    }
+
+    /**
+     * Get likes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLikes()
+    {
+        return $this->likes;
+    }
+
+    /**
+     * Add dislikes
+     *
+     * @param \VladChange\StoreBundle\Entity\Placemark $dislikes
+     * @return User
+     */
+    public function addDislike(\VladChange\StoreBundle\Entity\Placemark $dislikes)
+    {
+        $this->dislikes[] = $dislikes;
+        return $this
+    }
+
+    /**
+     * Set image
+     *
+     * @param \VladChange\StoreBundle\Entity\Image $image
+     * @return User
+     */
+    public function setImage(\VladChange\StoreBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+        return $this;
+    }
+
+    /**
+     * Remove dislikes
+     *
+     * @param \VladChange\StoreBundle\Entity\Placemark $dislikes
+     */
+    public function removeDislike(\VladChange\StoreBundle\Entity\Placemark $dislikes)
+    {
+        $this->dislikes->removeElement($dislikes);
+    }
+
+    /**
+     * Get dislikes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDislikes()
+    {
+        return $this->dislikes;
+    }
+    /**
+     * Get image
+     *
+     * @return \VladChange\StoreBundle\Entity\Image 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

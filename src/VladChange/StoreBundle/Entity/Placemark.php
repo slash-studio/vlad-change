@@ -4,11 +4,12 @@ namespace VladChange\StoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Placemark
  *
  * @ORM\Table(name="placemarks")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="VladChange\StoreBundle\Entity\PlacemarkRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class Placemark
@@ -81,7 +82,7 @@ class Placemark
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="projects")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
@@ -92,6 +93,22 @@ class Placemark
      * @ORM\Column(name="archived", type="boolean")
      */
     protected $archived = 0;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="likes")
+     */
+    protected $likes;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="placemarks")
+     */
+    protected $dislikes;
+
+    public function __construct()
+    {
+        $this->likes    = new ArrayCollection();
+        $this->dislikes = new ArrayCollection();
+    }
 
 
     /**
@@ -380,5 +397,71 @@ class Placemark
     public function getArchived()
     {
         return $this->archived;
+    }
+
+    /**
+     * Add likes
+     *
+     * @param \VladChange\StoreBundle\Entity\User $likes
+     * @return Placemark
+     */
+    public function addLike(\VladChange\StoreBundle\Entity\User $likes)
+    {
+        $this->likes[] = $likes;
+
+        return $this;
+    }
+
+    /**
+     * Remove likes
+     *
+     * @param \VladChange\StoreBundle\Entity\User $likes
+     */
+    public function removeLike(\VladChange\StoreBundle\Entity\User $likes)
+    {
+        $this->likes->removeElement($likes);
+    }
+
+    /**
+     * Get likes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLikes()
+    {
+        return $this->likes;
+    }
+
+    /**
+     * Add dislikes
+     *
+     * @param \VladChange\StoreBundle\Entity\User $dislikes
+     * @return Placemark
+     */
+    public function addDislike(\VladChange\StoreBundle\Entity\User $dislikes)
+    {
+        $this->dislikes[] = $dislikes;
+
+        return $this;
+    }
+
+    /**
+     * Remove dislikes
+     *
+     * @param \VladChange\StoreBundle\Entity\User $dislikes
+     */
+    public function removeDislike(\VladChange\StoreBundle\Entity\User $dislikes)
+    {
+        $this->dislikes->removeElement($dislikes);
+    }
+
+    /**
+     * Get dislikes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDislikes()
+    {
+        return $this->dislikes;
     }
 }
