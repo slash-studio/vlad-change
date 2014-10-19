@@ -55,7 +55,10 @@ function createPlacemark(info, event) {
         }
     );
     getAddress(placemark, coords, info);
+    map.relations[info.id] = info.relation;
+    map.projects[info.id] = placemark;
     placemark.events.add('dblclick', function(e) {
+
         e.preventDefault();
         $.ajax({
             url : "api/getPlacemarkInfo/" + info.id,
@@ -91,6 +94,9 @@ function init() {
         zoom: 11,
         controls: ['zoomControl']
     });
+
+    map.relations = {};
+    map.projects = {};
 
     $.ajax({
         url : "api/getAllPlacemark",
