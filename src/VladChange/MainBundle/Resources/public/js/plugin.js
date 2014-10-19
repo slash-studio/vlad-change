@@ -3,7 +3,6 @@
       var settings = $.extend( {
          'cropType'         : 'userCrop',
          'maxSize'          : '1024000',
-         'placemarkId'      : -1,
          'width'            : '230',
          'height'           : '230',
          'count'            : '1',

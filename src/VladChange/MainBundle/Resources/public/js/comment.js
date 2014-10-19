@@ -22,7 +22,7 @@ $(function() {
          function(data) {
             // data.owner - имя фамилия отправителя
             // data.create_date - дата создания
-            addComment(_message, '', '');
+            addComment(_message, data.owner, data.create_date);
             $('#comment_text').val('');
          },
          "json"

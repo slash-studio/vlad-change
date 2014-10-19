@@ -2,11 +2,61 @@
 
 {% block links %}
    {{ parent() }}
+
    <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/project_forms.css') }}" />
    <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/forms.css') }}" />
    <script src="{{ asset('bundles/vladchangemain/js/forms.js') }}"></script>
    <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/message.css') }}" />
    <script src="{{ asset('bundles/vladchangemain/js/message.js') }}"></script>
+   <script src="{{ asset('bundles/vladchangemain/js/plugin.js') }}"></script>
+   <script>
+      $(function(){
+         // $('div.avatar_in button.upload').each(function(){
+         //    $data = $(this).attr('data');
+         //    $(this).getUpload({
+         //       'uploadType'  : 'projects',
+         //       'isAvatar'    : 'true',
+         //       'item_id'     :  $data,
+         //       'width'       : '210',
+         //       'height'      : '210',
+         //       'count'       : '1',
+         //       'sizes'       : 's#210#210'
+         //    });
+         // });
+         // $('#upload_photo').getUpload({
+         //       'uploadType'  : 'projects',
+         //       'back_url'    : '{{ path('vlad_change_edit_project', {'id': project_id}) }}',
+         //       'isAvatar'    : 'false',
+         //       'width'       : '210',
+         //       'height'      : '210',
+         //       'count'       : '5',
+         //       'sizes'       : 's#210#210'
+         // });
+         //$('div.avatar_in a').fancybox();
+         //$('div.photos_in a').fancybox();
+         //$('div.text_in a').fancybox();
+
+         // $("textarea[name='body']").each(function(){
+         //    $(this).ckeditor();
+         // });
+         $('div.photo_in button.upload').getUpload({
+               // $data = $(this).attr('data');
+               'uploadType'  : 'projects',
+               'isAvatar'    : 'false',
+               'back_url'    : '{{ path('vlad_change_edit_project', {'id': project_id}) }}',
+               'PlacemarkId' : {{ project_id }},
+               'width'       : '800',
+               'height'      : '400',
+               'count'       : '5',
+               'sizes'       : 's#100#50,b#800#400'
+         });
+      });
+
+
+   </script>
+   <script src="{{ asset('bundles/vladchangemain/js/images.js') }}"></script>
+
+
 {% endblock %}
 
 {% block div_main %}
@@ -28,6 +78,15 @@
                       <input type="submit" value="Сохранить" />
                    </div>
                 </form>
+               <div class="in photo_in">
+                  <h1 class="head_upload">Фотографии проекта</h1>
+                  <button class="upload" type="submit" data="{{ project_id }}">Загрузить фотографию</button>
+                  <ul>
+                     {% for photo in photos %}
+                     <li><a href="/img/{{ photo.getId() }}_b"><img src="/img/{{ photo.getId() }}_s" /></a><button class="x" data="{{ photo.getId() }}" data-ext="{{ photo.getExtension() }}" data-proj="{{ project_id }}">x</button><button class="url" data="/img/{{ photo.getId() }}_b">URL</button></li>
+                     {% endfor %}
+                  </ul>
+               </div>
             </div>
         {% endif %}
     </div>

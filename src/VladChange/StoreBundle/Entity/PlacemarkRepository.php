@@ -13,7 +13,7 @@ class PlacemarkRepository extends EntityRepository
         $qb = $this->_em->createQueryBuilder();
         $arry = $qb->select('p')
                    ->from('VladChangeStoreBundle:Placemark', 'p')
-                   ->where('p.archived = 0')
+                   ->where('p.archived = false')
                    ->andWhere('p.dieDate > p.createDate')
                    ->andWhere('p.id = :id')
                    ->setParameter('id', $id)
@@ -48,7 +48,7 @@ class PlacemarkRepository extends EntityRepository
         $qb = $this->_em->createQueryBuilder();
         $arry = $qb->select('p')
                   ->from('VladChangeStoreBundle:Placemark', 'p')
-                  ->where('p.archived = 0')
+                  ->where('p.archived = false')
                   ->andWhere('p.dieDate > p.createDate')
                   ->getQuery()
                   ->getResult();

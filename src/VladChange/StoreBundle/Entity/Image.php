@@ -41,6 +41,12 @@ class Image
     protected $extension;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Placemark", inversedBy="images")
+     * @ORM\JoinColumn(name="placemark_id", referencedColumnName="id")
+     */
+    protected $placemark;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     protected $resized = false;
@@ -249,5 +255,28 @@ class Image
     public function getResized()
     {
         return $this->resized;
+    }
+
+    /**
+     * Set placemark
+     *
+     * @param \VladChange\StoreBundle\Entity\Placemark $placemark
+     * @return Image
+     */
+    public function setPlacemark(\VladChange\StoreBundle\Entity\Placemark $placemark = null)
+    {
+        $this->placemark = $placemark;
+
+        return $this;
+    }
+
+    /**
+     * Get placemark
+     *
+     * @return \VladChange\StoreBundle\Entity\Placemark 
+     */
+    public function getPlacemark()
+    {
+        return $this->placemark;
     }
 }

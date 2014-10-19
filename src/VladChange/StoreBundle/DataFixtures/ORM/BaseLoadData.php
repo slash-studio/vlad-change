@@ -23,43 +23,79 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
     {
         $userManager = $this->container->get('fos_user.user_manager');
         $user = $userManager->createUser();
-        $user->setName('Имя');
-        $user->setSurname('Фамилия');
-        $user->setEmail('vladchange@gmail.com');
+        $user->setName('Марк');
+        $user->setSurname('Тертышный');
+        $user->setEmail('m@gmail.com');
         $user->setPlainPassword('test');
         $user->setEnabled(true);
         $userManager->updateUser($user, true);
 
         $fakePM = new Placemark();
-        $fakePM->setName('Fake1')
-               ->setLat(43.13416130704415)
-               ->setLon(131.9348007202148)
+        $fakePM->setName('Давайте сделаем скейт парк')
+               ->setLat(43.15416130704415)
+               ->setLon(131.958007202148)
                ->setLimitVoice(50)
-               ->setShortDesc('Fake1 short description')
-               ->setDesc('Fake1 long description')
+               ->setShortDesc('Тут очень много молодёжи, и мы любим кататься на скейтах, а рамты нет ((')
+               ->setDesc('Тут очень много молодёжи, и мы любим кататься на скейтах, а рамты нет ((')
                ->setUser($user);
         $manager->persist($fakePM);
         $manager->flush();
 
         $user = $userManager->createUser();
-        $user->setName('Имя1');
-        $user->setSurname('Фамилия1');
-        $user->setEmail('vladchange1@gmail.com');
+        $user->setName('Иван');
+        $user->setSurname('Калита');
+        $user->setEmail('i@gmail.com');
         $user->setPlainPassword('test');
         $user->setEnabled(true);
         $userManager->updateUser($user, true);
 
         $fakePM = new Placemark();
-        $fakePM->setName('Fake2')
-               ->setLat(43.0853622332054)
-               ->setLon(131.91969451904296)
+        $fakePM->setName('Книжный шкаф')
+               ->setLat(43.1153622332054)
+               ->setLon(131.91069451904296)
                ->setLimitVoice(500)
-               ->setShortDesc('Fake2 short description')
-               ->setDesc('Fake2 long description')
+               ->setShortDesc('Ходим поставить книжный шкаф (как стоит в сквере на Суханова')
+               ->setDesc('Ходим поставить книжный шкаф (как стоит в сквере на Суханова')
                ->setUser($user);
         $manager->persist($fakePM);
         $manager->flush();
 
+        $user = $userManager->createUser();
+        $user->setName('Константин');
+        $user->setSurname('Ландышев');
+        $user->setEmail('k@gmail.com');
+        $user->setPlainPassword('test');
+        $user->setEnabled(true);
+        $userManager->updateUser($user, true);
 
+        $fakePM = new Placemark();
+        $fakePM->setName('Поблизости нет ни одного магазина')
+               ->setLat(43.0853622332054)
+               ->setLon(131.91969451904296)
+               ->setLimitVoice(500)
+               ->setShortDesc('Вокруге нет ни одного магазина на много домов')
+               ->setDesc('Вокруге нет ни одного магазина на много домов')
+               ->setUser($user);
+        $manager->persist($fakePM);
+        $manager->flush();
+
+        $user = $userManager->createUser();
+        $user->setName('Апанасенко');
+        $user->setSurname('Александр');
+        $user->setEmail('a@gmail.com');
+        $user->setPlainPassword('test');
+        $user->setEnabled(true);
+        $userManager->updateUser($user, true);
+
+        $fakePM = new Placemark();
+        $fakePM->setName('Хотим играть в баскетбол')
+               ->setLat(43.1253622332054)
+               ->setLon(132.0000969451904296)
+               ->setLimitVoice(500)
+               ->setShortDesc('Давайте поставим баскетбольный щит и устроем дворовый чемпионат')
+               ->setDesc('Давайте поставим баскетбольный щит и устроем дворовый чемпионат')
+               ->setUser($user);
+        $manager->persist($fakePM);
+        $manager->flush();
     }
 }

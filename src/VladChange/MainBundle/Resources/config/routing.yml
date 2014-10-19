@@ -55,3 +55,7 @@ vlad_change_get_image:
 vlad_change_get_root_image:
     path:     /img/{id}
     defaults: { _controller: VladChangeMainBundle:Default:getRootImage }
+
+vlad_change_delete_image:
+    path:     /delete_image
+    defaults: { _controller: VladChangeMainBundle:Default:deleteImage }
