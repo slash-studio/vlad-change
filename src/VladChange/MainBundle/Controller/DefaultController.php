@@ -6,6 +6,7 @@ use VladChange\MainBundle\Form\Type\PlacemarkType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use VladChange\StoreBundle\Entity\Image;
 
 class DefaultController extends Controller
 {
@@ -98,8 +99,79 @@ class DefaultController extends Controller
         ]);
     }
 
+    public function getImageAction($id)
+    {
+        $img = $this->getDoctrine()->getRepository('VladChangeStoreBundle:Image')->findOneById($id);
+        if (!$img) {
+            return new Response('Not found', 404);
+        }
+        $response = new Response();
+        $response->headers->set('Content-type', mime_content_type($img->getAbsolutePath()));
+        $response->setContent(file_get_contents($img->getAbsolutePath()));
+        return $response;
+
+    }
+
     public function uploadImageAction(Request $request)
     {
-        var_dump($request->request->get('data');
+        $response = new Response('', Response::HTTP_NOT_FOUND, ['Content-Type' => 'text/html']);
+
+        preg_match('/(.*)(\..*)/', basename($_FILES['uploadimage']['name']), $arr);
+        $ext        = strtolower($arr[2]);
+        $filetypes  = Array('.jpg', '.jpeg', '.png');
+        $ajaxResult = Array('result' => true, 'message' => 'Загрузка прошла успешно!', 'file_tmp' => $_FILES['uploadimage']['name']);
+
+        $__file = null;
+
+        try {
+
+           if (!in_array($ext, $filetypes)) {
+              throw new Exception('Это разрешение не поддерживается. Только JPG и PNG.');
+           }
+
+           $ajaxResult['ext'] = $ext;
+
+           $arr = getimagesize($_FILES['uploadimage']['tmp_name']);
+           if ($request->get('width') && $arr[0] < $request->get('width')) {
+              throw new Exception('Ширина изображения меньше допустимой!');
+           }
+
+           if ($request->get('height') && $arr[1] < $request->get('height')) {
+              throw new Exception('Высота изображения меньше допустимой!');
+           }
+
+           $ajaxResult['width'] = $arr[0];
+           $ajaxResult['height'] = $arr[1];
+
+           if ($_FILES['uploadimage']['size'] > $request->get('maxSize')) {
+              throw new Exception('Размер изображения превышает максимальный!');
+           }
+
+           if (!file_exists(UPLOAD_DIR)) {
+              mkdir(UPLOAD_DIR);
+           }
+
+           $img = new Image();
+           $img->setExtension($ext);
+           $em = $this->getDoctrine()->getEntityManager();
+           $em->persist($img);
+           $em->flush();
+           $__file = $img->getId();
+
+           $path = $img->getAbsolutePath();
+           if (!move_uploaded_file($_FILES['uploadimage']['tmp_name'], $path)) {
+              throw new Exception('Ошибка при загрузке файла на сервер!');
+           }
+           $ajaxResult['file'] = $__file;
+
+        } catch (Exception $e) {
+           $ajaxResult['result']  = false;
+           $ajaxResult['message'] = $e->getMessage();
+        }
+
+        if ($ajaxResult['result']) {
+           $response->setStatusCode(Response::HTTP_OK);
+        }
+        $response->setContent(json_encode($ajaxResult))->send();
     }
 }
