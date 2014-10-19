@@ -1,10 +1,12 @@
 function showInfo(data, address) {
+   $('#add_comment').attr('data-id', data.id);
    var $si = $('#short_info');
    $si.find('h1').text(data.name);
    var author = data.author.name + " " + data.author.surname;
    $si.find('.place').text(address); //to do
    $si.find('.author a').attr('href', '/profile/' + data.author.id).text(author);
    var $info = $('#full_info .info');
+
    $info.children('.info h1').text(data.name)
    $info.children('.text').html('<p>' + data.desc + '</p>')
    $info.children('.bottom_info').find('.author').text(author);

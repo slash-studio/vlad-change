@@ -3,10 +3,33 @@
 namespace VladChange\MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use VladChange\StoreBundle\Entity\Comment;
 
 class ApiController extends Controller
 {
+    public function addCommentAction(Request $request)
+    {
+        $response = new JsonResponse('Not found', JsonResponse::HTTP_NOT_FOUND);
+        $user = $this->getUser();
+        if (empty($user)) return $response;
+        $em = $this->getDoctrine()->getEntityManager();
+        $project = $em->getRepository('VladChangeStoreBundle:Placemark')->findOneById($request->request->get('project_id', -1));
+        if (empty($project)) return $response;
+        $comment = new Comment();
+        $comment->setUser($user)
+                ->setPlacemark($project)
+                ->setMessage($request->request->get('message'));
+        $em->persist($comment);
+        $em->flush();
+        return $response->setStatusCode(JsonResponse::HTTP_OK)->setData([
+            'result' => true,
+            'create_date' => $comment->getDt()->format('d.m.Y'),
+            'owner' => sprintf('%s %s', $user->getName(), $user->getSurname())
+        ]);
+    }
+
     public function addLikeAction($id, $type, $action)
     {
         $response = new JsonResponse('Not found', JsonResponse::HTTP_NOT_FOUND);
@@ -23,21 +46,6 @@ class ApiController extends Controller
         }
         $em->persist($user);
         $em->flush();
-        // if ($action == 'like') {
-        //     $user->removeLike($project);
-        //     if ($type == 'add') {
-        //         $user->addLike($project);
-        //     }
-        //     $em->persist($user);
-        //     $em->flush();
-        // } else {
-        //     $user->removeDislike($project);
-        //     if ($type == 'add') {
-        //         $user->addDislike($project);
-        //     }
-        //     $em->persist($user);
-        //     $em->flush();
-        // }
         return $response->setStatusCode(JsonResponse::HTTP_OK)->setData(['result' => true]);
     }
 

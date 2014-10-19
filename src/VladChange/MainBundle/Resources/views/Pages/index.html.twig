@@ -6,6 +6,7 @@
    <script src="{{ asset('bundles/vladchangemain/js/jquery.transform2d.js') }}"></script>
    <script src="{{ asset('bundles/vladchangemain/js/layers.js') }}"></script>
    <script src="{{ asset('bundles/vladchangemain/js/map.js') }}"></script>
+   <script src="{{ asset('bundles/vladchangemain/js/comment.js') }}"></script>
    <script src="{{ asset('bundles/vladchangemain/js/jquery.bxslider.min.js') }}"></script>
    <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/map_index.css') }}" />
    <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/jquery.bxslider.css') }}" />
@@ -64,7 +65,7 @@
                <div class="comments">
                   <div id="add_comment_block">
                      <textarea id="comment_text" name="text"></textarea>
-                     <button id="add_comment">Добавить</button>
+                     <button id="add_comment" data-id="">Добавить</button>
                   </div>
                   <div class="comment_block">
                   </div>
