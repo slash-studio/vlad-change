@@ -99,7 +99,7 @@ class Placemark
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="financeProjects")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="financer_user_id", referencedColumnName="id")
      */
     protected $user_financer;
 
