@@ -36,13 +36,13 @@ if [ "$has_debug" != "n" ]; then
    has_debug="y"
 fi
 
+sudo chmod -R ug+rw .
+if egrep -i "^www-data" /etc/group > /dev/null; then
+  sudo chown $USER:www-data .
+fi
+
 if [ "$has_debug" = "y" ]; then
    php app/console cache:clear --env=$env
 else
    php app/console cache:clear --env=$env --no-debug
-fi
-
-sudo chmod -R ug+rw .
-if egrep -i "^www-data" /etc/group > /dev/null; then
-  sudo chown $USER:www-data .
 fi
