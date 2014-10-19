@@ -82,7 +82,7 @@ class Placemark
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="projects")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
@@ -95,7 +95,7 @@ class Placemark
     protected $archived = 0;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="placemarks")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="likes")
      */
     protected $likes;
 
