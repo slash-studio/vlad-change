@@ -96,6 +96,14 @@ class Placemark
     protected $user;
 
     /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="financeProjects")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user_financer;
+
+    /**
      * @var Boolean
      *
      * @ORM\Column(name="archived", type="boolean")
@@ -112,8 +120,14 @@ class Placemark
      */
     protected $dislikes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="placemark")
+     */
+    protected $images;
+
     public function __construct()
     {
+        $this->images = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->likes    = new ArrayCollection();
         $this->dislikes = new ArrayCollection();
@@ -482,5 +496,61 @@ class Placemark
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Add images
+     *
+     * @param \VladChange\StoreBundle\Entity\Image $images
+     * @return Placemark
+     */
+    public function addImage(\VladChange\StoreBundle\Entity\Image $images)
+    {
+        $this->images[] = $images;
+
+        return $this;
+    }
+
+    /**
+     * Remove images
+     *
+     * @param \VladChange\StoreBundle\Entity\Image $images
+     */
+    public function removeImage(\VladChange\StoreBundle\Entity\Image $images)
+    {
+        $this->images->removeElement($images);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * Set user_financer
+     *
+     * @param \VladChange\StoreBundle\Entity\User $userFinancer
+     * @return Placemark
+     */
+    public function setUserFinancer(\VladChange\StoreBundle\Entity\User $userFinancer = null)
+    {
+        $this->user_financer = $userFinancer;
+
+        return $this;
+    }
+
+    /**
+     * Get user_financer
+     *
+     * @return \VladChange\StoreBundle\Entity\User 
+     */
+    public function getUserFinancer()
+    {
+        return $this->user_financer;
     }
 }

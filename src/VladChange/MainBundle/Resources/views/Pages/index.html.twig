@@ -63,12 +63,16 @@
                   </div>
                </div>
                <div class="comments">
-                  <div id="add_comment_block">
-                     <textarea id="comment_text" name="text"></textarea>
-                     <button id="add_comment" data-id="">Добавить</button>
-                  </div>
-                  <div class="comment_block">
-                  </div>
+                  {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                     <section id="add_comment_block">
+                        <h1>Добавить комментарий</h1>
+                        <textarea id="comment_text" name="text"></textarea>
+                        <button id="add_comment" data-id="">Добавить</button>
+                     </section>
+                  {% endif %}
+               </div>
+               <div class="comment_block">
+                  <ul></ul>
                </div>
             </div>
          </div>

@@ -66,6 +66,11 @@ class User extends BaseUser
     protected $projects;
 
     /**
+     * @ORM\OneToMany(targetEntity="Placemark", mappedBy="user_financer")
+     */
+    protected $financeProjects;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Placemark", inversedBy="likes")
      * @ORM\JoinTable(name="likes")
      */
@@ -89,12 +94,15 @@ class User extends BaseUser
     protected $comments;
 
 
+
+
     public function __construct() {
         parent::__construct();
         $this->comments = new ArrayCollection();
         $this->likes = new ArrayCollection();
         $this->dislikes = new ArrayCollection();
         $this->projects = new ArrayCollection();
+        $this->financeProjects = new ArrayCollection();
     }
 
     /**
@@ -362,5 +370,38 @@ class User extends BaseUser
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Add financeProjects
+     *
+     * @param \VladChange\StoreBundle\Entity\Placemark $financeProjects
+     * @return User
+     */
+    public function addFinanceProject(\VladChange\StoreBundle\Entity\Placemark $financeProjects)
+    {
+        $this->financeProjects[] = $financeProjects;
+
+        return $this;
+    }
+
+    /**
+     * Remove financeProjects
+     *
+     * @param \VladChange\StoreBundle\Entity\Placemark $financeProjects
+     */
+    public function removeFinanceProject(\VladChange\StoreBundle\Entity\Placemark $financeProjects)
+    {
+        $this->financeProjects->removeElement($financeProjects);
+    }
+
+    /**
+     * Get financeProjects
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFinanceProjects()
+    {
+        return $this->financeProjects;
     }
 }
