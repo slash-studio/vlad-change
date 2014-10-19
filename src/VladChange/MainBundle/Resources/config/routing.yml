@@ -40,6 +40,14 @@ vlad_change_upload_image:
     path:     /upload
     defaults: { _controller: VladChangeMainBundle:Default:uploadImage }
 
+vlad_change_resize_image:
+    path:     /resizeimage
+    defaults: { _controller: VladChangeMainBundle:Default:resizeImage }
+
 vlad_change_get_image:
-    path:     /img/{id}
+    path:     /img/{id}_{param}
     defaults: { _controller: VladChangeMainBundle:Default:getImage }
+
+vlad_change_get_root_image:
+    path:     /img/{id}
+    defaults: { _controller: VladChangeMainBundle:Default:getRootImage }

@@ -100,7 +100,7 @@ class Image
         // which the UploadedFile move() method does
         $this->getFile()->move(
             $this->getUploadRootDir(),
-            "img_" . $this->id . '.' . $this->getFile()->guessExtension()
+            $this->id . '.' . $this->getFile()->guessExtension()
         );
         $this->setFile(null);
     }
@@ -127,7 +127,14 @@ class Image
     {
         return null === $this->extension
             ? null
-            : $this->getUploadRootDir() . '/' . "img_{$this->id}{$this->extension}";
+            : $this->getUploadRootDir() . '/' . "{$this->id}{$this->extension}";
+    }
+
+    public function getAbsolutePath2($param)
+    {
+        return null === $this->extension
+            ? null
+            : $this->getUploadRootDir() . '/' . "{$this->id}_{$param}{$this->extension}";
     }
 
     /**
@@ -147,14 +154,14 @@ class Image
             // : $this->getUploadDir().'/'.$this->extension;
     // }
 
-    protected function getUploadRootDir()
+    public function getUploadRootDir()
     {
         // the absolute directory path where uploaded
         // documents should be saved
         return WEB_DIRECTORY . '/' . $this->getUploadDir();
     }
 
-    protected function getUploadDir()
+    public function getUploadDir()
     {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.

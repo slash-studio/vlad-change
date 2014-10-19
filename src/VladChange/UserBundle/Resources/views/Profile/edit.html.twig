@@ -10,6 +10,7 @@
       $(function(){
          $('#upload_photo').getUpload({
                'uploadType'  : 'projects',
+               'back_url'    : '{{ path('fos_user_profile_edit') }}',
                'isAvatar'    : 'true',
                'width'       : '210',
                'height'      : '210',
@@ -29,7 +30,6 @@
 {% endblock %}
 
 {% block div_main %}
-{% trans_default_domain 'FOSUserBundle' %}
    <div id="main_wrap">
       <h1 class="from_top">Изменение профиля</h1><div class="block_form">
          <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
@@ -39,13 +39,13 @@
             </div>
          </form>
                <div class="in photo_in">
-                  <h1 class="head_upload">Главное фото</h1>
-                  <button id="upload_photo" class="upload" data="mainphoto">Загрузить главное фото</button>
-{# <ul>
-{if !empty($d.projects_avatar_id)}
-<li><a href="/images/uploads/{$d.projects_avatar_id.name}_s.{$d.projects_avatar_id.ext}"><img src="/images/uploads/{$d.projects_avatar_id.name}_s.{$d.projects_avatar_id.ext}" /></a><button class="x" data="{$d.projects_avatar_id.name}" data-ext="{$d.projects_avatar_id.ext}">x</button></li>
-{/if}
-</ul> #}
+                    <h1 class="head_upload">Главное фото</h1>
+                    <button id="upload_photo" class="upload" data="mainphoto">Загрузить главное фото</button>
+                    <ul>
+                    {% if image|length %}
+                        <li><a href="{{ path('vlad_change_get_image', {'id':image.getId(), 'param':'s'}) }}"><img src="{{ path('vlad_change_get_image', {'id':image.getId(), 'param':'s'}) }}" /></a><button class="x" data="{{ image.getId() }}" data-ext="{{ image.getExtension() }}">x</button></li>
+                    {% endif %}
+                    </ul>
                </div>
       </div>
    </div>

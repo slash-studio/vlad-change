@@ -27,7 +27,7 @@ $(function() {
 
         $data.fileName = $response.file;
         $data.ext = $response.ext;
-        
+
         $('#upload_photo').hide();
         $('#resize_photo img.src_image').attr('src', '/img/' + $response.file);
 
@@ -81,7 +81,7 @@ $(function() {
          $resize,
          function(data) {
             if (data.result) {
-               document.location.replace(window.referer + '/?item_id=' + $data.item_id);
+               document.location.replace($data.back_url);
             } else {
                alert(data.message);
             }
