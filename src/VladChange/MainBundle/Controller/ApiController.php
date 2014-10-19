@@ -13,7 +13,8 @@ class ApiController extends Controller
         $user = $this->getUser();
         $em = $this->getDoctrine()->getEntityManager();
         $project = $em->getRepository('VladChangeStoreBundle:Placemark')->findOneById($id);
-        if (empty($user) || $project->getAuthor()->getId() == $user->getId()) return $response;
+        $userProj = $project->getUser();
+        if (empty($user) || (!empty($userProj) && $userProj->getId() == $user->getId())) return $response;
         $f = sprintf('remove%s', ucfirst($action));
         $user->$f($project);
         if ($type == 'add') {

@@ -28,14 +28,14 @@ class PlacemarkRepository extends EntityRepository
                 'name' => $e->getName(),
                 'desc' => $e->getDesc(),
                 'author' => [
-                    'id'      => $author->getId(),
-                    'name'    => $author->getName(),
-                    'surname' => $author->getSurname()
+                    'id'      => !empty($author) ? $author->getId() : '',
+                    'name'    => !empty($author) ? $author->getName() : '',
+                    'surname' => !empty($author) ? $author->getSurname() : ''
                 ],
+                'voices'  => $e->getLikes()->count(),
                 'dieDate' => $e->getDieDate()->format('d.m.Y'),
                 'shortDesc' => $e->getShortDesc(),
                 'createDate' => $e->getCreateDate()->format('d.m.Y'),
-                'limitVoice' => $e->getLimitVoice(),
             ];
         }
         return $arry;
