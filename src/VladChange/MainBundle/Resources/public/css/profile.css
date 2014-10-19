@@ -8,12 +8,47 @@
 
 #user_left {
    background: #2D2D2D;
-   width: 280px;
+   width: 240px;
    padding: 20px;
    position: absolute;
    top: 80px;
    left: 0;
+   height: 340px;
    color: white;
+}
+
+#close_left {
+   background: #262626;
+   width: 40px;
+   position: absolute;
+   left: 280px;
+   top: 80px;
+   height: 380px;
+   cursor: pointer;
+}
+
+#close_left div {
+   opacity: 0.5;
+   width: 19px;
+   height: 41px;
+   background: url('../images/controls.png') 0 0 no-repeat;
+   position: absolute;
+   top: 190px;
+   left: 10px;
+   margin-top: -41px;
+}
+
+#close_left:hover div {
+   background-position: 0 100%;
+   opacity: 1;
+}
+
+#close_left div.active {
+   background-position: 100% 0;
+}
+
+#close_left:hover div.active {
+   background-position: 100% 100%;
 }
 
 div.str {
@@ -26,7 +61,7 @@ div.str span {
 }
 
 #user_left div.user_info {
-   margin: 0 0 20px 0;
+   margin: 0 0 25px 0;
 }
 
 #user_left div.user_info div.avatar {
@@ -35,6 +70,10 @@ div.str span {
 
 #user_left div.user_info div.right_info {
    margin: 0 0 0 50px;
+}
+
+#user_left div.user_buttons {
+   padding-top: 10px;
 }
 
 #user_left div.user_buttons a {
@@ -50,7 +89,7 @@ div.str span {
 }
 
 #user_left div.user_buttons div.top {
-   min-height: 200px;
+   min-height: 180px;
 }
 
 #user_left div.user_buttons a.button {
@@ -86,16 +125,39 @@ div.str span {
 }
 
 #user_right div.project div.project_buttons {
+   padding-top: 3px;
 }
 
 #user_right div.project div.project_buttons a.button {
    display: inline-block;
-   background: #2d2d2d;
+   background: transparent;
    border: 0;
    color: white;
    text-align: center;
    cursor: pointer;
-   width: 15px;
-   height: 15px;
-   padding: 5px;
+   width: 18px;
+   height: 18px;
+   margin: 0 7px;
+}
+
+#user_right div.project div.project_buttons a.button:hover {
+   background-position: 0 100% !important;
+}
+
+#user_right div.project div.project_buttons a.button.edit {
+   background-image: url('../images/edit.png');
+   background-position: 0 0;
+   background-repeat: no-repeat;
+}
+
+#user_right div.project div.project_buttons a.button.to_archive {
+   background-image: url('../images/eye.png');
+   background-position: 0 0;
+   background-repeat: no-repeat;
+}
+
+#user_right div.project div.project_buttons a.button.delete {
+   background-image: url('../images/delete.png');
+   background-position: 0 0;
+   background-repeat: no-repeat;
 }

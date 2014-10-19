@@ -6,6 +6,13 @@
     <script src="{{ asset('bundles/vladchangemain/js/profile.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/profile.css') }}" />
     <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/map.css') }}" />
+    <script>
+      {% if isMine %}
+         $(function(){
+            $('header a[data=profile]').addClass('active');
+         });
+      {% endif %}
+    </script>
 {% endblock %}
 
 {% block div_main %}
@@ -17,9 +24,9 @@
             <div class="right_info">
                <div class="str"><span>Имя:</span> {{ user.getName() }}</div>
                <div class="str"><span>Фамилия:</span> {{ user.getSurname() }}</div>
-               <div class="str"><span>E-mail:</span> {{ user.getEmail() }}</div>
             </div>
          </div>
+         <div class="str"><span>E-mail:</span> {{ user.getEmail() }}</div>
          <div class="user_buttons">
             {% if isMine %}
                <div class="top">
@@ -33,6 +40,9 @@
             {% endif %}
          </div>
       </div>
+      <div id="close_left" class="disable">
+         <div></div>
+      </div>
       <div id="user_right">
          {% for p in user.getProjects() %}
             <div class="project">
@@ -43,9 +53,9 @@
                </div>
                <div class="project_buttons">
                   {% if isMine %}
-                     <a class="button edit" href="{{ path('vlad_change_edit_project', {'id': p.getId()}) }}">Р</a>
-                     <a class="button to_archive" href="javascript:manipulateProject('archive', {{ p.getId() }});">А</a>
-                     <a class="button delete" href="javascript:manipulateProject('delete', {{ p.getId() }});">X</a>
+                     <a class="button edit" href="{{ path('vlad_change_edit_project', {'id': p.getId()}) }}"></a>
+                     <a class="button to_archive" href="javascript:manipulateProject('archive', {{ p.getId() }});"></a>
+                     <a class="button delete" href="javascript:manipulateProject('delete', {{ p.getId() }});"></a>
                   {% endif %}
                </div>
             </div>

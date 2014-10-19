@@ -80,6 +80,13 @@ class Placemark
     protected $desc;
 
     /**
+     * @var Comment
+     *
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="placemark")
+     */
+    protected $comments;
+
+    /**
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="projects")
@@ -106,6 +113,7 @@ class Placemark
 
     public function __construct()
     {
+        $this->comments = new ArrayCollection();
         $this->likes    = new ArrayCollection();
         $this->dislikes = new ArrayCollection();
     }
@@ -440,5 +448,38 @@ class Placemark
     public function getDislikes()
     {
         return $this->dislikes;
+    }
+
+    /**
+     * Add comments
+     *
+     * @param \VladChange\StoreBundle\Entity\Comment $comments
+     * @return Placemark
+     */
+    public function addComment(\VladChange\StoreBundle\Entity\Comment $comments)
+    {
+        $this->comments[] = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \VladChange\StoreBundle\Entity\Comment $comments
+     */
+    public function removeComment(\VladChange\StoreBundle\Entity\Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

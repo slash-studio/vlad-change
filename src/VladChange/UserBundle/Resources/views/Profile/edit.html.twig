@@ -5,10 +5,31 @@
    <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/edit_profile.css') }}" />
    <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/forms.css') }}" />
    <script src="{{ asset('bundles/vladchangemain/js/forms.js') }}"></script>
+   <script src="{{ asset('bundles/vladchangemain/js/plugin.js') }}"></script>
+   <script>
+      $(function(){
+         $('#upload_photo').getUpload({
+               'uploadType'  : 'projects',
+               'back_url'    : '{{ path('fos_user_profile_edit') }}',
+               'isAvatar'    : 'true',
+               'width'       : '210',
+               'height'      : '210',
+               'count'       : '1',
+               'sizes'       : 's#210#210'
+         });
+         //$('div.avatar_in a').fancybox();
+         //$('div.photos_in a').fancybox();
+         //$('div.text_in a').fancybox();
+
+         // $("textarea[name='body']").each(function(){
+         //    $(this).ckeditor();
+         // });
+      });
+
+   </script>
 {% endblock %}
 
 {% block div_main %}
-{% trans_default_domain 'FOSUserBundle' %}
    <div id="main_wrap">
       <h1 class="from_top">Изменение профиля</h1><div class="block_form">
          <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
@@ -17,6 +38,15 @@
                <input type="submit" value="Сохранить" />
             </div>
          </form>
+               <div class="in photo_in">
+                    <h1 class="head_upload">Главное фото</h1>
+                    <button id="upload_photo" class="upload" data="mainphoto">Загрузить главное фото</button>
+                    <ul>
+                    {% if image|length %}
+                        <li><a href="{{ path('vlad_change_get_image', {'id':image.getId(), 'param':'s'}) }}"><img src="{{ path('vlad_change_get_image', {'id':image.getId(), 'param':'s'}) }}" /></a><button class="x" data="{{ image.getId() }}" data-ext="{{ image.getExtension() }}">x</button></li>
+                    {% endif %}
+                    </ul>
+               </div>
       </div>
    </div>
 {% endblock %}
