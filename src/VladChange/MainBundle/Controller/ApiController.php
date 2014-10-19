@@ -49,8 +49,11 @@ class ApiController extends Controller
 
     public function getAllPlacemarkAction()
     {
+        $u = $this->getUser();
         return new JsonResponse(
-            $this->getDoctrine()->getRepository('VladChangeStoreBundle:Placemark')->getCurrentPlacemarks()
+            $this->getDoctrine()
+                 ->getRepository('VladChangeStoreBundle:Placemark')
+                 ->getCurrentPlacemarks(!empty($u) ? $u->getId() : null)
         );
     }
 }
