@@ -138,8 +138,7 @@
 #full_info .content div.info div.bottom_info div.right button.likes {
    font-size: 110%;
    padding-right: 35px;
-   min-height: 18px;
-   padding-top: 7px;
+   height: 25px;
    cursor: pointer;
    background: url('../images/like.png') right 0 no-repeat;
 }
@@ -191,8 +190,6 @@
 }
 
 div.comment_block {
-   margin-left: 230px;
-   margin-top: -50px;
 }
 
 div.comment_block div.left a.avatar {
