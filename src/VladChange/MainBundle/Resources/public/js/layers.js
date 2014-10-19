@@ -8,7 +8,7 @@ function showInfo(data, address) {
    $info.children('.info h1').text(data.name)
    $info.children('.text').html('<p>' + data.desc + '</p>')
    $info.children('.bottom_info').find('.author').text(author);
-   $info.children('.bottom_info').find('.likes').text(data.voises);
+   $('div.likes').text(data.voices);
    $info.children('.bottom_info').find('time').text(data.createDate);
    $si.slideDown(500, function(){
       // Animation complete.
