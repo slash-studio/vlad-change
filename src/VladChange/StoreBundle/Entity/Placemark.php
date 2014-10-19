@@ -100,7 +100,7 @@ class Placemark
     protected $likes;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="placemarks")
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="dislikes")
      */
     protected $dislikes;
 

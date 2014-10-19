@@ -72,7 +72,7 @@ class User extends BaseUser
     protected $likes;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Placemark", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="Placemark", inversedBy="dislikes")
      * @ORM\JoinTable(name="dislikes")
      */
     protected $dislikes;
