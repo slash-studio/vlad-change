@@ -1,5 +1,12 @@
 ymaps.ready(init);
 
+baloonColors = {
+    "0" : '#FF0000',
+    "1" : '#FF00FF',
+    "2" : '#0000FF',
+    "3" : '#00FF00',
+};
+
 function getAddress(placemark, coords, info){
     ymaps.geocode(coords).then(function (res) {
             var firstGeoObject = res.geoObjects.get(0);
@@ -97,9 +104,16 @@ function init() {
     })
 
     map.events.add('contextmenu', function (e) {
-        map.lat = e.get('coords')[0];
-        map.lon = e.get('coords')[1];
-        map.hint.open([map.lat, map.lon], "<a href='javascript:addPlacemark();'> Добавить проект </a>");
+        if (!map.hint.isOpen()){ 
+            map.lat = e.get('coords')[0];
+            map.lon = e.get('coords')[1];
+            map.hint.open([map.lat, map.lon], "<a href='javascript:addPlacemark();'> Добавить проект </a>");
+        } else { 
+            map.hint.close();        
+        }
     });
 
+    map.events.add('boundschange', function (e) {
+        map.hint.close();
+    });
 }
