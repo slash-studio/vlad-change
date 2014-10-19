@@ -12,6 +12,10 @@ vlad_change_view_profile:
     requirements:
         id: \d+
 
+vlad_change_edit_avatar:
+    path:     /profile/edit/avatar
+    defaults: { _controller: VladChangeUserBundle:Profile:editAvatar }
+
 vlad_change_edit_project:
     path: /edit_project/{id}
     defaults: { _controller: VladChangeMainBundle:Default:editProject }
@@ -31,3 +35,7 @@ vlad_change_manipulate_project:
 vlad_change_add_project_from_map:
     path: /add_project/?lat={x}&lon={y}
     defaults: { _controller: VladChangeMainBundle:Default:addProject }
+
+# vlad_change_upload_image:
+#     path:     /upload
+#     defaults: { _controller: VladChangeMainBundle:Default:uploadImage }

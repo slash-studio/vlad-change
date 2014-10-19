@@ -5,6 +5,27 @@
    <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/edit_profile.css') }}" />
    <link rel="stylesheet" href="{{ asset('bundles/vladchangemain/css/forms.css') }}" />
    <script src="{{ asset('bundles/vladchangemain/js/forms.js') }}"></script>
+   <script src="{{ asset('bundles/vladchangemain/js/plugin.js') }}"></script>
+   <script>
+      $(function(){
+         $('#upload_photo').getUpload({
+               'uploadType'  : 'projects',
+               'isAvatar'    : 'true',
+               'width'       : '210',
+               'height'      : '210',
+               'count'       : '1',
+               'sizes'       : 's#210#210'
+         });
+         //$('div.avatar_in a').fancybox();
+         //$('div.photos_in a').fancybox();
+         //$('div.text_in a').fancybox();
+
+         // $("textarea[name='body']").each(function(){
+         //    $(this).ckeditor();
+         // });
+      });
+
+   </script>
 {% endblock %}
 
 {% block div_main %}
@@ -17,6 +38,15 @@
                <input type="submit" value="Сохранить" />
             </div>
          </form>
+               <div class="in photo_in">
+                  <h1 class="head_upload">Главное фото</h1>
+                  <button id="upload_photo" class="upload" data="mainphoto">Загрузить главное фото</button>
+{# <ul>
+{if !empty($d.projects_avatar_id)}
+<li><a href="/images/uploads/{$d.projects_avatar_id.name}_s.{$d.projects_avatar_id.ext}"><img src="/images/uploads/{$d.projects_avatar_id.name}_s.{$d.projects_avatar_id.ext}" /></a><button class="x" data="{$d.projects_avatar_id.name}" data-ext="{$d.projects_avatar_id.ext}">x</button></li>
+{/if}
+</ul> #}
+               </div>
       </div>
    </div>
 {% endblock %}

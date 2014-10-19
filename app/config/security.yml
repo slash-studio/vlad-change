@@ -19,6 +19,7 @@ security:
         - { path: ^/add_project, role: IS_AUTHENTICATED_REMEMBERED }
         - { path: ^/edit_project, role: IS_AUTHENTICATED_REMEMBERED }
         - { path: ^/profile/edit, role: IS_AUTHENTICATED_REMEMBERED }
+        # - { path: ^/upload, role: IS_AUTHENTICATED_REMEMBERED }
 
     firewalls:
         main:

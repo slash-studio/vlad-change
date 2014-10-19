@@ -7,6 +7,7 @@ use FOS\UserBundle\Controller\ProfileController as BaseController;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Request;
 
 class ProfileController extends BaseController
 {
@@ -38,6 +39,23 @@ class ProfileController extends BaseController
                 'isMine' => $isMine
             ]
         );
+    }
 
+    public function editAvatarAction(Request $request)
+    {
+        // var_dump($request->request->get('data'));
+        // exit;
+        $user = $this->getUser();
+
+        if (empty($user)) {
+            return $this->redirect($this->generateUrl('vlad_change_main_homepage'));
+        }
+        return $this->render(
+            'VladChangeUserBundle:Profile:avatar_upload.html.twig',
+            [
+                'photo_data' => $request->request->get('data')
+            ]
+        );
+        // exit;
     }
 }

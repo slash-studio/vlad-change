@@ -127,7 +127,7 @@ class Image
     {
         return null === $this->extension
             ? null
-            : $this->getUploadRootDir() . '/' . "img_{$this->id}.{$this->extension}";
+            : $this->getUploadRootDir() . '/' . "img_{$this->id}{$this->extension}";
     }
 
     /**

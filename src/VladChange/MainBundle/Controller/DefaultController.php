@@ -97,4 +97,9 @@ class DefaultController extends Controller
             'isAvailableProj' => $isAvailableProj
         ]);
     }
+
+    public function uploadImageAction(Request $request)
+    {
+        var_dump($request->request->get('data');
+    }
 }
