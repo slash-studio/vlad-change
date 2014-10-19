@@ -272,7 +272,7 @@ class User extends BaseUser
     public function addDislike(\VladChange\StoreBundle\Entity\Placemark $dislikes)
     {
         $this->dislikes[] = $dislikes;
-        return $this
+        return $this;
     }
 
     /**
