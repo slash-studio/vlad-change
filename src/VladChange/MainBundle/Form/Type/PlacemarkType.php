@@ -12,8 +12,8 @@ class PlacemarkType extends AbstractType
     {
         $builder->setMethod('POST')
                 ->add('name', 'text', ['label' => 'Название'])
-                ->add('short_desc', 'text', ['label' => 'Краткое описание'])
-                ->add('desc', 'text', ['label' => 'Полное описание'])
+                ->add('short_desc', 'textarea', ['label' => 'Краткое описание'])
+                ->add('desc', 'textarea', ['label' => 'Полное описание'])
                 ->add('limit_voice', 'number', ['data' => 100, 'label' => 'Порог голосов'])
                 ->add('lat', 'number', ['label' => 'Широта', 'precision' => 20])
                 ->add('lon', 'number', ['label' => 'Долгота', 'precision' => 20])
