@@ -2,6 +2,10 @@ vlad_change_main_homepage:
    path: /
    defaults: { _controller: VladChangeMainBundle:Default:index }
 
+vlad_change_profile_get_placemarks:
+    path:     /profile/api/getAllPlacemark
+    defaults: { _controller: VladChangeMainBundle:Api:getAllPlacemark }
+
 vlad_change_view_profile:
     path:     /profile/{id}
     defaults: { _controller: FOSUserBundle:Profile:show }

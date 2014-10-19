@@ -2,10 +2,12 @@
 
 {% block links %}
     {{ parent() }}
+    <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <script src="{{ asset('bundles/vladchangemain/js/profile.js') }}"></script>
 {% endblock %}
 
 {% block div_main %}
+    <div id="map"></div>
     <div class="fos_user_user_show">
         <p>Имя: {{ user.getName() }}</p>
         <p>Фамилия: {{ user.getSurname() }}</p>
