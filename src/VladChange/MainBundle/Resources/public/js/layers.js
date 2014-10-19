@@ -8,6 +8,7 @@ function showInfo(data, address) {
    $info.children('.info h1').text(data.name)
    $info.children('.text').html('<p>' + data.desc + '</p>')
    $info.children('.bottom_info').find('.author').text(author);
+   $info.children('.bottom_info').find('.likes').text(data.voises);
    $info.children('.bottom_info').find('time').text(data.createDate);
    $si.slideDown(500, function(){
       // Animation complete.
@@ -30,7 +31,7 @@ function hideInfo() {
          // Animation complete.
       });
 
-      $("#full_info").animate({
+      $("#full_info").animate({  
          transform: 'translateX(4000)'
       }, 800, function(){
          $(this).css('transform', 'translateX(100%)');

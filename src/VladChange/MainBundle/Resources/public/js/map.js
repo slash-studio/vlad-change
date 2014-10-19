@@ -61,7 +61,7 @@ function createPlacemark(info, event) {
             url : "api/getPlacemarkInfo/" + info.id,
             success: function(data) {
                 if ($.isEmptyObject(data)) return;
-                showInfo(data, info.address);
+                showInfo(data, info.address, info.relation);
                 var coords = e.get('coords');
                 var center = map.getCenter();
                 var gotoPoint = map.options.get('projection').fromGlobalPixels(
