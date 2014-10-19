@@ -71,9 +71,16 @@ class User extends BaseUser
      */
     protected $likes;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Placemark", inversedBy="users")
+     * @ORM\JoinTable(name="dislikes")
+     */
+    protected $dislikes;
+
     public function __construct() {
         parent::__construct();
         $this->likes = new ArrayCollection();
+        $this->dislikes = new ArrayCollection();
         $this->projects = new ArrayCollection();
     }
 
@@ -217,35 +224,68 @@ class User extends BaseUser
     }
 
     /**
-     * Add likes
+     * Add like
      *
      * @param \VladChange\StoreBundle\Entity\Placemark $likes
      * @return User
      */
-    public function addLike(\VladChange\StoreBundle\Entity\Placemark $likes)
+    public function addLike(\VladChange\StoreBundle\Entity\Placemark $like)
     {
-        $this->likes[] = $likes;
+        $this->likes[] = $like;
 
         return $this;
     }
 
     /**
-     * Remove likes
+     * Remove like
      *
-     * @param \VladChange\StoreBundle\Entity\Placemark $likes
+     * @param int $projId
      */
-    public function removeLike(\VladChange\StoreBundle\Entity\Placemark $likes)
+    public function removeLike(\VladChange\StoreBundle\Entity\Placemark $like)
     {
-        $this->likes->removeElement($likes);
+        return $this->likes->removeElement($like);
     }
 
     /**
      * Get likes
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getLikes()
     {
         return $this->likes;
+    }
+
+    /**
+     * Add dislikes
+     *
+     * @param \VladChange\StoreBundle\Entity\Placemark $dislikes
+     * @return User
+     */
+    public function addDislike(\VladChange\StoreBundle\Entity\Placemark $dislikes)
+    {
+        $this->dislikes[] = $dislikes;
+
+        return $this;
+    }
+
+    /**
+     * Remove dislikes
+     *
+     * @param \VladChange\StoreBundle\Entity\Placemark $dislikes
+     */
+    public function removeDislike(\VladChange\StoreBundle\Entity\Placemark $dislikes)
+    {
+        $this->dislikes->removeElement($dislikes);
+    }
+
+    /**
+     * Get dislikes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDislikes()
+    {
+        return $this->dislikes;
     }
 }
