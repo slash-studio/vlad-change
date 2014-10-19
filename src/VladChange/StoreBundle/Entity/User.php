@@ -208,6 +208,13 @@ class User extends BaseUser
         return $this->projects;
     }
 
+    public function getCurrentProjects()
+    {
+        return $this->projects->filter(function($e) {
+            return !$e->getArchived();
+        });
+    }
+
     /**
      * Set maxProjAmount
      *

@@ -44,7 +44,7 @@
          <div></div>
       </div>
       <div id="user_right">
-         {% for p in user.getProjects() %}
+         {% for p in user.getCurrentProjects() %}
             <div class="project">
                <div class="project_info">
                   <div class="str"><span>Название:</span> {{ p.getName() }}</div>
