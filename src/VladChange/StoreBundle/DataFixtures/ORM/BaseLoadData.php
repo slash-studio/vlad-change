@@ -13,6 +13,18 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
 {
     private $container;
 
+    private function addUser($userManager, $name, $surname, $email, $pass)
+    {
+        $user = $userManager->createUser();
+        $user->setName($name)
+             ->setSurname($surname)
+             ->setEmail($email)
+             ->setPlainPassword($pass)
+             ->setEnabled(true);
+        $userManager->updateUser($user, true);
+        return $user;
+    }
+
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
@@ -22,14 +34,8 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
     public function load(ObjectManager $manager)
     {
         $userManager = $this->container->get('fos_user.user_manager');
-        $user = $userManager->createUser();
-        $user->setName('Марк');
-        $user->setSurname('Тертышный');
-        $user->setEmail('m@gmail.com');
-        $user->setPlainPassword('test');
-        $user->setEnabled(true);
-        $userManager->updateUser($user, true);
 
+        $user = $this->addUser($userManager, 'Марк', 'Тертышный', 'm@gmail.com', 'test');
         $fakePM = new Placemark();
         $fakePM->setName('Давайте сделаем скейт парк')
                ->setLat(43.15416130704415)
@@ -41,14 +47,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         $manager->persist($fakePM);
         $manager->flush();
 
-        $user = $userManager->createUser();
-        $user->setName('Иван');
-        $user->setSurname('Калита');
-        $user->setEmail('i@gmail.com');
-        $user->setPlainPassword('test');
-        $user->setEnabled(true);
-        $userManager->updateUser($user, true);
-
+        $user = $this->addUser($userManager, 'Иван', 'Калита', 'i@gmail.com', 'test');
         $fakePM = new Placemark();
         $fakePM->setName('Книжный шкаф')
                ->setLat(43.1153622332054)
@@ -60,14 +59,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         $manager->persist($fakePM);
         $manager->flush();
 
-        $user = $userManager->createUser();
-        $user->setName('Константин');
-        $user->setSurname('Ландышев');
-        $user->setEmail('k@gmail.com');
-        $user->setPlainPassword('test');
-        $user->setEnabled(true);
-        $userManager->updateUser($user, true);
-
+        $user = $this->addUser($userManager, 'Константин', 'Ландышев', 'k@gmail.com', 'test');
         $fakePM = new Placemark();
         $fakePM->setName('Поблизости нет ни одного магазина')
                ->setLat(43.0853622332054)
@@ -79,14 +71,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
         $manager->persist($fakePM);
         $manager->flush();
 
-        $user = $userManager->createUser();
-        $user->setName('Апанасенко');
-        $user->setSurname('Александр');
-        $user->setEmail('a@gmail.com');
-        $user->setPlainPassword('test');
-        $user->setEnabled(true);
-        $userManager->updateUser($user, true);
-
+        $user = $this->addUser($userManager, 'Апанасенко', 'Александр', 'a@gmail.com', 'test');
         $fakePM = new Placemark();
         $fakePM->setName('Хотим играть в баскетбол')
                ->setLat(43.1253622332054)
