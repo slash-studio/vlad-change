@@ -8,13 +8,15 @@ function showInfo(data, address, relation) {
    $si.find('.author a').attr('href', '/profile/' + data.author.id).text(author);
    var $info = $('#full_info .info');
 
-   $info.children('.info h1').text(data.name)
-   $info.children('.text').html('<p>' + data.desc + '</p>')
+   $info.children('.info h1').text(data.name);
+   $info.children('.text').html('<p>' + data.desc + '</p>');
    $info.children('.bottom_info').find('.author').text(author);
    $('button.likes').text(data.voices);
    $('button.likes').attr('relation', relation);
    $('button.likes').attr('projectId', data.id);
-
+   for (var i = 0; i < data.comments.length; i++) {
+      addComment(data.comments[i]);
+   }
    if (relation == 0) {
       $('button.likes').removeClass('active');
    } else if(relation == 1) {

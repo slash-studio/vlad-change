@@ -63,6 +63,7 @@ function createPlacemark(info, event) {
             url : "api/getPlacemarkInfo/" + info.id,
             success: function(data) {
                 if ($.isEmptyObject(data)) return;
+                clearCommentBox(true);
                 showInfo(data, info.address, info.relation);
                 var coords = e.get('coords');
                 var center = map.getCenter();
@@ -109,12 +110,12 @@ function init() {
     })
 
     map.events.add('contextmenu', function (e) {
-        if (!map.hint.isOpen()){ 
+        if (!map.hint.isOpen()){
             map.lat = e.get('coords')[0];
             map.lon = e.get('coords')[1];
             map.hint.open([map.lat, map.lon], "<a href='javascript:addPlacemark();'> Добавить проект </a>");
-        } else { 
-            map.hint.close();        
+        } else {
+            map.hint.close();
         }
     });
 

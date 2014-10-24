@@ -162,6 +162,16 @@ class User extends BaseUser
     }
 
     /**
+     * Get full user name
+     *
+     * @return string
+     */
+    public function getFullName()
+    {
+        return sprintf("%s %s", $this->name, $this->surname);
+    }
+
+    /**
      * Set email
      *
      * @param string $email

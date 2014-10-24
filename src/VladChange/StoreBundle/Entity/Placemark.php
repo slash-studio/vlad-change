@@ -499,6 +499,29 @@ class Placemark
     }
 
     /**
+     * Get comments infromation
+     *
+     * @return array
+     */
+    public function getCommentsInfo()
+    {
+        $result = [];
+        foreach ($this->getComments() as $comment) {
+            $user = $comment->getUser();
+            $result[] = [
+                'message' => $comment->getMessage(),
+                'date' => $comment->getDt()->format('d.m.Y H:i'),
+                'user' => [
+                    'id' => $user->getId(),
+                    'name' => $user->getFullName(),
+                    'image' => null
+                ],
+            ];
+        }
+        return $result;
+    }
+
+    /**
      * Add images
      *
      * @param \VladChange\StoreBundle\Entity\Image $images

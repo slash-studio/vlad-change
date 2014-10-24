@@ -25,8 +25,8 @@ class ApiController extends Controller
         $em->flush();
         return $response->setStatusCode(JsonResponse::HTTP_OK)->setData([
             'result' => true,
-            'create_date' => $comment->getDt()->format('d.m.Y H:m'),
-            'owner' => [
+            'date' => $comment->getDt()->format('d.m.Y H:m'),
+            'user' => [
                 'name' => sprintf('%s %s', $user->getName(), $user->getSurname()),
                 'id' => $user->getId(),
                 'image' => null

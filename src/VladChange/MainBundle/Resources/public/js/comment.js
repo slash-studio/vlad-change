@@ -1,15 +1,24 @@
-$(function() {
-   function addComment(message, owner, create_date) {
-      $('div.comment_block ul').append("<li><div class='left'>" +
-                           "<a href='#' class='avatar'><img src='avatar.jpg' /></a>" +
-                        "</div>" +
-                        "<div class='right'>" +
-                           "<a href='/profile/" + owner.id + "' class='author'>" + owner.name + "</a>" +
-                           "<time>" + create_date + "</time>" +
-                           "<div class='text'>" + message + "</div>" +
-                        "</div></li>");
-   }
+function addComment(data) {
+   $('div.comment_block ul').append("<li><div class='left'>" +
+                        "<a href='#' class='avatar'><img src='avatar.jpg' /></a>" +
+                     "</div>" +
+                     "<div class='right'>" +
+                        "<a href='/profile/" + data.user.id + "' class='author'>" + data.user.name + "</a>" +
+                        "<time>" + data.date + "</time>" +
+                        "<div class='text'>" + data.message + "</div>" +
+                     "</div></li>");
+}
 
+function clearCommentBox(isDeleteComments)
+{
+   isDeleteComments = typeof isDeleteComments == 'undefined' ? false : isDeleteComments;
+   $('#comment_text').val('');
+   if (isDeleteComments) {
+      $('div.comment_block ul li').remove();
+   }
+}
+
+$(function() {
    $(document).on('click', '#add_comment', function() {
       var _message = $('#add_comment_block textarea').val();
       if (_message === '') return false;
@@ -20,10 +29,8 @@ $(function() {
             message: _message
          },
          function(data) {
-            // data.owner - имя фамилия отправителя
-            // data.create_date - дата создания
-            addComment(_message, data.owner, data.create_date);
-            $('#comment_text').val('');
+            addComment({message: _message, user: data.user, date: data.date});
+            clearCommentBox();
          },
          "json"
       );
